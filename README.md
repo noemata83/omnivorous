@@ -12,7 +12,7 @@ Omnivorous aspires to (someday) be a social cooking utility that
 Other, long-term feature ambitions include:
 * Automated recipe import from anywhere on the web
 * Obscure Ingredient Finder: see where (and when) other users have found hard-to-find ingredients in your area (or online)
-* Farmer's Market / CSA / Sustainable Agriculture locator 
+* Farmer's Market / CSA / Sustainable Agriculture connector: find and keep tabs on local produce
 
 ### Project Status
 
