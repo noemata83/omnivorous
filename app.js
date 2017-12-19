@@ -10,8 +10,8 @@ mongoose.connect('mongodb://localhost/Recipedb', {useMongoClient: true});
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-var routes = require('./api/routes/recipeRoutes');
-routes(app);
+const recipeRoutes = require('./api/routes/recipeRoutes');
+recipeRoutes(app);
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Recipe restful API started on: " + process.env.PORT);
