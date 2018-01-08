@@ -1,22 +1,36 @@
 'use strict';
 
-var mongoose = require('mongoose'), 
-    Recipe = mongoose.model('Recipes');
+const mongoose = require('mongoose'), 
+Recipe = mongoose.model('Recipes'),
+User = mongoose.model('Users');
     
     let listRecipes = function(req, res) {
-        Recipe.find({}, function(err, recipe) {
-           if (err) 
+        User.findOne({ username: req.params.username }).populate("recipes").exec( (err, foundUser) => {
+            if (err) 
              {  res.send(err);}
-           res.json(recipe);
+            else {
+                res.json(foundUser);
+            }
         });
     }
     
     let createRecipe = function(req, res) {
-        let newRecipe = Recipe(req.body);
-        newRecipe.save(function (err, recipe) {
-            if (err)
-            { res.send(err);}
-            res.json(recipe);
+        User.findOne({ username: req.params.username }, (err, foundUser) => {
+            if (err) {
+                res.send(err);
+            } else {
+                let newRecipe = req.body;
+                Recipe.create(newRecipe, (err, recipe) => {
+                   if (err) {
+                       res.send(err);
+                   } else {
+                    recipe.save();
+                    foundUser.recipes.push(recipe);
+                    foundUser.save();
+                    res.json(foundUser.recipes);
+                    }
+                });
+            }
         });
     }
     

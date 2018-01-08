@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var ingredientSchema = new Schema({
+const ingredientSchema = new Schema({
    amount: Number,
    unit: String,
    ingredient: String,  // This should be converted, ultimately, to a reference to the ingredient model.

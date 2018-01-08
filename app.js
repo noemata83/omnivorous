@@ -2,6 +2,7 @@ const express = require('express'),
     app = express(),
     mongoose = require('mongoose'),
     Recipe = require('./api/models/recipe'),
+    User = require('./api/models/user'),
     bodyParser = require('body-parser');
     
 mongoose.Promise = global.Promise;
@@ -13,7 +14,10 @@ app.use(bodyParser.json());
 const recipeRoutes = require('./api/routes/recipeRoutes');
 recipeRoutes(app);
 
-app.listen(process.env.PORT, process.env.IP, function() {
-    console.log("Recipe restful API started on: " + process.env.PORT);
+const authController = require('./api/controllers/authController');
+app.use('/auth', authController);
+
+app.listen(8081, process.env.IP, function() {
+    console.log("Recipe restful API started on: " + 8081);
 });
 
