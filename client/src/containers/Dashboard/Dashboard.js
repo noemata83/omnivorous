@@ -4,20 +4,20 @@ import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/RecipeDisplay/RecipeDisplay';
 import classes from './Dashboard.css';
 import { connect } from 'react-redux';
-import Aux from '../../hoc/Aux/Aux';
+import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 class Dashboard extends Component {
     
     render () {
         return (
-            <Aux>
+            <Wrapper>
                 <div>
                     <RecipeList />
                 </div>
                 <div>
                     <RecipeDisplay />
                 </div>
-            </Aux>
+            </Wrapper>
             );
     }
 }
