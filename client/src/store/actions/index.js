@@ -1,0 +1,1 @@
+export { displayRecipe } from './recipe';
