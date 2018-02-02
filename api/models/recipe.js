@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ingredientSchema = new Schema({
-   amount: Number,
+   amount: String,
    unit: String,
    ingredient: String,  // This should be converted, ultimately, to a reference to the ingredient model.
    comment: String
