@@ -1,0 +1,59 @@
+.Input {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.InputElement {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.InputElement:focus,
+.IngredientUnit:focus,
+.IngredientText:focus {
+    outline: none;
+    background-color: #ccc;
+}
+
+.IngredientUnit {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    margin: 10px;
+    display: inlin-block;
+    width: 10%;
+}
+
+.IngredientText {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: white;
+    font: inherit;
+    padding: 6px 10px;
+    display: inline-block;
+    width: 30%;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background-color: #FDA49A;
+}
+
+.ValidationError {
+    color: red;
+    margin: 5px 0;
+}
