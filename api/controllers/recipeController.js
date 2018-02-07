@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose'), 
 Recipe = mongoose.model('Recipes'),
-User = mongoose.model('Users');
+User = mongoose.model('users');
     
     let listRecipes = function(req, res) {
         User.findOne({ username: req.params.username }).populate("recipes").exec( (err, foundUser) => {

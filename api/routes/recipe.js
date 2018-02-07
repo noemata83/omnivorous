@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var recipeController = require('../controllers/recipeController');
+    const recipeController = require('../controllers/recipeController');
 
     app.route('/api/:username/recipes')
         .get(recipeController.listRecipes)
