@@ -11,7 +11,7 @@
 }
 
 .Button:first-of-type {
-    margin-left: 0;
+    margin-left: 10px;
     padding-left: 0;
 }
 
@@ -26,4 +26,12 @@
 
 .Danger {
     color: #944317;
+}
+
+.Inline {
+    display: inline-block;
+    background-color: transparent;
+    color: #aaa;
+    margin: 10px;
+    padding: 10px;
 }

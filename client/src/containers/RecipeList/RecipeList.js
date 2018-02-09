@@ -10,8 +10,7 @@ import classes from './RecipeList.css';
 
 class RecipeList extends Component {
     render() {
-        const recipes = this.props.recipes.map(recipe => <RecipeItem clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}}  key={recipe._id} title={recipe.title} />);
-        console.log(this.props.setEditMode);
+        const recipes = this.props.recipes.map(recipe => <RecipeItem clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
         return (
             <ul className={classes.RecipeList}>
                 {recipes}

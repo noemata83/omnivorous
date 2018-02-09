@@ -5,6 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import 'font-awesome/css/font-awesome.min.css';
 
 import recipeReducer from './store/reducers/recipe';
 
