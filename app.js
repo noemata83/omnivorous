@@ -10,7 +10,7 @@ require('./api/models/recipe');
 require('./api/services/passport');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/Recipedb');
+mongoose.connect(keys.mongoURL, { useMongoClient: true });
 
 app.use(
     session({
@@ -27,8 +27,8 @@ app.use(bodyParser.json());
 
 require('./api/routes/recipe')(app);
 require('./api/routes/auth')(app);
-
-app.listen(8081, process.env.IP, function() {
-    console.log("Recipe restful API started on: " + 8081);
+const PORT = process.env.DEVPORT || process.env.PORT;
+app.listen(PORT, process.env.IP, function() {
+    console.log("Recipe restful API started on: " + PORT);
 });
 
