@@ -1,0 +1,13 @@
+.RecipeList {
+    margin-right: 2rem;
+    width: 20%;
+    float: left;
+}
+
+.MainWindow {
+    float: left;
+}
+
+.SideBar {
+    float: left;
+}

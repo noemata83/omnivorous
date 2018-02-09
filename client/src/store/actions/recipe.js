@@ -6,3 +6,10 @@ export const displayRecipe = (recipe) => {
         recipe: recipe
     }
 };
+
+export const addRecipe = (recipe) => {
+    return {
+        type: actionTypes.ADD_RECIPE,
+        recipe: recipe
+    }
+}

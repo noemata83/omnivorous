@@ -46,6 +46,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentRecipe: action.recipe
             }
+        case (actionTypes.ADD_RECIPE):
+            return {
+                ...state,
+                recipes: state.recipes.concat(action.recipe)
+            }
         default:
             return state;
     }
