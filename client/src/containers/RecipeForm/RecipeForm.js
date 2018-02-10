@@ -7,133 +7,28 @@ import IngredientInput from '../../components/UI/Input/IngredientInput/Ingredien
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/';
 
-const ingredientForm = {
-    amount: {
-        elementType: 'input',
-        elementConfig: {
-            type: 'text',
-            placeholder: 'Amt'
-        },
-        value: '',
-        valueType: 'amount',
-        validation: {
-            required: true,
-            isNumber: true
-        },
-        valid: false,
-        touched: false
-    },
-    unit: {
-        elementType: 'select',
-        elementConfig: {
-            options: [{value: 'tsp'}, {value: 'Tbsp'}, {value: 'C'}],
-        },
-        value: 'tsp',
-        validation: {},
-        valid: true
-    },
-    ingredient: {
-        elementType: 'input',
-        elementConfig: {
-            type: 'text',
-            placeholder: 'Ingredient'
-        },
-        value: '',
-        validation: {
-            required: true,
-        },
-        valid: false,
-        touched: false
-    },
-    comment: {
-        elementType: 'input',
-        elementConfig: {
-            type: 'text',
-            placeholder: 'Comment'
-        },
-        value: '',
-        validation: {},
-        valid: true,
-        touched: false
-    }
-}
+import ingredientForm from './formPrototypes/ingredientForm';
+import directionForm from './formPrototypes/directionForm';
+import recipeForm from './formPrototypes/recipeForm';
 
-const directionForm = {
-        elementType: 'textarea',
-        elementConfig: {
-            placeholder: 'Enter the next recipe direction.'
-        },
-        value: '',
-        valueType: 'direction',
-        validation: {},
-        valid: true,
-        touched: false
-}
+import updateForm from './helpers/updateForm';
 
-class NewRecipe extends Component {
+class RecipeForm extends Component {
     state = {
-        recipeForm: {
-            title: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Recipe Name'
-                },
-                value: '',
-                valueType: 'title',
-                validation: {
-                    required: 'true'
-                },
-                valid: false,
-                touched: false,
-            },
-            description: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Description'
-                },
-                value: '',
-                valueType: 'description',
-                validation: {},
-                valid: true,
-                touched: false,
-            },
-            prepTime: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'number',
-                },
-                value: '0',
-                valueType: 'prep time',
-                validation: {},
-                valid: true,
-                touched: false
-            },
-            imageURL: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'input',
-                    placeholder: 'Image URL'
-                },
-                value: '',
-                valueType: 'prep time',
-                validation: {},
-                valid: true,
-                touched: false
-            },
-            ingredients: [
-                {
-                    ...ingredientForm,
-                }
-            ],
-            directions: [
-                {
-                    ...directionForm,
-                }
-            ],
-        },
+        recipeForm: JSON.parse(JSON.stringify(recipeForm)), // I really, really want to deep clone this, so that the prototype always remains available
         formIsValid: false,
+    };      
+    
+    componentWillMount() {
+        const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
+        this.setState({ recipeForm: updatedRecipeForm});
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(this.state.recipeForm);
+        const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
+        this.setState({ recipeForm: updatedRecipeForm});
+        console.log(this.state.recipeForm);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -166,7 +61,6 @@ class NewRecipe extends Component {
         });
 
         updatedIngredients[index] = updatedIngredient;
-        console.log(updatedIngredients);
 
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             ingredients: updatedIngredients
@@ -272,6 +166,10 @@ class NewRecipe extends Component {
                 return (
                     <IngredientInput
                         key={`ingredients[${index}]`}
+                        amountValue={ingredient.amount.value}
+                        unitValue={ingredient.unit.value}
+                        ingValue={ingredient.ingredient.value}
+                        commentValue={ingredient.comment.value}
                         index={index}
                         changed={this.ingredientChangedHandler} />
                 );
@@ -301,10 +199,16 @@ class NewRecipe extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        currentRecipe: state.currentRecipe
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onAddRecipe: (recipe) => dispatch(actions.addRecipe(recipe))
     }
 }
 
-export default connect(null, mapDispatchToProps)(NewRecipe);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);

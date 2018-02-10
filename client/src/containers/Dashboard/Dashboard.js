@@ -6,13 +6,13 @@ import RecipeForm from '../RecipeForm/RecipeForm';
 import classes from './Dashboard.css';
 import Wrapper from '../../hoc/Wrapper/Wrapper';
 
+
 class Dashboard extends Component {
     state = {
         editMode: false
     }
 
     setEditModeHandler = (target) => {
-        console.log("I'm setting it!");
         this.setState({ editMode: target});
     }
 
@@ -33,6 +33,5 @@ class Dashboard extends Component {
             );
     }
 }
-
 
 export default Dashboard;

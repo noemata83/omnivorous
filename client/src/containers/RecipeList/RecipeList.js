@@ -10,11 +10,11 @@ import classes from './RecipeList.css';
 
 class RecipeList extends Component {
     render() {
-        const recipes = this.props.recipes.map(recipe => <RecipeItem clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
+        const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(recipe); this.props.setEditMode(true) }} clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
         return (
             <ul className={classes.RecipeList}>
                 {recipes}
-                <Button buttonType="Success" clicked={() => this.props.setEditMode(true)}>Add Recipe</Button>
+                <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
             </ul>);    
     }
     
@@ -29,6 +29,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSelectRecipe: (recipe) => dispatch(actions.displayRecipe(recipe)),
+        addNewRecipe: () => dispatch(actions.newRecipe())
     }
 }
 

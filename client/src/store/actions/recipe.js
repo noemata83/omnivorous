@@ -13,3 +13,9 @@ export const addRecipe = (recipe) => {
         recipe: recipe
     }
 }
+
+export const newRecipe = () => {
+    return {
+        type: actionTypes.NEW_RECIPE
+    }
+}

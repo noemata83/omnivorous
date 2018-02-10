@@ -1,1 +1,1 @@
-export { displayRecipe, addRecipe } from './recipe';
+export { displayRecipe, addRecipe, newRecipe } from './recipe';
