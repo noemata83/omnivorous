@@ -22,13 +22,17 @@ class RecipeForm extends Component {
     componentWillMount() {
         const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
         this.setState({ recipeForm: updatedRecipeForm});
+        if (this.props.currentRecipe) {
+            this.setState({ formIsValid: true });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(this.state.recipeForm);
         const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
-        this.setState({ recipeForm: updatedRecipeForm});
-        console.log(this.state.recipeForm);
+        this.setState({ recipeForm: updatedRecipeForm});        
+        if (this.props.currentRecipe) {
+            this.setState({ formIsValid: true });
+        }
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -56,6 +60,7 @@ class RecipeForm extends Component {
             valid: checkValidity(event.target.value, this.state.recipeForm.ingredients[index][inputIdentifier]),
             touched: true
         });
+        console.log(updatedIngredientElement);
         const updatedIngredient = updateObject(this.state.recipeForm.ingredients[index], {
             [inputIdentifier]: updatedIngredientElement
         });
@@ -68,7 +73,10 @@ class RecipeForm extends Component {
         let formIsValid = true;
         updatedRecipeForm.ingredients.forEach(ingredient => {
             for (let input in ingredient) {
+                console.log(input);
+                console.log(updatedRecipeForm.ingredients[index][input].valid);
                 formIsValid = updatedRecipeForm.ingredients[index][input].valid && formIsValid;
+                console.log(formIsValid);
             }
         });
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
@@ -119,11 +127,20 @@ class RecipeForm extends Component {
                 recipe[formElementIdentifier] = this.state.recipeForm[formElementIdentifier].value;
             }
         }
-        this.props.onAddRecipe(recipe);
+        console.log(this.props.currentRecipe);
+        if (this.props.currentRecipe) {
+            this.props.onEditRecipe(this.props.currentRecipe._id, recipe);
+        } else {
+            this.props.onAddRecipe(recipe);
+        }
     }
 
 
     render() {
+        let recipeAction = 'ADD RECIPE';
+        if (this.props.currentRecipe) {
+            recipeAction = 'EDIT RECIPE';
+        }
         const formElementsArray = [];
         const ingredientsArray = [];
         const directionsArray = [];
@@ -188,7 +205,7 @@ class RecipeForm extends Component {
                 );
             })}
             <Button type="button" buttonType="Success" clicked={this.addDirectionHandler}>+</Button>
-            <Button buttonType="Success" disabled={!this.state.formIsValid}>ADD RECIPE</Button>
+            <Button buttonType="Success" disabled={!this.state.formIsValid}>{recipeAction}</Button>
         </form>);
         return (
             <div>
@@ -207,7 +224,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddRecipe: (recipe) => dispatch(actions.addRecipe(recipe))
+        onAddRecipe: (recipe) => dispatch(actions.addRecipe(recipe)),
+        onEditRecipe: (id, recipe) => dispatch(actions.editRecipe(id, recipe))
     }
 }
 

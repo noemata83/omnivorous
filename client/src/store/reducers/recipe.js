@@ -56,6 +56,20 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentRecipe: null,
             }
+        case (actionTypes.EDIT_RECIPE):
+            const recipes = [...state.recipes];
+            recipes.forEach((recipe, index) => {
+                if (recipe._id === action.id) {
+                    console.log("Let's update the recipe!")
+                    recipes[index] = { ...action.updatedRecipe,
+                                        _id: action.id }
+                }
+            });
+            console.log(recipes);
+            return {
+                ...state,
+                recipes: recipes
+            }
         default:
             return state;
     }

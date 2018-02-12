@@ -8,9 +8,9 @@ const ingredientInput = (props) => {
                 <input className={classes.Amount}
                 onChange={(event) => props.changed(event, props.index, 'amount')}
                 value={props.amountValue} />
-                <select className={classes.Unit}
+                <input className={classes.Unit}
                 onChange={(event) => props.changed(event, props.index, 'unit')}
-                value={props.unitValue} > </select>
+                value={props.unitValue} />
                 <input className={classes.Ingredient}
                 onChange={(event) => props.changed(event, props.index, 'ingredient')}
                 value={props.ingValue} />

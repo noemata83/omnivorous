@@ -19,3 +19,11 @@ export const newRecipe = () => {
         type: actionTypes.NEW_RECIPE
     }
 }
+
+export const editRecipe = (id, recipe) => {
+    return {
+        type: actionTypes.EDIT_RECIPE,
+        id: id,
+        updatedRecipe: recipe
+    }
+}

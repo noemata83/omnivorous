@@ -9,19 +9,20 @@ const ingredientForm = {
         valueType: 'amount',
         validation: {
             required: true,
-            isNumber: true
         },
         valid: false,
         touched: false
     },
     unit: {
-        elementType: 'select',
+        elementType: 'input',
         elementConfig: {
-            options: [{value: 'tsp'}, {value: 'Tbsp'}, {value: 'C'}],
+            type: 'text',
+            placeholder: 'unit'
         },
         value: 'tsp',
         validation: {},
-        valid: true
+        valid: true,
+        touched: false
     },
     ingredient: {
         elementType: 'input',

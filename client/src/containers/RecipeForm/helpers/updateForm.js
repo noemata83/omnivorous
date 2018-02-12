@@ -12,7 +12,7 @@ const updateIngredients = (ingredients) => {
             },
             unit: {
                 ...ingredientForm.unit,
-                value: ingredient.value
+                value: ingredient.unit
             },
             ingredient: {
                 ...ingredientForm.ingredient,
