@@ -1,8 +1,10 @@
 import React from 'react';
 
+import classes from './Direction.css';
+
 const direction = (props) => {
     return (
-        <li>{props.direction}</li>
+        <li className={classes.Direction}>{props.direction}</li>
     );
 }
 

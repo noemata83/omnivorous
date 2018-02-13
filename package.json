@@ -7,8 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "mocha --reporter spec"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "recipe",
@@ -22,6 +24,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.0",

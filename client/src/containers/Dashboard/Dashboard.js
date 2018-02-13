@@ -4,7 +4,7 @@ import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import classes from './Dashboard.css';
-import Wrapper from '../../hoc/Wrapper/Wrapper';
+// import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 
 class Dashboard extends Component {
@@ -22,14 +22,18 @@ class Dashboard extends Component {
             mainWindow= <RecipeForm />;
         }
         return (
-            <Wrapper>
+            <div>
+                <div className={classes.Background}>
+                    <div className={classes.Layer}></div>
+                </div>
+                
                 <div className={classes.RecipeList}>
                     <RecipeList setEditMode={this.setEditModeHandler}/>
                 </div>
                 <div className={classes.MainWindow}>
                     {mainWindow}
                 </div>
-            </Wrapper>
+            </div>
             );
     }
 }

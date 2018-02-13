@@ -10,14 +10,18 @@ import classes from './RecipeList.css';
 
 class RecipeList extends Component {
     render() {
-        console.log(this.props.recipes);
         const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(recipe); this.props.setEditMode(true) }} clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
-        console.log(recipes);
         return (
-            <ul className={classes.RecipeList}>
-                {recipes}
-                <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
-            </ul>);    
+            <div className={classes.ListBox}>
+                <div className={classes.ListHeader}>
+                    <h2 className={classes.ListHeaderText}>My Recipes</h2>
+                </div>
+                <ul className={classes.RecipeList}>
+                    {recipes}
+                    <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
+                </ul>
+            </div>  );    
+
     }
     
 };

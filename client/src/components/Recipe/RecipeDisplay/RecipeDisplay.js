@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import classes from './RecipeDisplay.css';
 import Ingredient from './Ingredient/Ingredient';
 import Direction from './Direction/Direction';
 
@@ -34,7 +35,11 @@ class RecipeDisplay extends Component {
                 </div>
                 )
         }
-        return recipe;
+        return (
+            <div className={classes.RecipeDisplay}>
+                {recipe}
+            </div>
+            );
     }
 }
 
