@@ -29,6 +29,14 @@
     color: #944317;
 }
 
+.Plus {
+    color: green;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+
 .Inline {
     display: inline-block;
     background-color: transparent;

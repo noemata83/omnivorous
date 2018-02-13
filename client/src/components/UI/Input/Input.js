@@ -12,7 +12,7 @@ const input = (props) => {
 
     switch (props.elementType) {
         case('input'):
-            inputElement = <input className={inputClasses.join(' ')}
+            inputElement = <input className={[classes.InputElement, inputClasses].join(' ')}
                                 {...props.elementConfig}
                                 onChange={props.changed}
                                 value={props.value} />
@@ -44,7 +44,7 @@ const input = (props) => {
 
     return (
         <div className={classes.Input}>
-            {/* <label className={classes.Label}>{props.label}</label> */}
+            <label className={classes.Label}>{props.label}</label>
             {inputElement}
             {validationError}
         </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateObject, checkValidity } from '../../shared/utility';
 
+import classes from './RecipeForm.css';
 import Input from '../../components/UI/Input/Input';
 import IngredientInput from '../../components/UI/Input/IngredientInput/IngredientInput';
 import Button from '../../components/UI/Button/Button';
@@ -12,6 +13,7 @@ import directionForm from './formPrototypes/directionForm';
 import recipeForm from './formPrototypes/recipeForm';
 
 import updateForm from './helpers/updateForm';
+import validateForm from './helpers/validator';
 
 class RecipeForm extends Component {
     state = {
@@ -41,10 +43,7 @@ class RecipeForm extends Component {
             [inputIdentifier]: updatedFormElement
         });
         let formIsValid = true;
-        for (let inputIdentifier in updatedRecipeForm) {
-            if (inputIdentifier === 'ingredients' || inputIdentifier === 'directions') { continue; }
-            formIsValid = updatedRecipeForm[inputIdentifier].valid && formIsValid;
-        }
+        formIsValid = validateForm(formIsValid, updatedRecipeForm);
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
@@ -65,23 +64,16 @@ class RecipeForm extends Component {
             ingredients: updatedIngredients
         });
         let formIsValid = true;
-        updatedRecipeForm.ingredients.forEach(ingredient => {
-            for (let input in ingredient) {
-                console.log(input);
-                console.log(updatedRecipeForm.ingredients[index][input].valid);
-                formIsValid = updatedRecipeForm.ingredients[index][input].valid && formIsValid;
-                console.log(formIsValid);
-            }
-        });
+        formIsValid = validateForm(formIsValid, updatedRecipeForm);
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
     directionChangedHandler = (event, index) => {
-        const updatedDirection = updateObject(this.state.recipeForm.directions[index], {
+        const updatedDirection = updateObject(this.state.recipeForm.directions[index].direction, {
             value: event.target.value,
         });
         const updatedDirections = [...this.state.recipeForm.directions];
-        updatedDirections[index] = updatedDirection;
+        updatedDirections[index].direction = updatedDirection;
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             directions: updatedDirections
         })
@@ -122,7 +114,6 @@ class RecipeForm extends Component {
                 recipe[formElementIdentifier] = this.state.recipeForm[formElementIdentifier].value;
             }
         }
-        console.log(this.props.currentRecipe);
         if (this.props.currentRecipe) {
             this.props.onEditRecipe(this.props.currentRecipe._id, recipe);
         } else {
@@ -140,7 +131,7 @@ class RecipeForm extends Component {
         const ingredientsArray = [];
         const directionsArray = [];
         for (let key in this.state.recipeForm) {
-            if (key === 'ingredients') {
+            if (key === 'ingredients' || key === 'directions') {
                 break;
             } else {
                 formElementsArray.push({
@@ -155,10 +146,11 @@ class RecipeForm extends Component {
             });
         });
         this.state.recipeForm.directions.forEach((direction, index) => {
+            console.log(this.state.recipeForm.directions[index].direction);
             directionsArray.push({
                 id: `directions[${index}]`,
-                config: this.state.recipeForm.directions[index]
-            })
+                config: this.state.recipeForm.directions[index].direction
+            });
         })
         let form =(<form onSubmit={this.recipeHandler}>
             {formElementsArray.map(formElement => {
@@ -186,9 +178,10 @@ class RecipeForm extends Component {
                         changed={this.ingredientChangedHandler} />
                 );
             })}
-            <Button type="Button" buttonType="Success" clicked={this.addIngredientHandler}>+</Button>
+            <Button type="Button" buttonType="Plus" clicked={this.addIngredientHandler}>+</Button>
             <ol>
                 {directionsArray.map((direction, index) => {
+                    console.log(direction);
                     return (
                         <li key={index}>
                             <Input
@@ -207,7 +200,7 @@ class RecipeForm extends Component {
             <Button buttonType="Success" disabled={!this.state.formIsValid}>{recipeAction}</Button>
         </form>);
         return (
-            <div>
+            <div className={classes.RecipeForm}>
                 <h4>Enter a new recipe</h4>
                 {form}
                 </div>
