@@ -65,7 +65,6 @@ const reducer = (state = initialState, action) => {
                                         _id: action.id }
                 }
             });
-            console.log(recipes);
             return {
                 ...state,
                 recipes: recipes

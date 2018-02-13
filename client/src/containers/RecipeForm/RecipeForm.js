@@ -20,23 +20,18 @@ class RecipeForm extends Component {
     };      
     
     componentWillMount() {
+        // When initializing,  update the form to reflect any data loaded in.
         const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
         this.setState({ recipeForm: updatedRecipeForm});
-        if (this.props.currentRecipe) {
-            this.setState({ formIsValid: true });
-        }
     }
 
     componentWillReceiveProps(nextProps) {
+        // Update the form if the user clicks to edit a different recipe.
         const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
-        this.setState({ recipeForm: updatedRecipeForm});        
-        if (this.props.currentRecipe) {
-            this.setState({ formIsValid: true });
-        }
+        this.setState({ recipeForm: updatedRecipeForm});
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
-
         const updatedFormElement = updateObject(this.state.recipeForm[inputIdentifier], { 
             value: event.target.value,
             valid: checkValidity(event.target.value, this.state.recipeForm[inputIdentifier].validation),
@@ -45,9 +40,9 @@ class RecipeForm extends Component {
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             [inputIdentifier]: updatedFormElement
         });
-        
         let formIsValid = true;
         for (let inputIdentifier in updatedRecipeForm) {
+            if (inputIdentifier === 'ingredients' || inputIdentifier === 'directions') { continue; }
             formIsValid = updatedRecipeForm[inputIdentifier].valid && formIsValid;
         }
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
@@ -57,10 +52,9 @@ class RecipeForm extends Component {
         const updatedIngredients = [...this.state.recipeForm.ingredients];
         const updatedIngredientElement = updateObject(this.state.recipeForm.ingredients[index][inputIdentifier], {
             value: event.target.value,
-            valid: checkValidity(event.target.value, this.state.recipeForm.ingredients[index][inputIdentifier]),
+            valid: checkValidity(event.target.value, this.state.recipeForm.ingredients[index][inputIdentifier].validation),
             touched: true
         });
-        console.log(updatedIngredientElement);
         const updatedIngredient = updateObject(this.state.recipeForm.ingredients[index], {
             [inputIdentifier]: updatedIngredientElement
         });
@@ -110,6 +104,7 @@ class RecipeForm extends Component {
             }
         })
     }
+
     recipeHandler = (event) => {
         event.preventDefault();
         const recipe = {};
@@ -192,18 +187,22 @@ class RecipeForm extends Component {
                 );
             })}
             <Button type="Button" buttonType="Success" clicked={this.addIngredientHandler}>+</Button>
-            {directionsArray.map((direction, index) => {
-                return (
-                    <Input
-                        key={direction.id}
-                        value={direction.config.value}
-                        valueType={direction.config.valueType}
-                        invalid={!direction.config.valid}
-                        shouldValidate={direction.config.validation}
-                        touched={direction.config.touched}
-                        changed={(event) => this.directionChangedHandler(event, index)} />
-                );
-            })}
+            <ol>
+                {directionsArray.map((direction, index) => {
+                    return (
+                        <li key={index}>
+                            <Input
+                            elementType={direction.config.elementType}
+                            value={direction.config.value}
+                            valueType={direction.config.valueType}
+                            invalid={!direction.config.valid}
+                            shouldValidate={direction.config.validation}
+                            touched={direction.config.touched}
+                            changed={(event) => this.directionChangedHandler(event, index)} />
+                        </li>
+                    );
+                })}
+            </ol>
             <Button type="button" buttonType="Success" clicked={this.addDirectionHandler}>+</Button>
             <Button buttonType="Success" disabled={!this.state.formIsValid}>{recipeAction}</Button>
         </form>);

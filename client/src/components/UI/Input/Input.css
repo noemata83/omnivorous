@@ -20,32 +20,14 @@
     box-sizing: border-box;
 }
 
-.InputElement:focus,
-.IngredientUnit:focus,
-.IngredientText:focus {
+.InputElement:focus {
     outline: none;
     background-color: #ccc;
 }
 
-.IngredientUnit {
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: white;
-    font: inherit;
-    padding: 6px 10px;
-    margin: 10px;
-    display: inlin-block;
-    width: 10%;
-}
-
-.IngredientText {
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: white;
-    font: inherit;
-    padding: 6px 10px;
-    display: inline-block;
-    width: 30%;
+.TextInput {
+    width: 100%;
+    height: 5rem;
 }
 
 .Invalid {
