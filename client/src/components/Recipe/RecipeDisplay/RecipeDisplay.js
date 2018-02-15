@@ -23,12 +23,12 @@ class RecipeDisplay extends Component {
             recipe = (
                 <div>
                     <h1>{this.props.currentRecipe.title}</h1>
-                    <p><em>{this.props.currentRecipe.description}</em></p>
-                    <h3>Ingredients</h3>
+                    <p className={classes.Description}>{this.props.currentRecipe.description}</p>
+                    <h3 className={classes.HeaderText}>Ingredients:</h3>
                         <ul>
                             {ingredients}
                         </ul>
-                    <h3>Directions:</h3>
+                    <h3 className={classes.HeaderText}>Directions:</h3>
                         <ol>
                             {directions}
                         </ol>
@@ -45,7 +45,7 @@ class RecipeDisplay extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentRecipe: state.currentRecipe
+        currentRecipe: state.recipe.currentRecipe
     }
 }
 

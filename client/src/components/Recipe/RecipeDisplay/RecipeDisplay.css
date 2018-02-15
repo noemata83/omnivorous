@@ -5,4 +5,15 @@
     width: 100%;
     padding: 1rem;
     overflow: auto;
+    border-radius: 10px;
+}
+
+.HeaderText {
+    font-size: 1.8rem;
+}
+
+.Description {
+    font-size: 1.6rem;
+    font-style: italic;
+    margin-left: 1.6rem;
 }

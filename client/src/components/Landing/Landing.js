@@ -1,15 +1,20 @@
 import React from 'react';
 
 import classes from "./Landing.css";
+import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 const landing = (props) => {
     return (
-        <div className={classes.Landing}>
-            <div className={classes.TextBox}>
-                <h2 className={classes.HeaderText}>Welcome to <span className={classes.HeaderText__brand}>Omnivorous</span></h2>
-                <a className={classes.Link} href="/recipes">Sign in with Google</a>
+        <Wrapper>
+            <div className={classes.Landing}></div>
+            <div className={classes.LandingContainer}>
+                <div className={classes.TextBox}>
+                    <h1 className={classes.HeaderText}>Welcome to <span className={classes.HeaderText__brand}>Omnivorous</span></h1>
+                    <h2 className={classes.Tagline}>The recipe manager that <em>just works</em></h2>
+                    <a className={classes.Link} href="/auth/google">Sign in with Google</a>
+                </div>
             </div>
-        </div>
+        </Wrapper>
     )
 }
 export default landing;

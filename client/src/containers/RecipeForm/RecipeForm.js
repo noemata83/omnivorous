@@ -220,7 +220,7 @@ class RecipeForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentRecipe: state.currentRecipe
+        currentRecipe: state.recipe.currentRecipe
     }
 }
 

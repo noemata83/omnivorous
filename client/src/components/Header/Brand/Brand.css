@@ -1,0 +1,8 @@
+.Brand {
+    margin-left: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Clicker Script', cursive;
+    color: rgb(91, 238, 91);
+    text-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+}

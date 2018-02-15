@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeForm from '../RecipeForm/RecipeForm';
@@ -25,6 +26,9 @@ class Dashboard extends Component {
             <div>
                 <div className={classes.Background}>
                     <div className={classes.Layer}></div>
+                </div>
+                <div className={classes.HeaderBox}>
+                    <Header />
                 </div>
                 
                 <div className={classes.RecipeList}>
