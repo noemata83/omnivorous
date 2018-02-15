@@ -6,7 +6,8 @@ const recipeForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'Recipe Name'
+            placeholder: 'Recipe Name',
+            label: 'Recipe Name'
         },
         value: '',
         valueType: 'title',
@@ -20,7 +21,8 @@ const recipeForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'Description'
+            placeholder: 'Description',
+            label: 'Description'
         },
         value: '',
         valueType: 'description',
@@ -32,6 +34,7 @@ const recipeForm = {
         elementType: 'input',
         elementConfig: {
             type: 'number',
+            label: 'Time to Prepare'
         },
         value: '0',
         valueType: 'prep time',
@@ -43,7 +46,8 @@ const recipeForm = {
         elementType: 'input',
         elementConfig: {
             type: 'input',
-            placeholder: 'Image URL'
+            placeholder: 'Image URL',
+            label: 'Image URL'
         },
         value: '',
         valueType: 'prep time',

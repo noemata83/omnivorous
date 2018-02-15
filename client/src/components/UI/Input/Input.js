@@ -42,9 +42,10 @@ const input = (props) => {
         validationError = <p className={classes.validationError}>{`Please enter a valid ${props.valueType}.`}</p>
     }
 
+    console.log(props.elementConfig);
     return (
         <div className={classes.Input}>
-            <label className={classes.Label}>{props.label}</label>
+            <label className={classes.Label}>{props.elementConfig ? props.elementConfig.label : null}</label>
             {inputElement}
             {validationError}
         </div>

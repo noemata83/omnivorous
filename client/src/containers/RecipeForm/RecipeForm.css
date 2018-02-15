@@ -1,4 +1,9 @@
 .RecipeForm {
-    background-color: rgba(255, 255, 255, .9);
+    height: 100%;
+    background-color: rgba(255, 255, 255, .95);
     overflow: auto;
+}
+
+.FormHeader {
+    font-size: 2.5rem;
 }

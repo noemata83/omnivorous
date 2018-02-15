@@ -4,6 +4,8 @@
 }
 
 .Label {
+    font-size: 1.8rem;
+    text-transform: capitalize;
     font-weight: bold;
     display: block;
     margin-bottom: 8px;

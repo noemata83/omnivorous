@@ -3,7 +3,8 @@ const ingredientForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'Amt'
+            placeholder: 'Amt',
+            label: "Amount"
         },
         value: '',
         valueType: 'amount',
@@ -15,9 +16,10 @@ const ingredientForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'unit'
+            placeholder: 'unit',
+            label: "Unit"
         },
-        value: 'tsp',
+        value: '',
         validation: {},
         valid: true,
         touched: false
@@ -26,7 +28,8 @@ const ingredientForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'Ingredient'
+            placeholder: 'Ingredient',
+            label: 'Ingredient Name'
         },
         value: '',
         validation: {
@@ -39,7 +42,8 @@ const ingredientForm = {
         elementType: 'input',
         elementConfig: {
             type: 'text',
-            placeholder: 'Comment'
+            placeholder: 'Comment',
+            label: "Comments"
         },
         value: '',
         validation: {},

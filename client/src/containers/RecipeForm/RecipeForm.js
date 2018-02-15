@@ -34,30 +34,43 @@ class RecipeForm extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
+
+        // First, create a copy of the form element (e.g., the input) with the value updated and check its validity.
         const updatedFormElement = updateObject(this.state.recipeForm[inputIdentifier], { 
             value: event.target.value,
             valid: checkValidity(event.target.value, this.state.recipeForm[inputIdentifier].validation),
             touched: true,
         });
+        
+        // Second, create a copy of the form data from the state, with the updated form element in it.
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             [inputIdentifier]: updatedFormElement
         });
+
+        // Cycle through each input in the entire form, checking for its overall validity.
         let formIsValid = true;
         formIsValid = validateForm(formIsValid, updatedRecipeForm);
+
+        // Update the state with the updated Recipe form and the status of its validity.
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
     ingredientChangedHandler = (event, index, inputIdentifier) => {
+        // First, create a copy of the array of ingredient form elements.
         const updatedIngredients = [...this.state.recipeForm.ingredients];
+        
+        // Update the relevant input from the correct index of the array with the inputted value; check its validity.
         const updatedIngredientElement = updateObject(this.state.recipeForm.ingredients[index][inputIdentifier], {
             value: event.target.value,
             valid: checkValidity(event.target.value, this.state.recipeForm.ingredients[index][inputIdentifier].validation),
             touched: true
         });
+
+        // Copy the ingredients array at the given index, replace the element configuration at that index with the updated value.
         const updatedIngredient = updateObject(this.state.recipeForm.ingredients[index], {
             [inputIdentifier]: updatedIngredientElement
         });
-
+        // Update the array at the given index
         updatedIngredients[index] = updatedIngredient;
 
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
@@ -146,7 +159,6 @@ class RecipeForm extends Component {
             });
         });
         this.state.recipeForm.directions.forEach((direction, index) => {
-            console.log(this.state.recipeForm.directions[index].direction);
             directionsArray.push({
                 id: `directions[${index}]`,
                 config: this.state.recipeForm.directions[index].direction
@@ -157,7 +169,6 @@ class RecipeForm extends Component {
                 return (
             <Input 
                 key={formElement.id}
-                label={formElement.id}
                 elementType={formElement.config.elementType} 
                 elementConfig={formElement.config.elementConfig} 
                 value={formElement.config.value}
@@ -181,7 +192,6 @@ class RecipeForm extends Component {
             <Button type="Button" buttonType="Plus" clicked={this.addIngredientHandler}>+</Button>
             <ol>
                 {directionsArray.map((direction, index) => {
-                    console.log(direction);
                     return (
                         <li key={index}>
                             <Input
@@ -201,7 +211,7 @@ class RecipeForm extends Component {
         </form>);
         return (
             <div className={classes.RecipeForm}>
-                <h4>Enter a new recipe</h4>
+                <h2 className={classes.FormHeader}>Enter a new recipe</h2>
                 {form}
                 </div>
         )

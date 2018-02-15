@@ -15,11 +15,23 @@
     color: black;
     padding: 3rem;
     text-align: center;
+    width: 50rem;
+    transition: all 1s;
 }
 
 .HeaderText {
-    font-size: 4rem;
+    font-size: 3rem;
+    text-transform: uppercase;
     margin: 0 0 1.5rem 0;
+}
+
+.HeaderText__brand {
+    font-size: 10rem;
+    font-family: 'Clicker Script', cursive;
+    color: rgb(91, 238, 91);
+    text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+    display: block;
+    text-transform: none;
 }
 
 .Link,
