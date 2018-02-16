@@ -76,17 +76,16 @@ class RecipeForm extends Component {
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             ingredients: updatedIngredients
         });
-        let formIsValid = true;
-        formIsValid = validateForm(formIsValid, updatedRecipeForm);
+        const formIsValid = validateForm(true, updatedRecipeForm);
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
     directionChangedHandler = (event, index) => {
-        const updatedDirection = updateObject(this.state.recipeForm.directions[index].direction, {
+        const updatedDirection = updateObject(this.state.recipeForm.directions[index].element, {
             value: event.target.value,
         });
         const updatedDirections = [...this.state.recipeForm.directions];
-        updatedDirections[index].direction = updatedDirection;
+        updatedDirections[index].element = updatedDirection;
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             directions: updatedDirections
         })
@@ -122,16 +121,19 @@ class RecipeForm extends Component {
                     comment: ingredient.comment.value
                 }});
             } else if (formElementIdentifier === 'directions') {
-                recipe.directions = this.state.recipeForm.directions.map(direction => direction.value);  
+                recipe.directions = this.state.recipeForm.directions.map(direction => direction.element.value);  
             } else {
                 recipe[formElementIdentifier] = this.state.recipeForm[formElementIdentifier].value;
             }
         }
         if (this.props.currentRecipe) {
             this.props.onEditRecipe(this.props.currentRecipe._id, recipe);
+            this.props.setEditMode(false);
         } else {
             this.props.onAddRecipe(recipe);
+            this.props.setEditMode(false);
         }
+
     }
 
 
@@ -158,10 +160,11 @@ class RecipeForm extends Component {
                 ...this.state.recipeForm.ingredients[index]
             });
         });
-        this.state.recipeForm.directions.forEach((direction, index) => {
+        this.state.recipeForm.directions.forEach((directionItem, index) => {
+            console.log(this.state.recipeForm.directions[index]);
             directionsArray.push({
                 id: `directions[${index}]`,
-                config: this.state.recipeForm.directions[index].direction
+                config: {...this.state.recipeForm.directions[index].element}
             });
         })
         let form =(<form onSubmit={this.recipeHandler}>

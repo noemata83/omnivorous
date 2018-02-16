@@ -50,10 +50,15 @@ const updateForm = (form, recipe) => {
     const ingredientsArray = updateIngredients(recipe.ingredients);
     const directionsArray = [];
     recipe.directions.forEach(direction => {
-        directionsArray.push({
-            ...directionForm,
-            value: direction
-        });
+        let updatedDirection = {
+            element: {
+                ...directionForm.element,
+                value: direction
+            }
+        };
+        console.log("updated Direction: ", updatedDirection);
+        directionsArray.push(updatedDirection);
+        console.log(directionsArray);
     });
     return {
         ...form,

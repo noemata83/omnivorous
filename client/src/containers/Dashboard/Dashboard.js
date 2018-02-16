@@ -20,7 +20,7 @@ class Dashboard extends Component {
     render () {
         let mainWindow = <RecipeDisplay />;
         if (this.state.editMode) {
-            mainWindow= <RecipeForm />;
+            mainWindow= <RecipeForm setEditMode={this.setEditModeHandler}/>;
         }
         return (
             <div>

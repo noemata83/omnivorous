@@ -1,5 +1,5 @@
 const directionForm = {
-    direction: {
+    element: {
             elementType: 'textarea',
             elementConfig: {
                 placeholder: 'Enter the next recipe direction.'
