@@ -48,8 +48,7 @@ class RecipeForm extends Component {
         });
 
         // Cycle through each input in the entire form, checking for its overall validity.
-        let formIsValid = true;
-        formIsValid = validateForm(formIsValid, updatedRecipeForm);
+        const formIsValid = validateForm(true, updatedRecipeForm);
 
         // Update the state with the updated Recipe form and the status of its validity.
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });

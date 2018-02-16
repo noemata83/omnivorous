@@ -9,6 +9,11 @@ import Button from '../../components/UI/Button/Button';
 import classes from './RecipeList.css';
 
 class RecipeList extends Component {
+
+    componentDidMount(){
+        // this.props.fetchRecipes(this.props.userId);
+    }
+    
     render() {
         const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(recipe); this.props.setEditMode(true) }} clicked={() => { this.props.onSelectRecipe(recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
         return (
@@ -28,14 +33,16 @@ class RecipeList extends Component {
 
 const mapStateToProps = state => {
     return {
-        recipes: state.recipe.recipes  
+        recipes: state.recipe.recipes,
+        userId: state.auth.userId || null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onSelectRecipe: (recipe) => dispatch(actions.displayRecipe(recipe)),
-        addNewRecipe: () => dispatch(actions.newRecipe())
+        addNewRecipe: () => dispatch(actions.newRecipe()),
+        fetchRecipes: (user) => dispatch(actions.fetchRecipes(user))
     }
 }
 

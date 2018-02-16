@@ -4,3 +4,6 @@ export const NEW_RECIPE = 'NEW_RECIPE';
 export const EDIT_RECIPE = 'EDIT_RECIPE';
 
 export const FETCH_USER = 'FETCH_USER';
+export const FETCH_START = 'FETCH_START';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAIL = 'FETCH_FAIL';

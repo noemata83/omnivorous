@@ -5,5 +5,7 @@ import * as actions from './actionTypes';
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('api/current_user');
     console.log(res);
-    dispatch({type: actions.FETCH_USER, user: res.data});
+    dispatch({
+        type: actions.FETCH_USER, 
+        user: res.data});
 }
