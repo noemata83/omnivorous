@@ -23,14 +23,15 @@ passport.use(
         callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
         User.findOne({ googleId: profile.id })
             .then( (existingUser) => {
                 if (existingUser) {
                     done(null, existingUser);
                 } else {
-                    console.log("adding new user...?");
-                    new User({ googleId: profile.id})
+                    const displayName = profile.displayName.split(' ')[0];
+                    new User({ 
+                        userId: profile.id, 
+                        displayName})
                         .save()
                         .then(user => done(null, user));
                 }

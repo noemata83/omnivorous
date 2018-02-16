@@ -1,11 +1,11 @@
-module.exports = function(app) {
+module.exports = (app) => {
     const recipeController = require('../controllers/recipeController');
 
-    app.route('/api/:username/recipes')
+    app.route('/api/:userId/recipes')
         .get(recipeController.listRecipes)
         .post(recipeController.createRecipe);
         
-    app.route('/api/:username/recipes/:id')
+    app.route('/api/:userId/recipes/:id')
         .get(recipeController.readRecipe)
         .put(recipeController.updateRecipe)
         .delete(recipeController.deleteRecipe);

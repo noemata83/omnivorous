@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-   googleId: String,
+   userId: String,
+   displayName: String,
    recipes: [{
        id: {
            type: mongoose.Schema.Types.ObjectId,

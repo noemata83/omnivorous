@@ -11,7 +11,7 @@ module.exports = (app) => {
         res.redirect('/recipes');
     });
     
-    app.get('/auth/google/logout', (req, res) => {
+    app.get('/api/logout', (req, res) => {
         req.logout();
     });
     

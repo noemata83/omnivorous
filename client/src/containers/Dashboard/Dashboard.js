@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import classes from './Dashboard.css';
+import * as actions from '../../store/actions';
+
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 
 class Dashboard extends Component {
     state = {
         editMode: false
+    }
+
+    componentDidMount() {
+        this.props.fetchUser();
     }
 
     setEditModeHandler = (target) => {
@@ -42,4 +49,10 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUser: () => dispatch(actions.fetchUser())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Dashboard);
