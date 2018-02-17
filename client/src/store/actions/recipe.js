@@ -1,6 +1,19 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
+export const fetchRecipe = (user, recipe) => {
+    // console.log(recipe);
+    return dispatch => {
+        axios.get(`/api/${user}/recipes/${recipe._id}`)
+            .then(res => {
+                dispatch(displayRecipe(res.data));
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+}
+
 export const displayRecipe = (recipe) => {
     return {
         type: actionTypes.DISPLAY_RECIPE,
@@ -60,7 +73,6 @@ export const fetchRecipes = (user) => {
         dispatch(fetchStart());
         axios.get(`/api/${user}/recipes`)
         .then(response => {
-            console.log(response);
             dispatch(fetchSuccess(response.data))
         })
         .catch(error => {
