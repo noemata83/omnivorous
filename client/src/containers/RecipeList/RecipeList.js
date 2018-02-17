@@ -10,8 +10,21 @@ import classes from './RecipeList.css';
 
 class RecipeList extends Component {
 
+    state = {
+        loading: true
+    }
+
     componentDidMount(){
-        // this.props.fetchRecipes(this.props.userId);
+        if (this.props.userId && !this.props.loading) {
+            this.props.fetchRecipes(this.props.userId);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.loading) {
+            this.props.fetchRecipes(nextProps.userId);
+            this.setState({loading: false});
+        }
     }
     
     render() {
@@ -34,7 +47,8 @@ class RecipeList extends Component {
 const mapStateToProps = state => {
     return {
         recipes: state.recipe.recipes,
-        userId: state.auth.userId || null
+        userId: state.auth.userId || null,
+        loading: state.recipe.loading
     }
 }
 

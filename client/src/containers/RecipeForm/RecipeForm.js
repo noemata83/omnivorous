@@ -129,7 +129,7 @@ class RecipeForm extends Component {
             this.props.onEditRecipe(this.props.currentRecipe._id, recipe);
             this.props.setEditMode(false);
         } else {
-            this.props.onAddRecipe(recipe);
+            this.props.onAddRecipe(this.props.user, recipe);
             this.props.setEditMode(false);
         }
 
@@ -222,13 +222,14 @@ class RecipeForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentRecipe: state.recipe.currentRecipe
+        currentRecipe: state.recipe.currentRecipe,
+        user: state.auth.userId,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddRecipe: (recipe) => dispatch(actions.addRecipe(recipe)),
+        onAddRecipe: (user, recipe) => dispatch(actions.addRecipe(user, recipe)),
         onEditRecipe: (id, recipe) => dispatch(actions.editRecipe(id, recipe))
     }
 }

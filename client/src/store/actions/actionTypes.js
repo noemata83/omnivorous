@@ -1,5 +1,8 @@
 export const DISPLAY_RECIPE = 'DISPLAY_RECIPE';
 export const ADD_RECIPE = 'ADD_RECIPE';
+export const ADD_RECIPE_START = 'ADD_RECIPE_START';
+export const ADD_RECIPE_SUCCESS = 'ADD_RECIPE_SUCCESS';
+export const ADD_RECIPE_FAIL = 'ADD_RECIPE_FAIL';
 export const NEW_RECIPE = 'NEW_RECIPE';
 export const EDIT_RECIPE = 'EDIT_RECIPE';
 

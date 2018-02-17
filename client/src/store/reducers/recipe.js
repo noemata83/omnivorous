@@ -67,11 +67,24 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentRecipe: action.recipe
             }
-        case (actionTypes.ADD_RECIPE):
+        case (actionTypes.ADD_RECIPE_START):
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case (actionTypes.ADD_RECIPE_FAIL):
+            return {
+                ...state,
+                error: action.error
+            }
+        case (actionTypes.ADD_RECIPE_SUCCESS):
+            console.log(state.recipes);
             return {
                 ...state,
                 recipes: state.recipes.concat(action.recipe),
-                currentRecipe: action.recipe    // problem: this recipe won't have an id property. Better to call DISPLAY_RECIPE immediately after adding it?
+                loading: false,
+                error: null
             }
         case (actionTypes.NEW_RECIPE):
             return {

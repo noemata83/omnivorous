@@ -5,17 +5,18 @@ Recipe = mongoose.model('Recipes'),
 User = mongoose.model('users');
     
     let listRecipes = function(req, res) {
-        User.findOne({ userId: req.params.userId }).populate("recipes").exec( (err, foundUser) => {
+        User.findOne({ userId: req.params.userId }, (err, foundUser) => {
             if (err) 
              {  res.send(err);}
             else {
-                res.json(foundUser);
+                console.log(foundUser.recipes);
+                res.json(foundUser.recipes);
             }
         });
     }
     
     let createRecipe = function(req, res) {
-        User.findOne({ username: req.params.userId }, (err, foundUser) => {
+        User.findOne({ userId: req.params.userId }, (err, foundUser) => {
             if (err) {
                 res.send(err);
             } else {
@@ -27,7 +28,7 @@ User = mongoose.model('users');
                     recipe.save();
                     foundUser.recipes.push(recipe);
                     foundUser.save();
-                    res.json(foundUser.recipes);
+                    res.json(recipe);
                     }
                 });
             }

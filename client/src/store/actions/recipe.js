@@ -8,10 +8,36 @@ export const displayRecipe = (recipe) => {
     }
 };
 
-export const addRecipe = (recipe) => {
+export const addRecipe = (user, recipe) => {
+    return dispatch => {
+        dispatch(addRecipeStart());
+        axios.post(`/api/${user}/recipes`, {...recipe})
+            .then(res => {
+                dispatch(addRecipeSuccess(recipe));
+            })
+            .catch(error => {
+                dispatch(addRecipeFail(error));
+            })    
+    }
+}
+
+export const addRecipeStart = () => {
     return {
-        type: actionTypes.ADD_RECIPE,
-        recipe: recipe
+        type: actionTypes.ADD_RECIPE_START
+    }
+}
+
+export const addRecipeFail = (error) => {
+    return {
+        type: actionTypes.ADD_RECIPE_FAIL,
+        error
+    }
+}
+
+export const addRecipeSuccess = (recipe) => {
+    return {
+        type: actionTypes.ADD_RECIPE_SUCCESS,
+        recipe
     }
 }
 
@@ -34,11 +60,12 @@ export const fetchRecipes = (user) => {
         dispatch(fetchStart());
         axios.get(`/api/${user}/recipes`)
         .then(response => {
-            dispatch(fetchSuccess(response.data.recipes))
+            console.log(response);
+            dispatch(fetchSuccess(response.data))
         })
         .catch(error => {
             console.log(error);
-            dispatch(fetchFail(error.response.data.data.error));
+            dispatch(fetchFail(error));
         })
     }
 }
