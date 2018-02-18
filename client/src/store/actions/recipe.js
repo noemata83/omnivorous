@@ -60,6 +60,16 @@ export const newRecipe = () => {
     }
 }
 
+export const updateRecipe = (user, recipeId, recipe) => {
+	return dispatch => {
+		axios.put(`/api/${user}/recipes/${recipeId}`, recipe)
+		.then(res => {
+			dispatch(editRecipe(recipeId, res.data));
+			dispatch(displayRecipe(res.data));
+		});
+	}
+}
+
 export const editRecipe = (id, recipe) => {
     return {
         type: actionTypes.EDIT_RECIPE,

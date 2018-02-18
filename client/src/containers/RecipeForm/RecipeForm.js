@@ -23,14 +23,19 @@ class RecipeForm extends Component {
     
     componentWillMount() {
         // When initializing,  update the form to reflect any data loaded in.
-        const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
-        this.setState({ recipeForm: updatedRecipeForm});
+	if (this.props.currentRecipe) {
+	        const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
+        	this.setState({ recipeForm: updatedRecipeForm});
+	}
     }
 
     componentWillReceiveProps(nextProps) {
         // Update the form if the user clicks to edit a different recipe.
-        const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
-        this.setState({ recipeForm: updatedRecipeForm});
+        
+	if (nextProps.currentRecipe) {    
+		const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
+        	this.setState({ recipeForm: updatedRecipeForm});
+	}
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -126,7 +131,7 @@ class RecipeForm extends Component {
             }
         }
         if (this.props.currentRecipe) {
-            this.props.onEditRecipe(this.props.currentRecipe._id, recipe);
+            this.props.onEditRecipe(this.props.user,this.props.currentRecipe._id, recipe);
             this.props.setEditMode(false);
         } else {
             this.props.onAddRecipe(this.props.user, recipe);
@@ -230,7 +235,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddRecipe: (user, recipe) => dispatch(actions.addRecipe(user, recipe)),
-        onEditRecipe: (id, recipe) => dispatch(actions.editRecipe(id, recipe))
+        onEditRecipe: (user, id, recipe) => dispatch(actions.updateRecipe(user, id, recipe))
     }
 }
 
