@@ -9,7 +9,7 @@ const ingredientForm = {
         value: '',
         valueType: 'amount',
         validation: {},
-        valid: false,
+        valid: true,
         touched: false
     },
     unit: {

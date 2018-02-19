@@ -4,8 +4,11 @@ import * as actionTypes from './actionTypes';
 export const fetchRecipe = (user, recipe) => {
     // console.log(recipe);
     return dispatch => {
+        console.log(recipe._id);
+        console.log(recipe.id);
         axios.get(`/api/${user}/recipes/${recipe._id}`)
             .then(res => {
+                console.log(res.data);
                 dispatch(displayRecipe(res.data));
             })
             .catch(error => {
@@ -26,7 +29,8 @@ export const addRecipe = (user, recipe) => {
         dispatch(addRecipeStart());
         axios.post(`/api/${user}/recipes`, {...recipe})
             .then(res => {
-                dispatch(addRecipeSuccess(recipe));
+                console.log(res);
+                dispatch(addRecipeSuccess(res.data));
             })
             .catch(error => {
                 dispatch(addRecipeFail(error));

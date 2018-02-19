@@ -4,8 +4,10 @@ const express           =     require('express'),
         passport        =     require('passport'),
         keys            =     require('./api/config/keys'),
         session         =     require('express-session'),
-        bodyParser      =     require('body-parser');
-require('./api/models/user');
+        bodyParser      =     require('body-parser'),
+        MongoStore      =    require('connect-mongo')(session);
+
+        require('./api/models/user');
 require('./api/models/recipe');
 require('./api/services/passport');
 mongoose.Promise = global.Promise;
@@ -16,7 +18,10 @@ app.use(
     session({
         secret: keys.cookieSecret,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        store: new MongoStore({
+            mongooseConnection: mongoose.connection
+        })
     }));
     
 app.use(passport.initialize());

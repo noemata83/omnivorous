@@ -165,7 +165,6 @@ class RecipeForm extends Component {
             });
         });
         this.state.recipeForm.directions.forEach((directionItem, index) => {
-            console.log(this.state.recipeForm.directions[index]);
             directionsArray.push({
                 id: `directions[${index}]`,
                 config: {...this.state.recipeForm.directions[index].element}
@@ -203,6 +202,7 @@ class RecipeForm extends Component {
                         <li key={index}>
                             <Input
                             elementType={direction.config.elementType}
+                            elementConfig={direction.config.elementConfig}
                             value={direction.config.value}
                             valueType={direction.config.valueType}
                             invalid={!direction.config.valid}

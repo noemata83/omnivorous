@@ -44,11 +44,12 @@ User = mongoose.model('users');
     }
     
     let updateRecipe = function(req, res) {
-        Recipe.findByIdAndUpdate(req.params.id, req.body, function(err, recipe) {
+        Recipe.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, recipe) {
            if (err)
            { res.send(err); }
            else 
-           { res.json(recipe); }
+           {    console.log(recipe);
+               res.json(recipe); }
         });
     }
     
