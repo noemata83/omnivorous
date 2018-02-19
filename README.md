@@ -1,4 +1,4 @@
-# Ominvorous
+# Omnivorous
 ## A recipe manager/lifestyle/cooking utility app built with NodeJS and Mongo
 
 ### Features 
