@@ -28,7 +28,6 @@ class RecipeList extends Component {
     }
     
     render() {
-        console.log(this.props.recipes);
         const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true) }} clicked={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} key={recipe._id} title={recipe.title} />);
         return (
             <div className={classes.ListBox}>

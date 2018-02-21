@@ -14,6 +14,7 @@ import recipeForm from './formPrototypes/recipeForm';
 
 import updateForm from './helpers/updateForm';
 import validateForm from './helpers/validator';
+import getRecipe from './helpers/getRecipe';
 
 class RecipeForm extends Component {
     state = {
@@ -99,9 +100,20 @@ class RecipeForm extends Component {
     addIngredientHandler = () => {
         this.setState({ 
             recipeForm: {
-                        ...this.state.recipeForm,
-                        ingredients: this.state.recipeForm.ingredients.concat({ ...ingredientForm })
+                ...this.state.recipeForm,
+                ingredients: this.state.recipeForm.ingredients.concat({ ...ingredientForm })
         }})
+    }
+
+    removeIngredientHandler = () => {
+        const ingList = [...this.state.recipeForm.ingredients];
+        ingList.splice(-1, 1);
+        this.setState({
+            recipeForm: {
+                ...this.state.recipeForm,
+                ingredients: ingList
+            }
+        })
     }
 
     addDirectionHandler = () => {
@@ -115,21 +127,7 @@ class RecipeForm extends Component {
 
     recipeHandler = (event) => {
         event.preventDefault();
-        const recipe = {};
-        for (let formElementIdentifier in this.state.recipeForm) {
-            if (formElementIdentifier === "ingredients") {
-                recipe.ingredients = this.state.recipeForm.ingredients.map(ingredient => { return {
-                    amount: ingredient.amount.value,
-                    unit: ingredient.unit.value,
-                    ingredient: ingredient.ingredient.value,
-                    comment: ingredient.comment.value
-                }});
-            } else if (formElementIdentifier === 'directions') {
-                recipe.directions = this.state.recipeForm.directions.map(direction => direction.element.value);  
-            } else {
-                recipe[formElementIdentifier] = this.state.recipeForm[formElementIdentifier].value;
-            }
-        }
+        const recipe = getRecipe(this.state.recipeForm);        
         if (this.props.currentRecipe) {
             this.props.onEditRecipe(this.props.user,this.props.currentRecipe._id, recipe);
             this.props.setEditMode(false);
@@ -199,6 +197,7 @@ class RecipeForm extends Component {
                 );
             })}
             <Button type="Button" buttonType="Plus" clicked={this.addIngredientHandler}>+</Button>
+            <Button type="Button" buttonType="Minus" clicked={this.removeIngredientHandler}>-</Button>
             <ol>
                 {directionsArray.map((direction, index) => {
                     return (
