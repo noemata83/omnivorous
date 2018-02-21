@@ -4,11 +4,8 @@ import * as actionTypes from './actionTypes';
 export const fetchRecipe = (user, recipe) => {
     // console.log(recipe);
     return dispatch => {
-        console.log(recipe._id);
-        console.log(recipe.id);
         axios.get(`/api/${user}/recipes/${recipe._id}`)
             .then(res => {
-                console.log(res.data);
                 dispatch(displayRecipe(res.data));
             })
             .catch(error => {
@@ -79,6 +76,20 @@ export const editRecipe = (id, recipe) => {
         type: actionTypes.EDIT_RECIPE,
         id: id,
         updatedRecipe: recipe
+    }
+}
+
+export const destroyRecipe = (user, recipeId) => {
+    return dispatch => {
+        axios.delete(`/api/${user}/recipes/${recipeId}`)
+        .then(res => dispatch(deleteRecipe(recipeId)));
+    }
+}
+
+export const deleteRecipe = recipeId => {
+    return {
+        type: actionTypes.DELETE_RECIPE,
+        id: recipeId
     }
 }
 

@@ -8,7 +8,6 @@ import Direction from './Direction/Direction';
 class RecipeDisplay extends Component {
     render () {
         let recipe = <h1>Please select a Recipe!</h1>;
-	    console.log(this.props.currentRecipe);
         if (this.props.currentRecipe) {
             const ingredients = this.props.currentRecipe.ingredients.map((ingredient,index) => (
                 <Ingredient 

@@ -70,6 +70,15 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: recipes
             }
+        case (actionTypes.DELETE_RECIPE):
+            let recipeList = [...state.recipes];
+            const targetIndex = recipeList.map(recipe => recipe._id).indexOf(action.id);
+            recipeList.splice(targetIndex, 1);
+            return {
+                ...state,
+                recipes: recipeList,
+                currentRecipe: null
+            }
         default:
             return state;
     }

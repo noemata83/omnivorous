@@ -142,9 +142,12 @@ class RecipeForm extends Component {
 
 
     render() {
-        let recipeAction = 'ADD RECIPE';
+        let recipeAction = <Button buttonType="Success" disabled={!this.state.formIsValid}>Add Recipe</Button>;
         if (this.props.currentRecipe) {
-            recipeAction = 'EDIT RECIPE';
+            recipeAction = (<div>
+                            <Button buttonType="Success" disabled={!this.state.formIsValid}>Edit Recipe</Button>
+                            <Button buttonType="Danger" clicked={() => { this.props.onDeleteRecipe(this.props.user, this.props.currentRecipe._id)}}>Delete Recipe</Button>
+                            </div>);
         }
         const formElementsArray = [];
         const ingredientsArray = [];
@@ -214,7 +217,7 @@ class RecipeForm extends Component {
                 })}
             </ol>
             <Button type="button" buttonType="Success" clicked={this.addDirectionHandler}>+</Button>
-            <Button buttonType="Success" disabled={!this.state.formIsValid}>{recipeAction}</Button>
+            {recipeAction}
         </form>);
         return (
             <div className={classes.RecipeForm}>
@@ -235,7 +238,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddRecipe: (user, recipe) => dispatch(actions.addRecipe(user, recipe)),
-        onEditRecipe: (user, id, recipe) => dispatch(actions.updateRecipe(user, id, recipe))
+        onEditRecipe: (user, id, recipe) => dispatch(actions.updateRecipe(user, id, recipe)),
+        onDeleteRecipe: (user, id) => dispatch(actions.destroyRecipe(user, id))
     }
 }
 
