@@ -1,4 +1,4 @@
-const getRecipe = (form) => {
+export const getRecipe = (form) => {
     const recipe = {};
     for (let formElementIdentifier in form) {
         if (formElementIdentifier === "ingredients") {
@@ -16,5 +16,3 @@ const getRecipe = (form) => {
     }
     return recipe;
 }
-
-export default getRecipe;

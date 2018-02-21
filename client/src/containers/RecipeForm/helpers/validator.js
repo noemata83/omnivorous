@@ -1,17 +1,6 @@
-const validateForm = (formIsValid, form) => {
-    for (let key in form) {
-        if (Array.isArray(form[key])) {
-            form[key].forEach(entry => {
-                console.log("We're checking: ", entry);
-                formIsValid = validateForm(formIsValid, entry) && formIsValid;
-                console.log("And the form is: ", formIsValid);
-            });
-        } else {
-            formIsValid = form[key].valid && formIsValid;        
-            console.log("Is it valid?: ", formIsValid);
-        }
-    }
-    return formIsValid;
-}
+import { flattenForm } from './flattenForm';
 
-export default validateForm;
+export const validator = (formIsValid, form) => {
+    const flattenedForm = flattenForm(form);
+    return Object.values(flattenedForm).every(element => element.valid);
+}

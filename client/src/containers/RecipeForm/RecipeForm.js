@@ -12,9 +12,10 @@ import ingredientForm from './formPrototypes/ingredientForm';
 import directionForm from './formPrototypes/directionForm';
 import recipeForm from './formPrototypes/recipeForm';
 
-import updateForm from './helpers/updateForm';
-import validateForm from './helpers/validator';
-import getRecipe from './helpers/getRecipe';
+import * as helpers from './helpers/';
+// import updateForm from './helpers/updateForm';
+// import validateForm from './helpers/validator';
+// import getRecipe from './helpers/getRecipe';
 
 class RecipeForm extends Component {
     state = {
@@ -25,18 +26,18 @@ class RecipeForm extends Component {
     componentWillMount() {
         // When initializing,  update the form to reflect any data loaded in.
 	if (this.props.currentRecipe) {
-	        const updatedRecipeForm = updateForm(this.state.recipeForm, this.props.currentRecipe);
-        	this.setState({ recipeForm: updatedRecipeForm});
+	        const updatedRecipeForm = helpers.updateForm(this.state.recipeForm, this.props.currentRecipe);
+        	this.setState({ recipeForm: updatedRecipeForm, formIsValid: true});
 	}
     }
 
     componentWillReceiveProps(nextProps) {
         // Update the form if the user clicks to edit a different recipe.
         
-	if (nextProps.currentRecipe) {    
-		const updatedRecipeForm = updateForm(this.state.recipeForm, nextProps.currentRecipe);
-        	this.setState({ recipeForm: updatedRecipeForm});
-	}
+        if (nextProps.currentRecipe) {    
+            const updatedRecipeForm = helpers.updateForm(this.state.recipeForm, nextProps.currentRecipe);
+                this.setState({ recipeForm: updatedRecipeForm, formIsValid: true});
+        }
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -54,7 +55,7 @@ class RecipeForm extends Component {
         });
 
         // Cycle through each input in the entire form, checking for its overall validity.
-        const formIsValid = validateForm(true, updatedRecipeForm);
+        const formIsValid = helpers.validator(true, updatedRecipeForm);
 
         // Update the state with the updated Recipe form and the status of its validity.
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
@@ -81,7 +82,7 @@ class RecipeForm extends Component {
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
             ingredients: updatedIngredients
         });
-        const formIsValid = validateForm(true, updatedRecipeForm);
+        const formIsValid = helpers.validator(true, updatedRecipeForm);
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
@@ -125,9 +126,17 @@ class RecipeForm extends Component {
         })
     }
 
+    deleteRecipeHandler = (user, recipeId) => {
+        console.log("Hello from deleteRecipeHandler!");
+        let deleteContinue = window.confirm(`Are you sure you want to delete "${this.props.currentRecipe.title}"?`);
+        if (deleteContinue) {
+            this.props.onDeleteRecipe(user, recipeId);
+        }
+    }
+
     recipeHandler = (event) => {
         event.preventDefault();
-        const recipe = getRecipe(this.state.recipeForm);        
+        const recipe = helpers.getRecipe(this.state.recipeForm);        
         if (this.props.currentRecipe) {
             this.props.onEditRecipe(this.props.user,this.props.currentRecipe._id, recipe);
             this.props.setEditMode(false);
@@ -144,7 +153,7 @@ class RecipeForm extends Component {
         if (this.props.currentRecipe) {
             recipeAction = (<div>
                             <Button buttonType="Success" disabled={!this.state.formIsValid}>Edit Recipe</Button>
-                            <Button buttonType="Danger" clicked={() => { this.props.onDeleteRecipe(this.props.user, this.props.currentRecipe._id)}}>Delete Recipe</Button>
+                            <Button buttonType="Danger" clicked={() => { this.deleteRecipeHandler(this.props.user, this.props.currentRecipe._id)}}>Delete Recipe</Button>
                             </div>);
         }
         const formElementsArray = [];

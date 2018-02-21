@@ -36,7 +36,7 @@ const updateIngredients = (ingredients) => {
     return ingredientsArray;
 }
 
-const updateForm = (form, recipe) => {
+export const updateForm = (form, recipe) => {
     if (!recipe) {
         return JSON.parse(JSON.stringify(recipeForm));
     }
@@ -67,4 +67,3 @@ const updateForm = (form, recipe) => {
     };
 }
 
-export default updateForm;
