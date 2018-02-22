@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import classes from "./Landing.css";
 import Wrapper from '../../hoc/Wrapper/Wrapper';
@@ -17,4 +18,10 @@ const landing = (props) => {
         </Wrapper>
     )
 }
-export default landing;
+
+const mapStateToProps = state => {
+    return {
+        currentUser: state.auth.userId
+    }
+}
+export default connect(mapStateToProps)(landing);

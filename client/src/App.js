@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -14,16 +14,25 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-            <Route path="/" exact component={Landing} />
-            <Route path="/recipes" exact component={Dashboard} />
+        <Switch>
+            <Route path="/" exact render={() => this.props.currentUser ? ( <Redirect to="/recipes" />) : (<Landing /> )} />
+            <Route path="/recipes" component={Dashboard} />
+        </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.userId
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchUser: () => dispatch(actions.fetchUser())
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
