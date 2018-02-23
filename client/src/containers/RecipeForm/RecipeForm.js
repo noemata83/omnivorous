@@ -126,6 +126,17 @@ class RecipeForm extends Component {
         })
     }
 
+    removeDirectionHandler = () => {
+        const dirList = [ ...this.state.recipeForm.directions ];
+        dirList.splice(-1, 1);
+        this.setState({
+            recipeForm: {
+                ...this.state.recipeForm,
+                directions: dirList
+            }
+        })
+    }
+
     deleteRecipeHandler = (user, recipeId) => {
         console.log("Hello from deleteRecipeHandler!");
         let deleteContinue = window.confirm(`Are you sure you want to delete "${this.props.currentRecipe.title}"?`);
@@ -206,7 +217,7 @@ class RecipeForm extends Component {
                 );
             })}
             <Button type="Button" buttonType="Plus" clicked={this.addIngredientHandler}>+</Button>
-            <Button type="Button" buttonType="Minus" clicked={this.removeIngredientHandler}>-</Button>
+        { this.state.recipeForm.ingredients.length > 1 ? <Button type="Button" buttonType="Minus" clicked={this.removeIngredientHandler}>-</Button> : null }
             <ol>
                 {directionsArray.map((direction, index) => {
                     return (
@@ -224,8 +235,11 @@ class RecipeForm extends Component {
                     );
                 })}
             </ol>
-            <Button type="button" buttonType="Success" clicked={this.addDirectionHandler}>+</Button>
-            {recipeAction}
+            <Button type="button" buttonType="Plus" clicked={this.addDirectionHandler}>+</Button>
+            { this.state.recipeForm.directions.length > 1 ? <Button type="Button" buttonType="Minus" clicked={this.removeDirectionHandler}>-</Button> : null }
+            <div>
+                {recipeAction}
+            </div>
         </form>);
         return (
             <div className={classes.RecipeForm}>
