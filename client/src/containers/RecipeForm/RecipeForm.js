@@ -4,6 +4,7 @@ import { updateObject, checkValidity } from '../../shared/utility';
 
 import classes from './RecipeForm.css';
 import Input from '../../components/UI/Input/Input';
+import IngredientForm from '../../components/Recipe/RecipeForm/IngredientForm/ingredientForm';
 import IngredientInput from '../../components/UI/Input/IngredientInput/IngredientInput';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/';
@@ -168,7 +169,7 @@ class RecipeForm extends Component {
                             </div>);
         }
         const formElementsArray = [];
-        const ingredientsArray = [];
+        // const ingredientsArray = [];
         const directionsArray = [];
         for (let key in this.state.recipeForm) {
             if (key === 'ingredients' || key === 'directions') {
@@ -180,11 +181,11 @@ class RecipeForm extends Component {
                 })
             }
         }
-        this.state.recipeForm.ingredients.forEach((ingredient, index) => {
-            ingredientsArray.push({
-                ...this.state.recipeForm.ingredients[index]
-            });
-        });
+        // this.state.recipeForm.ingredients.forEach((ingredient, index) => {
+        //     ingredientsArray.push({
+        //         ...this.state.recipeForm.ingredients[index]
+        //     });
+        // });
         this.state.recipeForm.directions.forEach((directionItem, index) => {
             directionsArray.push({
                 id: `directions[${index}]`,
@@ -204,20 +205,7 @@ class RecipeForm extends Component {
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)} /> );})}
-            {ingredientsArray.map((ingredient, index) => {
-                return (
-                    <IngredientInput
-                        key={`ingredients[${index}]`}
-                        amountValue={ingredient.amount.value}
-                        unitValue={ingredient.unit.value}
-                        ingValue={ingredient.ingredient.value}
-                        commentValue={ingredient.comment.value}
-                        index={index}
-                        changed={this.ingredientChangedHandler} />
-                );
-            })}
-            <Button type="Button" buttonType="Plus" clicked={this.addIngredientHandler}>+</Button>
-        { this.state.recipeForm.ingredients.length > 1 ? <Button type="Button" buttonType="Minus" clicked={this.removeIngredientHandler}>-</Button> : null }
+            <IngredientForm ingredients={this.state.recipeForm.ingredients} ingredientChanged={this.ingredientChangedHandler} addIngredient={this.addIngredientHandler} removeIngredient={this.removeIngredientHandler}/>
             <ol>
                 {directionsArray.map((direction, index) => {
                     return (
