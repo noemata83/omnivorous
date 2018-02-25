@@ -4,13 +4,7 @@ import IngredientInput from '../../../UI/Input/IngredientInput/IngredientInput';
 import Button from '../../../UI/Button/Button';
 
 const ingredientForm = (props) => {
-    let ingredientFormArray = [];
-    console.log("Hi from Ingredient Form!");
-    props.ingredients.forEach(ingredient => {
-        console.log(ingredient);
-        ingredientFormArray.push({...ingredient});
-    });
-    const ingredientForm = ingredientFormArray.map((ingredient, index) => {
+    const ingredientForm = props.ingredients.map((ingredient, index) => {
         return (
             <IngredientInput
                 key={`ingredients[${index}]`}

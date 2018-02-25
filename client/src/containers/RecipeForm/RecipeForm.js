@@ -5,7 +5,7 @@ import { updateObject, checkValidity } from '../../shared/utility';
 import classes from './RecipeForm.css';
 import Input from '../../components/UI/Input/Input';
 import IngredientForm from '../../components/Recipe/RecipeForm/IngredientForm/ingredientForm';
-import IngredientInput from '../../components/UI/Input/IngredientInput/IngredientInput';
+import DirectionForm from '../../components/Recipe/RecipeForm/DirectionForm/directionForm';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/';
 
@@ -14,9 +14,6 @@ import directionForm from './formPrototypes/directionForm';
 import recipeForm from './formPrototypes/recipeForm';
 
 import * as helpers from './helpers/';
-// import updateForm from './helpers/updateForm';
-// import validateForm from './helpers/validator';
-// import getRecipe from './helpers/getRecipe';
 
 class RecipeForm extends Component {
     state = {
@@ -139,7 +136,6 @@ class RecipeForm extends Component {
     }
 
     deleteRecipeHandler = (user, recipeId) => {
-        console.log("Hello from deleteRecipeHandler!");
         let deleteContinue = window.confirm(`Are you sure you want to delete "${this.props.currentRecipe.title}"?`);
         if (deleteContinue) {
             this.props.onDeleteRecipe(user, recipeId);
@@ -169,8 +165,6 @@ class RecipeForm extends Component {
                             </div>);
         }
         const formElementsArray = [];
-        // const ingredientsArray = [];
-        const directionsArray = [];
         for (let key in this.state.recipeForm) {
             if (key === 'ingredients' || key === 'directions') {
                 break;
@@ -181,17 +175,6 @@ class RecipeForm extends Component {
                 })
             }
         }
-        // this.state.recipeForm.ingredients.forEach((ingredient, index) => {
-        //     ingredientsArray.push({
-        //         ...this.state.recipeForm.ingredients[index]
-        //     });
-        // });
-        this.state.recipeForm.directions.forEach((directionItem, index) => {
-            directionsArray.push({
-                id: `directions[${index}]`,
-                config: {...this.state.recipeForm.directions[index].element}
-            });
-        })
         let form =(<form onSubmit={this.recipeHandler}>
             {formElementsArray.map(formElement => {
                 return (
@@ -206,25 +189,7 @@ class RecipeForm extends Component {
                 touched={formElement.config.touched}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)} /> );})}
             <IngredientForm ingredients={this.state.recipeForm.ingredients} ingredientChanged={this.ingredientChangedHandler} addIngredient={this.addIngredientHandler} removeIngredient={this.removeIngredientHandler}/>
-            <ol>
-                {directionsArray.map((direction, index) => {
-                    return (
-                        <li key={index}>
-                            <Input
-                            elementType={direction.config.elementType}
-                            elementConfig={direction.config.elementConfig}
-                            value={direction.config.value}
-                            valueType={direction.config.valueType}
-                            invalid={!direction.config.valid}
-                            shouldValidate={direction.config.validation}
-                            touched={direction.config.touched}
-                            changed={(event) => this.directionChangedHandler(event, index)} />
-                        </li>
-                    );
-                })}
-            </ol>
-            <Button type="button" buttonType="Plus" clicked={this.addDirectionHandler}>+</Button>
-            { this.state.recipeForm.directions.length > 1 ? <Button type="Button" buttonType="Minus" clicked={this.removeDirectionHandler}>-</Button> : null }
+            <DirectionForm directions={this.state.recipeForm.directions} directionChanged={this.directionChangedHandler} addDirection={this.addDirectionHandler} removeDirection={this.removeDirectionHandler} />
             <div>
                 {recipeAction}
             </div>
