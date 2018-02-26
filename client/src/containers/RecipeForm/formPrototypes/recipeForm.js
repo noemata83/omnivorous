@@ -2,7 +2,7 @@ import ingredientForm from './ingredientForm';
 import directionForm from './directionForm';
 
 const recipeForm = {
-    title: {
+    name: {
         elementType: 'input',
         elementConfig: {
             type: 'text',
@@ -42,7 +42,7 @@ const recipeForm = {
         valid: true,
         touched: false
     },
-    imageURL: {
+    image: {
         elementType: 'input',
         elementConfig: {
             type: 'input',
