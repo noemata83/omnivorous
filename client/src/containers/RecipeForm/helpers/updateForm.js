@@ -41,15 +41,15 @@ export const updateForm = (form, recipe) => {
         return JSON.parse(JSON.stringify(recipeForm));
     }
     Object.keys(form).forEach(key => {
-        if (key !== "ingredients" || key !== "directions") {
+        if (key !== "recipeIngredient" || key !== "recipeInstructions") {
             form[key].value = recipe[key] || '';
             form[key].valid = checkValidity(form[key].value, form[key].validation);
             form[key].touched = true;
         }
     });
-    const ingredientsArray = updateIngredients(recipe.ingredients);
+    const ingredientsArray = updateIngredients(recipe.recipeIngredient);
     const directionsArray = [];
-    recipe.directions.forEach(direction => {
+    recipe.recipeInstructions.forEach(direction => {
         let updatedDirection = {
             element: {
                 ...directionForm.element,
@@ -62,8 +62,8 @@ export const updateForm = (form, recipe) => {
     });
     return {
         ...form,
-        ingredients: [...ingredientsArray],
-        directions: [...directionsArray]
+        recipeIngredient: [...ingredientsArray],
+        recipeInstructions: [...directionsArray]
     };
 }
 

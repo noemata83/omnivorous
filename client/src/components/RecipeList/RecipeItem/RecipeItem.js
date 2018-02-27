@@ -9,7 +9,7 @@ const recipeItem = (props) => {
     return (
         <Wrapper>
             <li className={classes.RecipeItem}>
-                <span onClick={props.clicked}>{props.title}</span>
+                <span onClick={props.clicked}>{props.name}</span>
                 <Button 
                     buttonType="Inline" 
                     clicked={props.edit}>

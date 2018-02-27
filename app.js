@@ -5,7 +5,7 @@ const express           =     require('express'),
         keys            =     require('./api/config/keys'),
         session         =     require('express-session'),
         bodyParser      =     require('body-parser'),
-        MongoStore      =    require('connect-mongo')(session);
+        MongoStore      =     require('connect-mongo')(session);
 
 require('./api/models/user');
 require('./api/models/recipe');

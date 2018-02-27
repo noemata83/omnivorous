@@ -55,12 +55,12 @@ const recipeForm = {
         valid: true,
         touched: false
     },
-    ingredients: [
+    recipeIngredient: [
         {
             ...ingredientForm,
         }
     ],
-    directions: [
+    recipeInstructions: [
         {
             ...directionForm,
         }

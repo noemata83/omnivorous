@@ -9,20 +9,20 @@ class RecipeDisplay extends Component {
     render () {
         let recipe = <h1>Please select a Recipe!</h1>;
         if (this.props.currentRecipe) {
-            const ingredients = this.props.currentRecipe.ingredients.map((ingredient,index) => (
+            const ingredients = this.props.currentRecipe.recipeIngredient.map((ingredient,index) => (
                 <Ingredient 
                     key={index} 
                     amount={ingredient.amount}
                     unit={ingredient.unit}
                     name={ingredient.ingredient}
                     />));
-            const directions = this.props.currentRecipe.directions.map((direction,index) => (
+            const directions = this.props.currentRecipe.recipeInstructions.map((direction,index) => (
                 <Direction
                     key={index}
                     direction={direction} />));                   
             recipe = (
                 <div>
-                    <h1>{this.props.currentRecipe.title}</h1>
+                    <h1>{this.props.currentRecipe.name}</h1>
                     <p className={classes.Description}>{this.props.currentRecipe.description}</p>
                     <h3 className={classes.HeaderText}>Ingredients:</h3>
                         <ul>

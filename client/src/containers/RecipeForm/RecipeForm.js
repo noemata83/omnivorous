@@ -61,37 +61,37 @@ class RecipeForm extends Component {
 
     ingredientChangedHandler = (event, index, inputIdentifier) => {
         // First, create a copy of the array of ingredient form elements.
-        const updatedIngredients = [...this.state.recipeForm.ingredients];
+        const updatedIngredients = [...this.state.recipeForm.recipeIngredient];
         
         // Update the relevant input from the correct index of the array with the inputted value; check its validity.
-        const updatedIngredientElement = updateObject(this.state.recipeForm.ingredients[index][inputIdentifier], {
+        const updatedIngredientElement = updateObject(this.state.recipeForm.recipeIngredient[index][inputIdentifier], {
             value: event.target.value,
-            valid: checkValidity(event.target.value, this.state.recipeForm.ingredients[index][inputIdentifier].validation),
+            valid: checkValidity(event.target.value, this.state.recipeForm.recipeIngredient[index][inputIdentifier].validation),
             touched: true
         });
 
         // Copy the ingredients array at the given index, replace the element configuration at that index with the updated value.
-        const updatedIngredient = updateObject(this.state.recipeForm.ingredients[index], {
+        const updatedIngredient = updateObject(this.state.recipeForm.recipeIngredient[index], {
             [inputIdentifier]: updatedIngredientElement
         });
         // Update the array at the given index
         updatedIngredients[index] = updatedIngredient;
 
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
-            ingredients: updatedIngredients
+            recipeIngredient: updatedIngredients
         });
         const formIsValid = helpers.validator(true, updatedRecipeForm);
         this.setState({ recipeForm: updatedRecipeForm, formIsValid: formIsValid });
     }
 
     directionChangedHandler = (event, index) => {
-        const updatedDirection = updateObject(this.state.recipeForm.directions[index].element, {
+        const updatedDirection = updateObject(this.state.recipeForm.recipeInstructions[index].element, {
             value: event.target.value,
         });
-        const updatedDirections = [...this.state.recipeForm.directions];
+        const updatedDirections = [...this.state.recipeForm.recipeInstructions];
         updatedDirections[index].element = updatedDirection;
         const updatedRecipeForm = updateObject(this.state.recipeForm, {
-            directions: updatedDirections
+            recipeInstructions: updatedDirections
         })
         this.setState({ recipeForm: updatedRecipeForm });
     }
@@ -100,17 +100,17 @@ class RecipeForm extends Component {
         this.setState({ 
             recipeForm: {
                 ...this.state.recipeForm,
-                ingredients: this.state.recipeForm.ingredients.concat({ ...ingredientForm })
+                recipeIngredient: this.state.recipeForm.recipeIngredient.concat({ ...ingredientForm })
         }})
     }
 
     removeIngredientHandler = () => {
-        const ingList = [...this.state.recipeForm.ingredients];
+        const ingList = [...this.state.recipeForm.recipeIngredient];
         ingList.splice(-1, 1);
         this.setState({
             recipeForm: {
                 ...this.state.recipeForm,
-                ingredients: ingList
+                recipeIngredient: ingList
             }
         })
     }
@@ -119,18 +119,18 @@ class RecipeForm extends Component {
         this.setState({
             recipeForm: {
                 ...this.state.recipeForm,
-                directions: this.state.recipeForm.directions.concat({ ...directionForm })
+                recipeInstructions: this.state.recipeForm.recipeInstructions.concat({ ...directionForm })
             }
         })
     }
 
     removeDirectionHandler = () => {
-        const dirList = [ ...this.state.recipeForm.directions ];
+        const dirList = [ ...this.state.recipeForm.recipeInstructions ];
         dirList.splice(-1, 1);
         this.setState({
             recipeForm: {
                 ...this.state.recipeForm,
-                directions: dirList
+                recipeInstructions: dirList
             }
         })
     }
@@ -166,7 +166,7 @@ class RecipeForm extends Component {
         }
         const formElementsArray = [];
         for (let key in this.state.recipeForm) {
-            if (key === 'ingredients' || key === 'directions') {
+            if (key === 'recipeIngredient' || key === 'recipeInstructions') {
                 break;
             } else {
                 formElementsArray.push({
@@ -188,8 +188,8 @@ class RecipeForm extends Component {
                 shouldValidate={formElement.config.validation}
                 touched={formElement.config.touched}
                 changed={(event) => this.inputChangedHandler(event, formElement.id)} /> );})}
-            <IngredientForm ingredients={this.state.recipeForm.ingredients} ingredientChanged={this.ingredientChangedHandler} addIngredient={this.addIngredientHandler} removeIngredient={this.removeIngredientHandler}/>
-            <DirectionForm directions={this.state.recipeForm.directions} directionChanged={this.directionChangedHandler} addDirection={this.addDirectionHandler} removeDirection={this.removeDirectionHandler} />
+            <IngredientForm ingredients={this.state.recipeForm.recipeIngredient} ingredientChanged={this.ingredientChangedHandler} addIngredient={this.addIngredientHandler} removeIngredient={this.removeIngredientHandler}/>
+            <DirectionForm directions={this.state.recipeForm.recipeInstructions} directionChanged={this.directionChangedHandler} addDirection={this.addDirectionHandler} removeDirection={this.removeDirectionHandler} />
             <div>
                 {recipeAction}
             </div>

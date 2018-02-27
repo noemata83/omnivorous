@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
            type: mongoose.Schema.Types.ObjectId,
            ref: "Recipe"
        },
-       title: String
+       name: String
    }]
 });
 
