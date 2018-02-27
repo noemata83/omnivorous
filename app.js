@@ -7,7 +7,7 @@ const express           =     require('express'),
         bodyParser      =     require('body-parser'),
         MongoStore      =    require('connect-mongo')(session);
 
-        require('./api/models/user');
+require('./api/models/user');
 require('./api/models/recipe');
 require('./api/services/passport');
 mongoose.Promise = global.Promise;
