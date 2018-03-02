@@ -12,7 +12,7 @@ require('./api/models/recipe');
 require('./api/services/passport');
 mongoose.Promise = global.Promise;
 
-mongoose.connect(keys.mongoURL, { useMongoClient: true });
+mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 app.use(
     session({
