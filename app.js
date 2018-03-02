@@ -32,6 +32,17 @@ app.use(bodyParser.json());
 
 require('./api/routes/recipe')(app);
 require('./api/routes/auth')(app);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
+
 const PORT = process.env.DEVPORT || process.env.PORT;
 app.listen(PORT, process.env.IP, function() {
     console.log("Recipe restful API started on: " + PORT);
