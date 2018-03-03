@@ -5,7 +5,7 @@ import classes from './Greeting.css';
 const greeting = (props) => {
     return (
         <div className={classes.Greeting}>
-            Hi {props.displayName}!
+            Hi {props.displayName}! | <a className={classes.Logout} href="/api/logout">Logout</a>
         </div>
     )
 }
