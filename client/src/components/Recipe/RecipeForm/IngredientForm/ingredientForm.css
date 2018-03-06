@@ -1,0 +1,11 @@
+.IngredientForm {
+    width: 85%;
+    padding: 1rem;
+    display: inline-block;
+}
+
+.Header {
+    font-size: 1.8rem;
+    padding: 1rem;
+    margin: 0;
+}

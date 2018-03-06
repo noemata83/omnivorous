@@ -1,31 +1,57 @@
 import React from 'react';
+import { Field } from 'redux-form';
 
 import IngredientInput from '../../../UI/Input/IngredientInput/IngredientInput';
 import Button from '../../../UI/Button/Button';
+import classes from './ingredientForm.css';
 
-const ingredientForm = (props) => {
-    const ingredientForm = props.ingredients.map((ingredient, index) => {
-        return (
-            <IngredientInput
-                key={`ingredients[${index}]`}
-                amountValue={ingredient.amount.value}
-                unitValue={ingredient.unit.value}
-                ingValue={ingredient.ingredient.value}
-                commentValue={ingredient.comment.value}
-                index={index}
-                changed={props.ingredientChanged} />
-        );
-    });
-    const removeButton = props.ingredients.length > 1 ? <Button type="Button" buttonType="Minus" clicked={props.removeIngredient}>-</Button> : null;
+const ingredientForm = ({fields, meta: { error, submitFailed }}) => {
+    if (!fields.length) fields.push();
+    const removeButton = fields.length > 1 ? <Button type="Button" buttonType="Minus" clicked={() => fields.pop()}>-</Button> : null;
     return (
-        <div>
-            <h2>Ingredients</h2>
-            {ingredientForm}
-            <Button type="Button" buttonType="Plus" clicked={props.addIngredient}>+</Button>
-            {removeButton}
-        </div>
-    )
-
+    <div>
+        <h3 className={classes.Header}>Ingredients</h3>
+        {fields.map( (recipeIngredient, index) => (
+                <div className={classes.IngredientForm} key={index}>
+                        <Field
+                            name={`${recipeIngredient}.amount`}
+                            key={`${recipeIngredient}.amount`}
+                            label="Amount"
+                            component={IngredientInput}
+                            type="text"
+                            sort="Qty"
+                        />
+                        <Field
+                            name={`${recipeIngredient}.unit`}
+                            key={`${recipeIngredient}.unit`}
+                            component={IngredientInput}
+                            label="Unit"
+                            type="text"
+                            sort="Qty"
+                       />
+                        <Field
+                            name={`${recipeIngredient}.ingredient`}
+                            key={`${recipeIngredient}.ingredient`}
+                            component={IngredientInput}
+                            label="Ingredient"
+                            type="text"
+                            sort="Detail"
+                        />
+                        <Field
+                            name={`${recipeIngredient}.comment`}
+                            key={`${recipeIngredient}.comment`}
+                            component={IngredientInput}
+                            label="Comment"
+                            type="text"
+                            sort="Detail"
+                        />
+                </div>
+            ))
+        }
+        {removeButton}
+        <Button type="Button" buttonType="Plus" clicked={() => fields.push()}>+</Button>
+    </div>
+    );
 }
 
 export default ingredientForm;

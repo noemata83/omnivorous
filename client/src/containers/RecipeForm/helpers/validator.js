@@ -1,6 +1,9 @@
-import { flattenForm } from './flattenForm';
+export default (values) => {
+    const errors = {};
 
-export const validator = (formIsValid, form) => {
-    const flattenedForm = flattenForm(form);
-    return Object.values(flattenedForm).every(element => element.valid);
+    if (!values.name) {
+        errors.name = "You must provide a value.";
+    }
+
+    return errors;
 }

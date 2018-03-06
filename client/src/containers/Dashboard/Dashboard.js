@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
-import RecipeForm from '../RecipeForm/RecipeForm';
+import RecipeControl from '../RecipeForm/RecipeControl';
 import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 
@@ -27,7 +27,7 @@ class Dashboard extends Component {
     render () {
         let mainWindow = <RecipeDisplay />;
         if (this.state.editMode) {
-            mainWindow= <RecipeForm setEditMode={this.setEditModeHandler}/>;
+            mainWindow= <RecipeControl setEditMode={this.setEditModeHandler}/>;
         }
         return (
             <div>
