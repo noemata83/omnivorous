@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import RecipeForm from './RecipeForm';
-import classes from './RecipeForm.css';
+import RecipeForm from '../../components/Recipe/RecipeForm/RecipeForm';
+import classes from './RecipeControl.css';
 import * as actions from '../../store/actions';
 
 class RecipeControl extends Component {
@@ -27,7 +27,7 @@ class RecipeControl extends Component {
     render() {
         return (
             <div className={classes.RecipeForm}>
-                <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete}/>
+                <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete} />
             </div>
         );
     }

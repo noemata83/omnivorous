@@ -2,17 +2,17 @@ import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { recipeHeader, recipeFooter } from './formPrototypes/recipeForm';
-import Input from '../../components/UI/Input/Input';
-import Button from '../../components/UI/Button/Button';
+import Input from '../../UI/Input/Input';
+import Button from '../../UI/Button/Button';
+import ingredientForm from './IngredientForm/ingredientForm';
+import directionForm from './DirectionForm/directionForm';
 import validate from './helpers/validator';
-import ingredientForm from '../../components/Recipe/RecipeForm/IngredientForm/ingredientForm';
-import directionForm from '../../components/Recipe/RecipeForm/DirectionForm/directionForm';
 
 // import * as helpers from './helpers/';
 
 const recipeForm = (props) => {
     const { handleSubmit, onDelete, initialValues } = props;
-    let recipeAction = <Button buttonType="Success">Add Recipe</Button>;
+let recipeAction = (<div><Button buttonType="Success">Add Recipe</Button></div>);
     if (initialValues) {
         recipeAction = (<div>
                         <Button buttonType="Success">Edit Recipe</Button>
