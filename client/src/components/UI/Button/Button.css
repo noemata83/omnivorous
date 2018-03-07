@@ -9,12 +9,7 @@
     padding: 10px;
     margin: 10px;
     font-weight: bold;
-}
-
-.Button:first-of-type {
-    margin-left: 10px;
-    padding-left: 0;
-}
+}  
 
 .Button:disabled {
     color: #ccc;
@@ -52,4 +47,12 @@
     color: #aaa;
     margin: 0;
     padding: 0;
+}
+
+.OpenImport {
+    float: right;
+    background-color: #5C9210;
+    color: white;
+    border-radius: 5px;
+    padding: 1rem;
 }

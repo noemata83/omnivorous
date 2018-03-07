@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RecipeForm from '../../components/Recipe/RecipeForm/RecipeForm';
+import Modal from '../../components/UI/Modal/Modal';
+import RecipeImport from '../../components/Recipe/RecipeImport/recipeImport';
 import classes from './RecipeControl.css';
 import * as actions from '../../store/actions';
+import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 class RecipeControl extends Component {
+    state = {
+        showImportModal: false,
+        importURL: '',
+    }
 
     handleSubmit = values => {
-        if (this.props.currentRecipe) {
+    if (this.props.currentRecipe) {
             this.props.onEditRecipe(this.props.user, this.props.currentRecipe._id, values);
             this.props.setEditMode(false);
         } else {
@@ -24,11 +31,38 @@ class RecipeControl extends Component {
         }
     }
 
+    inputChangedHandler = (e) => {
+        this.setState({ importURL: e.target.value})
+    }
+
+    initImportHandler = () => {
+        this.setState({showImportModal: true});
+    }
+
+    importCancelHandler = () => {
+        this.setState({showImportModal: false });
+    }
+
+    importRecipeHandler = (e) => {
+        e.preventDefault();
+    }
+
     render() {
         return (
-            <div className={classes.FormContainer}>
-                <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete} />
-            </div>
+            <Wrapper>
+                <Modal 
+                    show={this.state.showImportModal} 
+                    modalClosed={this.importCancelHandler}
+                ><RecipeImport 
+                    changed={this.inputChangedHandler}
+                    url={this.state.importURL}
+                    import={(e) => {e.preventDefault(); console.log(this.state.importURL)}}
+                    />
+                </Modal>
+                <div className={classes.FormContainer}>
+                    <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete} onImportInit={this.initImportHandler} />
+                </div>
+            </Wrapper>
         );
     }
 }

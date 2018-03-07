@@ -3,13 +3,13 @@ import React from 'react';
 import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import Field from 'redux-form/lib/Field';
-import classes from './directionForm.css';
+import classes from './instructionForm.css';
 
-const directionForm = ({fields, meta: { error }}) => {
+const instructionForm = ({fields, meta: { error }}) => {
     if (!fields.length) fields.push();
-    const removeButton = fields.length > 1 ? <Button type="Button" buttonType="Minus" clicked={() => fields.pop()}>-</Button> : null;
+    const removeButton = fields.length > 1 ? <Button type="Button" buttonType="Minus" key="Minus" clicked={() => fields.pop()}>-</Button> : null;
     let buttons = [
-        <Button type="Button" buttonType="Plus" clicked={() => fields.push()}>+</Button>,
+        <Button type="Button" key="Plus" buttonType="Plus" clicked={() => fields.push()}>+</Button>,
         removeButton
     ]
     return (
@@ -17,9 +17,8 @@ const directionForm = ({fields, meta: { error }}) => {
             <h3 className={classes.Header}>Instructions</h3>
             <div className={classes.InstructionBox}>
                 <ol className={classes.InstructionList}>
-                
                     {fields.map( (recipeInstruction, index) => (
-                            <li>
+                            <li key={`Instruction#$${index}`}>
                                 <Field
                                     name={`recipeInstructions[${index}]`}
                                     component={Input}
@@ -36,4 +35,4 @@ const directionForm = ({fields, meta: { error }}) => {
     );
 }
 
-export default directionForm;
+export default instructionForm;
