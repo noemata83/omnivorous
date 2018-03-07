@@ -19,7 +19,14 @@
     margin-bottom: 8px;
 }
 
-
+.TextBox {
+    height: 8rem;
+    outline: none;
+    border: 1px solid #ccc;
+    font: inherit;
+    display: inline-block;
+    width: 100%;
+}
 
 .InputElement {
     outline: none;

@@ -1,6 +1,7 @@
-.RecipeForm {
+.FormContainer {
     height: 100%;
+    width: 100%;
     background-color: rgba(255, 255, 255, .95);
-    overflow: auto;
+    overflow:hidden;
     border-radius:10px;
 }

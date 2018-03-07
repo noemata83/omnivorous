@@ -1,0 +1,21 @@
+.Header {
+    font-size: 1.8rem;
+    padding: 1rem;
+    margin: 0;
+}
+
+.InstructionBox {
+    display: inline-block;
+    width: 80%;
+    margin: 0;
+}
+
+.Buttons {
+    display: inline-block;
+    width: 20%;
+}
+
+.InstructionList {
+    -webkit-padding-start: 1rem;;
+    padding-left: 3rem;
+}

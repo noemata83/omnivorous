@@ -6,7 +6,7 @@ const input = ({ input, type, style, label, meta: { error, touched} }) => { //
     return (
         <div className={classes[style]}>
             <label className={classes.Label}>{label}</label>
-    {type === 'textarea' ? (<textarea className={classes.InputElement} {...input} ></textarea>) : (<input className={classes.InputElement} type={type} {...input}/>)}
+    {type === 'textarea' ? (<textarea className={classes.TextBox} {...input} ></textarea>) : (<input className={classes.InputElement} type={type} {...input}/>)}
             <div style={{'marginBottom': '20px', 'color': 'red'}}>
             {touched && error}
             </div>

@@ -7,6 +7,7 @@ import Button from '../../UI/Button/Button';
 import ingredientForm from './IngredientForm/ingredientForm';
 import directionForm from './DirectionForm/directionForm';
 import validate from './helpers/validator';
+import classes from './RecipeForm.css';
 
 // import * as helpers from './helpers/';
 
@@ -20,13 +21,15 @@ let recipeAction = (<div><Button buttonType="Success">Add Recipe</Button></div>)
                         </div>);
     }
     return (
-        <form onSubmit={ handleSubmit }>
-        { recipeHeader.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
-        <FieldArray name="recipeIngredient" component={ingredientForm} />
-        <FieldArray name="recipeInstructions" component={directionForm} />
-        { recipeFooter.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
-        {recipeAction}
-        </form>
+        <div className={classes.RecipeForm}>
+            <form onSubmit={ handleSubmit }>
+            { recipeHeader.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
+            <FieldArray name="recipeIngredient" component={ingredientForm} />
+            <FieldArray name="recipeInstructions" component={directionForm} />
+            { recipeFooter.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
+            {recipeAction}
+            </form>
+        </div>
     )
 }
 export default reduxForm({

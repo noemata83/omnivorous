@@ -8,22 +8,30 @@ import classes from './directionForm.css';
 const directionForm = ({fields, meta: { error }}) => {
     if (!fields.length) fields.push();
     const removeButton = fields.length > 1 ? <Button type="Button" buttonType="Minus" clicked={() => fields.pop()}>-</Button> : null;
+    let buttons = [
+        <Button type="Button" buttonType="Plus" clicked={() => fields.push()}>+</Button>,
+        removeButton
+    ]
     return (
         <div>
             <h3 className={classes.Header}>Instructions</h3>
-            <ol>
-                {fields.map( (recipeInstruction, index) => (
-                    <li key={index}>
-                        <Field
-                            name={`recipeInstructions[${index}]`}
-                            component={Input}
-                            type="textarea"
-                        />
-                    </li>
-                ))}
-            </ol>
-            <Button type="Button" buttonType="Plus" clicked={() => fields.push()}>+</Button>
-            {removeButton}
+            <div className={classes.InstructionBox}>
+                <ol className={classes.InstructionList}>
+                
+                    {fields.map( (recipeInstruction, index) => (
+                            <li>
+                                <Field
+                                    name={`recipeInstructions[${index}]`}
+                                    component={Input}
+                                    type="textarea"
+                                />
+                            </li>       
+                    ))}
+                </ol>
+            </div>
+            <div className={classes.Buttons}>
+                {buttons}
+            </div>
         </div>
     );
 }

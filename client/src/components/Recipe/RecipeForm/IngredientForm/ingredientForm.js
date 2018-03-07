@@ -48,8 +48,8 @@ const ingredientForm = ({fields, meta: { error, submitFailed }}) => {
                 </div>
             ))
         }
-        {removeButton}
         <Button type="Button" buttonType="Plus" clicked={() => fields.push()}>+</Button>
+        {removeButton}
     </div>
     );
 }

@@ -26,7 +26,7 @@ class RecipeControl extends Component {
 
     render() {
         return (
-            <div className={classes.RecipeForm}>
+            <div className={classes.FormContainer}>
                 <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete} />
             </div>
         );
