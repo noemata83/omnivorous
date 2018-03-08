@@ -1,5 +1,7 @@
 export const recipeHeader = [
     { label: 'Name', name: 'name', type: 'text', style: 'Input' },
+    { label: 'Author', name: 'author', type: 'text', style: 'InlineInput'},
+    { label: 'Source', name: 'source', type: 'hidden' },
     { label: 'Description', name: 'description', type: 'textarea', style: 'Input' },
     { label: 'Time to Prep', name: 'prepTime', type:'number', style: 'InlineInput' },
     { label: 'Time to Cook', name: 'cookTime', type: 'number', style: 'InlineInput'},
