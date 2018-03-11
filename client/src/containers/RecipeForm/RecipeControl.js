@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import RecipeForm from '../../components/Recipe/RecipeForm/RecipeForm';
 import Modal from '../../components/UI/Modal/Modal';
@@ -45,6 +46,11 @@ class RecipeControl extends Component {
 
     importRecipeHandler = (e) => {
         e.preventDefault();
+
+        axios.post(`/api/${this.props.user.id}/recipes/import`, { url: this.state.importURL}).then( res => {
+            console.log(res.data);
+        });
+
     }
 
     render() {
@@ -56,7 +62,7 @@ class RecipeControl extends Component {
                 ><RecipeImport 
                     changed={this.inputChangedHandler}
                     url={this.state.importURL}
-                    import={(e) => {e.preventDefault(); console.log(this.state.importURL)}}
+                    import={this.importRecipeHandler}
                     />
                 </Modal>
                 <div className={classes.FormContainer}>

@@ -3,6 +3,7 @@
 const mongoose = require('mongoose'), 
 Recipe = mongoose.model('Recipes'),
 User = mongoose.model('users');
+const kitchenhand= require('kitchenhand');
     
     let listRecipes = function(req, res) {
         User.findOne({ userId: req.params.userId }, (err, foundUser) => {
@@ -42,12 +43,20 @@ User = mongoose.model('users');
         });
     }
     
-    let updateRecipe = function(req, res) {
+    let updateRecipe = (req, res) => {
         Recipe.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, recipe) {
            if (err)
            { res.send(err); }
            else 
            { res.json(recipe); }
+        });
+    }
+
+    let importRecipe = (req, res) => {
+        const url = req.body.url;
+
+        kitchenhand(url).then(recipe => {
+            res.send(recipe);
         });
     }
     
@@ -79,5 +88,6 @@ User = mongoose.model('users');
         createRecipe,
         readRecipe,
         updateRecipe,
+        importRecipe,
         deleteRecipe
     }
