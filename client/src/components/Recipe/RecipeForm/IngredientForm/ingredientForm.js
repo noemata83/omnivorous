@@ -30,8 +30,8 @@ const ingredientForm = ({fields, meta: { error, submitFailed }}) => {
                             sort="Qty"
                        />
                         <Field
-                            name={`${recipeIngredient}.ingredient`}
-                            key={`${recipeIngredient}.ingredient`}
+                            name={`${recipeIngredient}.name`}
+                            key={`${recipeIngredient}.name`}
                             component={IngredientInput}
                             label="Ingredient"
                             type="text"

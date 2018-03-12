@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { change } from 'redux-form';
 
 import RecipeForm from '../../components/Recipe/RecipeForm/RecipeForm';
 import Modal from '../../components/UI/Modal/Modal';
@@ -48,7 +49,15 @@ class RecipeControl extends Component {
         e.preventDefault();
 
         axios.post(`/api/${this.props.user.id}/recipes/import`, { url: this.state.importURL}).then( res => {
-            console.log(res.data);
+            if (res.data.message) {
+                return console.log(res.data.message);
+            } else {
+                let recipe = res.data;
+                Object.keys(recipe).forEach(key => {
+                    this.props.onChangeFieldValue(key, recipe[key]);
+            });
+                this.setState({showImportModal: false});
+            }
         });
 
     }
@@ -84,7 +93,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAddRecipe: (user, recipe) => dispatch(actions.addRecipe(user, recipe)),
         onEditRecipe: (user, id, recipe) => dispatch(actions.updateRecipe(user, id, recipe)),
-        onDeleteRecipe: (user, id) => dispatch(actions.destroyRecipe(user, id))
+        onDeleteRecipe: (user, id) => dispatch(actions.destroyRecipe(user, id)),
+        onChangeFieldValue: (field, value) => dispatch(change('recipeForm', field, value))
     }
 }
 

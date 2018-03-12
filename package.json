@@ -31,6 +31,7 @@
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.0",
     "kitchenhand": "0.0.1",
+    "moment": "^2.21.0",
     "mongoose": "^4.13.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",

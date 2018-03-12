@@ -4,6 +4,7 @@ const mongoose = require('mongoose'),
 Recipe = mongoose.model('Recipes'),
 User = mongoose.model('users');
 const kitchenhand= require('kitchenhand');
+const moment = require('moment');
     
     let listRecipes = function(req, res) {
         User.findOne({ userId: req.params.userId }, (err, foundUser) => {
@@ -55,7 +56,21 @@ const kitchenhand= require('kitchenhand');
     let importRecipe = (req, res) => {
         const url = req.body.url;
 
-        kitchenhand(url).then(recipe => {
+        kitchenhand(url, {parseIngredients: true}).then(recipe => {
+            if (recipe.nutrition) {
+                recipe.nutrition = JSON.stringify(recipe.nutrition);
+            }
+
+            // We need to dry this up big-time!
+            if (recipe.prepTime) {
+                recipe.prepTime = moment.duration(recipe.prepTime)._data.minutes + (60 * moment.duration(recipe.prepTime)._data.hours);
+            }
+            if (recipe.cookTime) {
+                recipe.cookTime = moment.duration(recipe.cookTime)._data.minutes + (60 * moment.duration(recipe.cookTime)._data.hours);
+            }
+            if (recipe.totalTime) {
+                recipe.totalTime = moment.duration(recipe.totalTime)._data.minutes + (60 * moment.duration(recipe.totalTime)._data.hours);
+            }
             res.send(recipe);
         });
     }
@@ -70,7 +85,7 @@ const kitchenhand= require('kitchenhand');
              if (err) {
                  res.send("Something went wrong: ", err);
              } else {
-                 const targetIndex = foundUser.recipes.map(recipe => recipe._id).indexOf(req.params.id);
+                 const targetIndex = foundUser.recipes.map(recipe => recipe._id.toHexString()).indexOf(req.params.id);
                  foundUser.recipes.splice(targetIndex, 1);
                  foundUser.save();
                  Recipe.findByIdAndRemove(req.params.id, function(err) {

@@ -45,7 +45,6 @@ const reducer = (state = initialState, action) => {
                 error: action.error
             }
         case (actionTypes.ADD_RECIPE_SUCCESS):
-            console.log(state.recipes);
             return {
                 ...state,
                 recipes: state.recipes.concat(action.recipe),
@@ -61,7 +60,6 @@ const reducer = (state = initialState, action) => {
             const recipes = [...state.recipes];
             recipes.forEach((recipe, index) => {
                 if (recipe._id === action.id) {
-                    console.log("Let's update the recipe!")
                     recipes[index] = { ...action.updatedRecipe,
                                         _id: action.id }
                 }

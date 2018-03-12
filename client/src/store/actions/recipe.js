@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 export const fetchRecipe = (user, recipe) => {
-    // console.log(recipe);
     return dispatch => {
         axios.get(`/api/${user}/recipes/${recipe._id}`)
             .then(res => {

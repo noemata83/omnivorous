@@ -14,7 +14,7 @@ class RecipeDisplay extends Component {
                     key={index} 
                     amount={ingredient.amount}
                     unit={ingredient.unit}
-                    name={ingredient.ingredient}
+                    name={ingredient.name}
                     />));
             const directions = this.props.currentRecipe.recipeInstructions.map((direction,index) => (
                 <Direction
