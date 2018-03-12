@@ -30,6 +30,15 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
+if (process.env.NODE_ENV === 'production') {
+    app.use((req, res, next) => {
+      if (req.header['x-forwarded-proto'] !== 'https')
+        res.redirect(`https://${req.header('host')}${req.url}`)
+      else
+        next()
+    });
+}
+
 require('./api/routes/recipe')(app);
 require('./api/routes/auth')(app);
 
