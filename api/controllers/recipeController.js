@@ -4,8 +4,8 @@ const mongoose = require('mongoose'),
 Recipe = mongoose.model('Recipes'),
 User = mongoose.model('users');
 const kitchenhand= require('kitchenhand');
-const moment = require('moment');
-    
+const convertToMinutes = require('../utility/utility').convertToMinutes;
+
     let listRecipes = function(req, res) {
         User.findOne({ userId: req.params.userId }, (err, foundUser) => {
             if (err) 
@@ -61,16 +61,13 @@ const moment = require('moment');
                 recipe.nutrition = JSON.stringify(recipe.nutrition);
             }
 
-            // We need to dry this up big-time!
-            if (recipe.prepTime) {
-                recipe.prepTime = moment.duration(recipe.prepTime)._data.minutes + (60 * moment.duration(recipe.prepTime)._data.hours);
-            }
-            if (recipe.cookTime) {
-                recipe.cookTime = moment.duration(recipe.cookTime)._data.minutes + (60 * moment.duration(recipe.cookTime)._data.hours);
-            }
-            if (recipe.totalTime) {
-                recipe.totalTime = moment.duration(recipe.totalTime)._data.minutes + (60 * moment.duration(recipe.totalTime)._data.hours);
-            }
+            let timeVars = ['prepTime', 'cookTime', 'totalTime'];
+            timeVars.forEach( timeVar => {
+                if (recipe[timeVar]) {
+                    recipe[timeVar] = convertToMinutes(recipe[timeVar]);
+                }
+            });
+
             res.send(recipe);
         });
     }
