@@ -4,7 +4,7 @@
     height: 100%;
     width: 100%;
     padding: 1rem;
-    overflow: auto;
+    overflow-y: auto;
     border-radius: 10px;
 }
 

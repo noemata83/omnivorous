@@ -13,7 +13,8 @@ import * as actions from '../../store/actions';
 
 class Dashboard extends Component {
     state = {
-        editMode: false
+        editMode: false,
+        recipeListDisplay: false,
     }
 
     componentDidMount() {
@@ -37,12 +38,13 @@ class Dashboard extends Component {
                 <div className={classes.HeaderBox}>
                     <Header />
                 </div>
-                
-                <div className={classes.RecipeList}>
-                    <RecipeList setEditMode={this.setEditModeHandler}/>
-                </div>
-                <div className={classes.MainWindow}>
-                    {mainWindow}
+                <div className={classes.MainContent}>
+                    <div className={classes.RecipeList}>
+                        <RecipeList setEditMode={this.setEditModeHandler}/>
+                    </div>
+                    <div className={classes.MainWindow}>
+                        {mainWindow}
+                    </div>
                 </div>
             </div>
             );

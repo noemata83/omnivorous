@@ -5,13 +5,15 @@ import * as actions from '../../store/actions/';
 
 import RecipeItem from '../../components/RecipeList/RecipeItem/RecipeItem';
 import Button from '../../components/UI/Button/Button';
+import RecipeNav from '../../components/RecipeList/RecipeNav/RecipeNav';
 
 import classes from './RecipeList.css';
 
 class RecipeList extends Component {
 
     state = {
-        loading: true
+        loading: true,
+        recipeListDisplay: false
     }
 
     componentDidMount(){
@@ -26,18 +28,29 @@ class RecipeList extends Component {
             this.setState({loading: false});
         }
     }
- 
+
+    toggleRecipeListHandler = () => {
+        this.setState({
+            recipeListDisplay: !this.state.recipeListDisplay
+        })
+    }
+
     render() {
         const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true) }} clicked={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} key={recipe._id} name={recipe.name} />);
+        const recipeListClasses = this.state.recipeListDisplay ? [ classes.RecipeContent, classes.Show].join(' ') : classes.RecipeContent;
+        const listBoxClasses = this.state.recipeListDisplay ? [ classes.ListBox, classes.Show ].join(' ') : classes.ListBox;
         return (
-            <div className={classes.ListBox}>
-                <div className={classes.ListHeader}>
-                    <h2 className={classes.ListHeaderText}>My Recipes</h2>
+            <div className={recipeListClasses}>
+                <div className={listBoxClasses}>
+                    <div className={classes.ListHeader}>
+                        <h2 className={classes.ListHeaderText}>My Recipes</h2>
+                    </div>
+                    <ul className={classes.RecipeList}>
+                        {recipes}
+                        <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
+                    </ul>
                 </div>
-                <ul className={classes.RecipeList}>
-                    {recipes}
-                    <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
-                </ul>
+                <RecipeNav shown={this.state.recipeListDisplay} clicked={this.toggleRecipeListHandler} />
             </div>  );    
 
     }
