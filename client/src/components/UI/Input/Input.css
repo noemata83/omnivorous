@@ -15,7 +15,7 @@
     font-size: 1.8rem;
     text-transform: capitalize;
     font-weight: bold;
-    display: block;
+    display: inline;
     margin-bottom: 8px;
 }
 
@@ -34,8 +34,7 @@
     background-color: white;
     font: inherit;
     padding: 6px 10px;
-    display: block;
-    width: 100%;
+    display: inline-block;
     box-sizing: border-box;
 }
 

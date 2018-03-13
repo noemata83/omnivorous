@@ -8,8 +8,9 @@ const recipeImport = (props) => {
         <div>
             <h2 className={classes.Header}>Import a Recipe from the Web</h2>
             <form onSubmit={props.import}>
-                <input type="url" placeholder="Enter a URL" name="target-url" value={props.url} onChange={props.changed}/>
+                <input className={classes.Input} type="url" placeholder="Enter a URL" name="target-url" value={props.url} onChange={props.changed}/>
                 <Button buttonType="Success">Import</Button>
+                <Button buttonType="Danger" clicked={props.cancel}>Cancel</Button>
             </form>
         </div>
     );

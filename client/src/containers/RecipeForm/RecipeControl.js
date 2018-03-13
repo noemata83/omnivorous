@@ -72,6 +72,7 @@ class RecipeControl extends Component {
                     changed={this.inputChangedHandler}
                     url={this.state.importURL}
                     import={this.importRecipeHandler}
+                    cancel={this.importCancelHandler}
                     />
                 </Modal>
                 <div className={classes.FormContainer}>

@@ -32,7 +32,9 @@ const recipeForm = (props) => {
             <FieldArray name="recipeIngredient" component={ingredientForm} />
             <FieldArray name="recipeInstructions" component={instructionForm} />
             { recipeFooter.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
-            {recipeAction}
+            <div className={classes.FormFooter}>
+                {recipeAction}
+            </div>
             </form>
         </div>
     )

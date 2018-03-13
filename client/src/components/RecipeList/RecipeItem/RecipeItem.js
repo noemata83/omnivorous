@@ -1,22 +1,19 @@
 import React from 'react';
 
-import Wrapper from '../../../hoc/Wrapper/Wrapper';
 import classes from './RecipeItem.css';
-import Button from '../../UI/Button/Button';
+// import Button from '../../UI/Button/Button';
 import { fa, fa_edit } from '../../../icons';
 
 const recipeItem = (props) => {
     return (
-        <Wrapper>
             <li className={classes.RecipeItem}>
                 <span onClick={props.clicked}>{props.name}</span>
-                <Button 
-                    buttonType="Inline" 
-                    clicked={props.edit}>
+                <button
+                    className={classes.Edit}
+                    onClick={props.edit}>
                     <i className={[fa, fa_edit].join(' ')}></i>
-                </Button>
+                </button>
             </li>
-        </Wrapper>
         );
 }
 

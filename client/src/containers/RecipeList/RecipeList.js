@@ -26,7 +26,7 @@ class RecipeList extends Component {
             this.setState({loading: false});
         }
     }
-    
+ 
     render() {
         const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true) }} clicked={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} key={recipe._id} name={recipe.name} />);
         return (

@@ -1,0 +1,10 @@
+.Header {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.Input {
+    display: block;
+    font-family: inherit;
+    width: 90%;
+}
