@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes';
 
 export const fetchRecipe = (user, recipe) => {
     return dispatch => {
-        axios.get(`/api/${user}/recipes/${recipe._id}`)
+        axios.get(`/api/recipes/${recipe._id}`)
             .then(res => {
                 dispatch(displayRecipe(res.data));
             })
@@ -23,7 +23,7 @@ export const displayRecipe = (recipe) => {
 export const addRecipe = (user, recipe) => {
     return dispatch => {
         dispatch(addRecipeStart());
-        axios.post(`/api/${user}/recipes`, {...recipe})
+        axios.post(`/api/recipes`, {...recipe})
             .then(res => {
                 console.log(res);
                 dispatch(addRecipeSuccess(res.data));
@@ -62,7 +62,7 @@ export const newRecipe = () => {
 
 export const updateRecipe = (user, recipeId, recipe) => {
 	return dispatch => {
-		axios.put(`/api/${user}/recipes/${recipeId}`, recipe)
+		axios.put(`/api/recipes/${recipeId}`, recipe)
 		.then(res => {
 			dispatch(editRecipe(recipeId, res.data));
 			dispatch(displayRecipe(res.data));
@@ -80,7 +80,7 @@ export const editRecipe = (id, recipe) => {
 
 export const destroyRecipe = (user, recipeId) => {
     return dispatch => {
-        axios.delete(`/api/${user}/recipes/${recipeId}`)
+        axios.delete(`/api/recipes/${recipeId}`)
         .then(res => dispatch(deleteRecipe(recipeId)));
     }
 }
@@ -95,7 +95,7 @@ export const deleteRecipe = recipeId => {
 export const fetchRecipes = (user) => {
     return dispatch => {
         dispatch(fetchStart());
-        axios.get(`/api/${user}/recipes`)
+        axios.get(`/api/recipes`)
         .then(response => {
             dispatch(fetchSuccess(response.data))
         })

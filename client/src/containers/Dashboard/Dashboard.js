@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeControl from '../RecipeForm/RecipeControl';
+import ShoppingListControl from '../ShoppingListControl/ShoppingListControl';
 import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 
@@ -45,7 +46,10 @@ class Dashboard extends Component {
                     <div className={classes.MainWindow}>
                         {mainWindow}
                     </div>
-                </div>
+                    <div className={classes.ShoppingList}>
+                        <ShoppingListControl />
+                    </div>
+                </div>}
             </div>
             );
     }

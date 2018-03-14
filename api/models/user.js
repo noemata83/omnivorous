@@ -9,7 +9,11 @@ var UserSchema = new mongoose.Schema({
            ref: "Recipe"
        },
        name: String
-   }]
+   }],
+   lists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ShoppingList"
+       }]
 });
 
 mongoose.model('users', UserSchema);

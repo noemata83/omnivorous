@@ -23,6 +23,12 @@
     /* max-width: 70vw; */
 }
 
+.ShoppingList {
+    flex-basis: 30%;
+    flex-shrink: 1;
+    background-color: white;
+}
+
 /* .SideBar {
     float: left;
     z-index: 100;

@@ -1,14 +1,16 @@
+
+
 module.exports = (app) => {
     const recipeController = require('../controllers/recipeController');
 
-    app.route('/api/:userId/recipes/import')
+    app.route('/api/recipes/import')
     .post(recipeController.importRecipe);
     
-    app.route('/api/:userId/recipes')
+    app.route('/api/recipes')
         .get(recipeController.listRecipes)
         .post(recipeController.createRecipe);
         
-    app.route('/api/:userId/recipes/:id')
+    app.route('/api/recipes/:id')
         .get(recipeController.readRecipe)
         .put(recipeController.updateRecipe)
         .delete(recipeController.deleteRecipe);

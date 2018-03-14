@@ -9,6 +9,7 @@ const express           =     require('express'),
 
 require('./api/models/user');
 require('./api/models/recipe');
+require('./api/models/shoppinglist');
 require('./api/services/passport');
 mongoose.Promise = global.Promise;
 
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 
 require('./api/routes/recipe')(app);
 require('./api/routes/auth')(app);
+require('./api/routes/shoppinglist')(app);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
