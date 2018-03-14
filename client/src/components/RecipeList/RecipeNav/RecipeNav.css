@@ -21,6 +21,10 @@
     display: block;
 }
 
+.Collapse {
+    width: 0;
+}
+
 .Icon {
     margin: 0 auto;
     display: inline-block;
