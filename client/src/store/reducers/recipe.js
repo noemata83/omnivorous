@@ -7,7 +7,7 @@ const initialState = {
         error: null
     };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = {...initialState}, action) => {
     switch (action.type) {
         case (actionTypes.FETCH_START):
             return {
@@ -58,23 +58,24 @@ const reducer = (state = initialState, action) => {
             }
         case (actionTypes.EDIT_RECIPE):
             const recipes = [...state.recipes];
-            recipes.forEach((recipe, index) => {
+            const updatedRecipes = recipes.map((recipe, index) => {
                 if (recipe._id === action.id) {
-                    recipes[index] = { ...action.updatedRecipe,
-                                        _id: action.id }
+                    return { ...action.updatedRecipe,
+                             _id: action.id }
                 }
+                return recipe
             });
             return {
                 ...state,
-                recipes: recipes
+                recipes: updatedRecipes
             }
         case (actionTypes.DELETE_RECIPE):
-            let recipeList = [...state.recipes];
+            const recipeList = [...state.recipes];
             const targetIndex = recipeList.map(recipe => recipe._id).indexOf(action.id);
-            recipeList.splice(targetIndex, 1);
+            const updatedRecipeList = recipeList.filter( (recipe, index) => index !== targetIndex);
             return {
                 ...state,
-                recipes: recipeList,
+                recipes: updatedRecipeList,
                 currentRecipe: null
             }
         default:

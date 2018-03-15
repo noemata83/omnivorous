@@ -48,7 +48,7 @@ class RecipeControl extends Component {
     importRecipeHandler = (e) => {
         e.preventDefault();
 
-        axios.post(`/api/${this.props.user.id}/recipes/import`, { url: this.state.importURL}).then( res => {
+        axios.post(`/api/recipes/import`, { url: this.state.importURL}).then( res => {
             if (res.data.message) {
                 return console.log(res.data.message);
             } else {
