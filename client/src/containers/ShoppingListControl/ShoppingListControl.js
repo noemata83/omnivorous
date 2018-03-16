@@ -3,7 +3,20 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 
+import ShoppingList from '../../components/ShoppingList/ShoppingList';
+
 class ShoppingListControl extends Component {
+    state = {
+        loading: true,
+        shoppingListDisplay: false
+    }
+
+    toggleListDisplayHandler = () => {
+        console.log("Time to toggle!");
+        this.setState({
+            shoppingListDisplay: !this.state.shoppingListDisplay
+        })
+    }
 
     makeListHandler = () => {
         axios.post('/api/shopping', {
@@ -28,10 +41,10 @@ class ShoppingListControl extends Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.makeListHandler}>Make List</button>
-                <button onClick={this.getListsHandler}>Get List</button>
-            </div>
+           <ShoppingList 
+            listDisplay={this.state.shoppingListDisplay}
+            toggleDisplay={this.toggleListDisplayHandler}
+            />
         );
     }
 }

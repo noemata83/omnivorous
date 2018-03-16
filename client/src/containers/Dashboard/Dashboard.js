@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeControl from '../RecipeForm/RecipeControl';
-// import  from '../ShoppingListControl/ShoppingListControl';
+import ShoppingListControl from '../ShoppingListControl/ShoppingListControl';
 import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 
@@ -32,7 +32,7 @@ class Dashboard extends Component {
             mainWindow= <RecipeControl setEditMode={this.setEditModeHandler}/>;
         }
         return (
-            <div>
+            <div className={classes.Dashboard}>
                 <div className={classes.Background}>
                     <div className={classes.Layer}></div>
                 </div>
@@ -47,8 +47,9 @@ class Dashboard extends Component {
                         {mainWindow}
                     </div>
                     <div className={classes.ShoppingList}>
+                        <ShoppingListControl />
                     </div>
-                </div>}
+                </div>
             </div>
             );
     }
