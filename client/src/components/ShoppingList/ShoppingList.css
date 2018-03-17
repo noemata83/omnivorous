@@ -1,0 +1,40 @@
+.ShoppingListContent {
+    display: flex;
+    flex-direction: row;
+    transform: translateX(90%);
+    transition: all .5s;
+}
+
+.Show {
+    border-top-left-radius: 10px !important;
+    transform: translateX(0);
+    min-width: 30rem;
+}
+
+.ListBox {
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 0 1rem 3rem rgba(0,0,0, 0.2);
+    height: 40rem;
+    width: 0;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    overflow-y: auto;
+    display: inline-block;
+    box-sizing: content-box;
+    transition: all .5s;
+}
+
+.ListHeader {
+    background-color: darkred;
+    color: white;
+    padding: .5rem;
+    text-align: center;
+}
+
+.ListHeaderText {
+    font-size: 2rem;
+}
+
+.ShoppingList {
+    font-size: 1.8rem;
+}
