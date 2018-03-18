@@ -12,7 +12,6 @@ class ShoppingListControl extends Component {
     }
 
     toggleListDisplayHandler = () => {
-        console.log("Time to toggle!");
         this.setState({
             shoppingListDisplay: !this.state.shoppingListDisplay
         })
@@ -44,9 +43,16 @@ class ShoppingListControl extends Component {
            <ShoppingList 
             listDisplay={this.state.shoppingListDisplay}
             toggleDisplay={this.toggleListDisplayHandler}
+            currentList={this.props.currentList}
             />
         );
     }
 }
 
-export default ShoppingListControl;
+const mapStateToProps = state => {
+    return {
+        currentList: state.shoppingList.currentList
+    }
+}
+
+export default connect(mapStateToProps)(ShoppingListControl);

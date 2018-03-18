@@ -1,8 +1,17 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    lists: [],
-    currentList: null,
+    lists: [
+        { name: 'Grocery List', id: "adjiafjaiefaijfoasnda"}
+    ],
+    currentList: {
+        name: 'Grocery List',
+        categories: ['Dairy', 'Canned Goods', 'Uncategorized'],
+        items: [
+            { name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
+            { name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
+        ]
+    },
     loading: false,
     error: null
 }

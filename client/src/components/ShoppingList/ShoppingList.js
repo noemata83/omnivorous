@@ -1,6 +1,8 @@
 import React from 'react';
 
 import ShoppingNav from './ShoppingNav/ShoppingNav';
+import ListControls from './ListControls/ListControls';
+import CurrentList from './CurrentList/CurrentList';
 
 import classes from './ShoppingList.css';
 
@@ -15,15 +17,9 @@ const shoppingList = (props) => {
                 <div className={classes.ListHeader}>
                     <h2 className={classes.ListHeaderText}>Shopping List</h2>
                 </div>
+                <ListControls />
                 <div className={classes.ShoppingList}>
-                    <ul>
-                        <li>Category #1
-                            <ul>
-                                <li>Thing #1</li>
-                                <li>Thing #2</li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <CurrentList currentList={props.currentList} />
                 </div>
             </div>
        </div> 
