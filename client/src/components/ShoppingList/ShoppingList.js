@@ -17,9 +17,11 @@ const shoppingList = (props) => {
                 <div className={classes.ListHeader}>
                     <h2 className={classes.ListHeaderText}>Shopping List</h2>
                 </div>
-                <ListControls />
-                <div className={classes.ShoppingList}>
-                    <CurrentList currentList={props.currentList} />
+                <div className={classes.Shopping}>
+                    <ListControls />
+                    <ul className={classes.ShoppingList}>
+                        <CurrentList currentList={props.currentList} />
+                    </ul>
                 </div>
             </div>
        </div> 
