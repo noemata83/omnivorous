@@ -3,7 +3,7 @@ import React from 'react';
 const listItem = (props) => {
     const qty = props.unit ? `(${props.quantity} ${props.unit})` : null;
     return (
-        <li>{props.name} {qty}</li>
+        <li><input type="checkbox" />{props.name} {qty}</li>
     )
 }
 

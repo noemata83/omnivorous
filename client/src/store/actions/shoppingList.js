@@ -37,7 +37,8 @@ const fetchSuccess = (lists) => {
 
 export const editList = (id, list) => {
     return {
-        type: actionTypes.EDIT_SHOPPING_LIST
+        type: actionTypes.EDIT_SHOPPING_LIST,
+        list
     }
 }
 
@@ -79,5 +80,12 @@ export const displayShoppingList = (list) => {
     return {
         type: actionTypes.DISPLAY_SHOPPING_LIST,
         list
+    }
+}
+
+export const addListItem = (item) => {
+    return {
+        type: actionTypes.ADD_LIST_ITEM,
+        item,
     }
 }

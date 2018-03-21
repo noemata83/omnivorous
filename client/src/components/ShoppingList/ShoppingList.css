@@ -35,12 +35,7 @@
     font-size: 2rem;
 }
 
-.Shopping {
+.ShoppingList {
     padding: 1rem;
 }
 
-.ShoppingList {
-    font-size: 1.4rem;
-    list-style: none;
-    -webkit-padding-start: 0;
-}

@@ -8,9 +8,10 @@ const initialState = {
         name: 'Grocery List',
         categories: ['Dairy', 'Canned Goods', 'Uncategorized'],
         items: [
-            { name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
-            { name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
-        ]
+            { itemId: 0, name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
+            { itemId: 1, name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
+        ],
+        nextId: 2
     },
     loading: false,
     error: null
@@ -58,6 +59,15 @@ const reducer = (state = {...initialState}, action) => {
                 ...state,
                 lists: newLists,
                 currentList: newLists[0] || null
+            }
+        case(actionTypes.ADD_LIST_ITEM):
+            const { item } = action;
+            const items = state.currentList.items.concat(item);
+            const nextId = state.currentList.nextId + 1;
+            const updatedCurrentList = { ...state.currentList, items, nextId};
+            return {
+                ...state,
+                currentList: updatedCurrentList
             }
         default:
             return state;

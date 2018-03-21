@@ -5,7 +5,6 @@ import classes from './ShoppingNav.css';
 import {fa, fa_times, fa_shopping_cart} from '../../../icons';
 
  const shoppingNav = (props) => {
-     console.log(props.clicked);
     const tabClasses = props.shown ? [classes.ShoppingTab, classes.Shown].join(' ') : classes.ShoppingTab;
     const iconClasses = props.shown ? [fa, fa_times, classes.Icon].join(' ') : [fa, fa_shopping_cart, classes.Icon].join(' ');
     const navClasses = props.shown ? [classes.ShoppingNav, classes.Collapse].join(' ') : classes.ShoppingNav;

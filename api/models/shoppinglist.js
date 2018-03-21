@@ -31,6 +31,10 @@ const shoppingListItemSchema = new Schema({
     purchased: {
         type: Boolean,
         default: false
+    },
+    itemId: {
+        type: Number,
+        required: true
     }
 });
 
@@ -44,7 +48,8 @@ const shoppingListSchema = new Schema({
     items: {
         type: [shoppingListItemSchema],
         default: [],
-    }
+    },
+    nextId: Number
 });
 
 mongoose.model('ShoppingList', shoppingListSchema, 'ShoppingList');

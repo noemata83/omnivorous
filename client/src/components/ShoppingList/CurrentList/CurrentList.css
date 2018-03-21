@@ -1,0 +1,19 @@
+.ShoppingList {
+    font-size: 1.4rem;
+    list-style: none;
+    -webkit-padding-start: 0;
+}
+
+.ItemInput {
+    width: 100%;
+}
+
+.ListTitle {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.List {
+    height: 17rem;
+    overflow: auto;
+}
