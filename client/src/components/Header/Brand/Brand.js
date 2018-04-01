@@ -4,7 +4,7 @@ import classes from './Brand.css';
 
 const brand = (props) => {
     return (
-        <div className={classes.Brand}>
+        <div className={["brand-logo light-green-text text-accent-3 left", classes.Brand].join(' ')}>
             Omnivorous
         </div>
     )

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Brand from './Brand/Brand';
 import Greeting from './Greeting/Greeting';
-import classes from './Header.css';
+// import classes from './Header.css';
 
 class Header extends Component {
 
@@ -19,9 +19,13 @@ class Header extends Component {
 
     render () {
         return (
-            <nav className={classes.Header}>
+            <nav className="white black-text">
+                <div className="nav-wrapper">
                     <Brand />
-                    <Greeting displayName={this.renderGreeting()} />
+                    <ul className="right">
+                        <Greeting displayName={this.renderGreeting()} />
+                    </ul>
+                </div>
             </nav>
         )
     }

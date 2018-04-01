@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Background from '../../components/UI/Background/Background';
 import Header from '../../components/Header/Header';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
@@ -33,17 +34,17 @@ class Dashboard extends Component {
         }
         return (
             <div className={classes.Dashboard}>
-                <div className={classes.Background}>
+                <Background>
                     <div className={classes.Layer}></div>
-                </div>
-                <div className={classes.HeaderBox}>
+                </Background>
+                <div className={["container", classes.HeaderBox].join(" ")}>
                     <Header />
                 </div>
                 <div className={classes.MainContent}>
                     <div className={classes.RecipeList}>
                         <RecipeList setEditMode={this.setEditModeHandler}/>
                     </div>
-                    <div className={classes.MainWindow}>
+                    <div className={["container", classes.MainWindow].join(' ')}>
                         {mainWindow}
                     </div>
                     <div className={classes.ShoppingList}>

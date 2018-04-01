@@ -1,12 +1,11 @@
 .Greeting {
     font-size: 1.6rem;
     text-transform: uppercase;
-    float: right;
-    height: 100%;
-    margin: 1rem 1rem;
 }
 
 .Logout {
+    font-size: 1.6rem;
+    display: inline-block;
     text-decoration: none;
     color: inherit;
 }

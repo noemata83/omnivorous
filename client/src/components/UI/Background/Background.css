@@ -1,0 +1,10 @@
+.Background {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../../../assets/img/backdrop.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    filter: blur(2px);
+    position: absolute;
+    z-index: -1;
+}
