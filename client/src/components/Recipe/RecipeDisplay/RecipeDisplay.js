@@ -36,7 +36,7 @@ class RecipeDisplay extends Component {
                 )
         }
         return (
-            <div className={["card", classes.RecipeDisplay].join(' ')}>
+            <div className={classes.RecipeDisplay}>
                 {recipe}
             </div>
             );

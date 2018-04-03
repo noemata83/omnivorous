@@ -8,6 +8,7 @@ import ingredientForm from './IngredientForm/ingredientForm';
 import instructionForm from './InstructionForm/instructionForm';
 import validate from './helpers/validator';
 import classes from './RecipeForm.css';
+import FlatButton from 'material-ui/FlatButton';
 
 // import * as helpers from './helpers/';
 
@@ -17,8 +18,8 @@ const recipeForm = (props) => {
     let importButton = null;
     if (initialValues) {
         recipeAction = (<div>
-                        <Button buttonType="Success">Edit Recipe</Button>
-                        <Button buttonType="Danger" clicked={() => { onDelete(initialValues._id)}}>Delete Recipe</Button>
+                        <FlatButton primary={true} onClick={handleSubmit} style={{fontSize:'2rem', marginRight:'2rem'}}>Edit Recipe</FlatButton>
+                        <FlatButton onClick={() => { onDelete(initialValues._id)}} style={{color: 'red', fontSize:'2rem'}}>Delete Recipe</FlatButton>
                         </div>);
     } else {
         importButton = (<Button buttonType="OpenImport" clicked={props.onImportInit}>Import from the Web</Button>)

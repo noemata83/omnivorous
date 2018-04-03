@@ -1,16 +1,14 @@
 
 .Dashboard {
-    min-height: 100vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
 .MainContent {
-    height: auto;
     overflow: hidden;
-    overflow-x: hidden;
-    height: auto;
+    height: 100vh;
 }
 
 .SideDrawer {
@@ -29,10 +27,11 @@
 
 .MainWindow {
     z-index: 100;
-    height: 70vh;
     flex-basis: 60%;
     flex-shrink: 1;
     flex-grow: 1;
+    padding: 0 1.5rem;
+    height: 100vh;
     /* max-width: 87.5vw; */
 }
 

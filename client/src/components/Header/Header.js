@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import Brand from './Brand/Brand';
 import Greeting from './Greeting/Greeting';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 // import classes from './Header.css';
 
 class Header extends Component {
@@ -19,14 +21,11 @@ class Header extends Component {
 
     render () {
         return (
-            <nav className="white black-text">
-                <div className="nav-wrapper">
-                    <Brand />
-                    <ul className="right">
-                        <Greeting displayName={this.renderGreeting()} />
-                    </ul>
-                </div>
-            </nav>
+            <AppBar
+                title={<Brand />}
+                iconElementRight={<FlatButton><Greeting displayName={this.renderGreeting()}/></FlatButton>}
+                showMenuIconButton={false}
+            />
         )
     }
 }

@@ -4,9 +4,9 @@ import classes from './Greeting.css';
 
 const greeting = (props) => {
     return (
-        <li className={classes.Greeting}>
-            Hi {props.displayName}! | <a className={["black-text", classes.Logout].join(" ")}  href="/api/logout">Logout</a>
-        </li>
+        <span className={classes.Greeting}>
+            Hi {props.displayName}! | <a className={classes.Logout}  href="/api/logout">Logout</a>
+        </span>
     )
 }
 

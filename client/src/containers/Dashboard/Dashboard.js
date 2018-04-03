@@ -46,10 +46,10 @@ class Dashboard extends Component {
                 </div>
                 <div className={classes.MainWindow}>
                     <div className={classes.MainContent}>
-                        <div className={["container", classes.HeaderBox].join(" ")}>
+                        <div className={classes.HeaderBox}>
                             <Header />
                         </div>
-                        <div className={["container", classes.MainWindow].join(' ')}>
+                        <div className={classes.MainWindow}>
                             {mainWindow}
                         </div>
                     </div>
