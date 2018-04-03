@@ -1,25 +1,28 @@
 
 .Dashboard {
+    min-height: 100vh;
     width: 100%;
-    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .MainContent {
-    display: flex;
-    width: 100vw;
     height: auto;
     overflow: hidden;
-    flex-basis: 85%;
-    /* overflow-x: hidden;
-    height: auto; */
+    overflow-x: hidden;
+    height: auto;
+}
+
+.SideDrawer {
+    height: 100vh;
+    width: 25.6rem;
+    position: relative;
 }
 
 .RecipeList {
     margin-right: 3rem;
     width: auto;
-    /* flex-basis: 20%; */
+    flex-basis: 20%;
     max-width: 25%;
     z-index: 100;
 }
@@ -68,7 +71,6 @@
 }
 
 .HeaderBox{
-    width: 100%;
     flex-basis: 15%;
     padding: 1.5rem;
     box-sizing: border-box;

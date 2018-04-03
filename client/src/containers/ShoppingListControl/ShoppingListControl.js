@@ -8,14 +8,13 @@ import ShoppingList from '../../components/ShoppingList/ShoppingList';
 class ShoppingListControl extends Component {
     state = {
         loading: true,
-        shoppingListDisplay: false
     }
 
-    toggleListDisplayHandler = () => {
-        this.setState({
-            shoppingListDisplay: !this.state.shoppingListDisplay
-        })
-    }
+    // toggleListDisplayHandler = () => {
+    //     this.setState({
+    //         shoppingListDisplay: !this.state.shoppingListDisplay
+    //     })
+    // }
 
     // getListsHandler() {
     //     axios.get('/api/shopping').then( whatsit => console.log(whatsit.data));
@@ -25,7 +24,6 @@ class ShoppingListControl extends Component {
         return (
             <ShoppingList 
             listDisplay={this.state.shoppingListDisplay}
-            toggleDisplay={this.toggleListDisplayHandler}
             currentList={this.props.currentList}
             />
         );

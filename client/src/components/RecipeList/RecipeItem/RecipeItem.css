@@ -1,9 +1,7 @@
 .RecipeItem {
     font-size: 1.4rem;
-    display: inline-block;
     margin: 0.8rem 0;
     height: auto;
-    width: 100%;
 }
 
 .RecipeItem:hover {

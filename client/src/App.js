@@ -13,7 +13,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div style={{'height':'100vh'}}>
+      <div>
         <Switch>
             <Route path="/" exact render={() => this.props.currentUser ? ( <Redirect to="/recipes" />) : (<Landing /> )} />
             <Route path="/recipes" component={Dashboard} />
