@@ -21,9 +21,9 @@ class ShoppingListControl extends Component {
     //     axios.get('/api/shopping').then( whatsit => console.log(whatsit.data));
     // }
 
-    render() {
+    render() {           
         return (
-           <ShoppingList 
+            <ShoppingList 
             listDisplay={this.state.shoppingListDisplay}
             toggleDisplay={this.toggleListDisplayHandler}
             currentList={this.props.currentList}

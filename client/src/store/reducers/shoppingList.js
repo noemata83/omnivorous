@@ -38,7 +38,7 @@ const reducer = (state = {...initialState}, action) => {
                 error: null,
                 lists: action.lists
             }
-        case(actionTypes.EDIT_SHOPPING_LIST):
+        case(actionTypes.UPDATE_SHOPPING_LIST):
             const lists = [...state.lists];
             const updatedLists = lists.map( (list, index) => {
                 if (list.id === action.id) {
@@ -51,7 +51,7 @@ const reducer = (state = {...initialState}, action) => {
                 ...state,
                 lists: updatedLists
             }
-        case(actionTypes.DELETE_RECIPE):
+        case(actionTypes.DELETE_SHOPPING_LIST):
             const oldLists = [...state.lists];
             const targetIndex = oldLists.map(list => list._id).indexOf(action.id);
             const newLists = oldLists.filter( (list, index) => index !== targetIndex);
@@ -60,7 +60,7 @@ const reducer = (state = {...initialState}, action) => {
                 lists: newLists,
                 currentList: newLists[0] || null
             }
-        case(actionTypes.ADD_LIST_ITEM):
+        case(actionTypes.ADD_LIST_ITEM): {
             const { item } = action;
             const items = state.currentList.items.concat(item);
             const nextId = state.currentList.nextId + 1;
@@ -69,6 +69,24 @@ const reducer = (state = {...initialState}, action) => {
                 ...state,
                 currentList: updatedCurrentList
             }
+        }
+        case(actionTypes.EDIT_SHOPPING_LIST_ITEM): {
+            const { itemId, item } = action;
+            const items = state.currentList.items.map(oldItem => {
+                if (oldItem.itemId === itemId) {
+                    return {
+                        ...item,
+                        itemId,
+                    }
+                }
+                return oldItem;
+            });
+            const updatedCurrentList = { ...state.currentList, items };
+            return {
+                ...state,
+                currentList: updatedCurrentList
+            }
+        }
         default:
             return state;
     }

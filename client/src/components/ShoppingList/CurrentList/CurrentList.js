@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
 import ListCategory from './ListCategory/ListCategory';
+import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
 
 class CurrentList extends Component {
 
     state = {
         itemInput: '',
-
+        editing: false,
+        editId: null,
     }
 
     addItemHandler = (e) => {
@@ -31,21 +33,48 @@ class CurrentList extends Component {
         });
     }
 
+    setEditModeHandler = (editId) => {
+        this.setState({
+            editing: true,
+            editId
+        })
+    }
+
+    handleSubmit = values => {
+        this.props.editItem(this.state.editId, values);
+        this.setState({
+            editing: false,
+            editId:null
+        })
+    }
+
+    getItemToEdit = (itemId) => {
+       return this.props.currentList.items.find(item => item.itemId === itemId);
+    }
+
     render() {
-        const categories = this.props.currentList.categories.map(category => <ListCategory items={
-            this.props.currentList.items.filter(item => category === item.category)
-        } key={category} name={category}/>);
+        const categories = this.props.currentList.categories.map(category => <ListCategory 
+            setEditMode={this.setEditModeHandler}
+            items={
+                this.props.currentList.items.filter(item => category === item.category)
+            } key={category} name={category}/>);
+        const shoppingDisplay = this.state.editing ? 
+            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} categories={this.props.categories} /> : (
+                <div>
+                   <h2 className={classes.ListTitle}>{this.props.currentList.name}</h2>
+                    <div className={classes.List}>
+                        <ul className={classes.ShoppingList}>
+                            {categories}
+                        </ul>
+                    </div>
+                    <form onSubmit={this.addItemHandler}>
+                        <input className={classes.ItemInput} type="text" name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} placeholder="Add Item" />
+                    </form>
+                </div>
+            );
         return (
             <div>
-                <h2 className={classes.ListTitle}>{this.props.currentList.name}</h2>
-                <div className={classes.List}>
-                    <ul className={classes.ShoppingList}>
-                        {categories}
-                    </ul>
-                </div>
-                <form onSubmit={this.addItemHandler}>
-                    <input className={classes.ItemInput} type="text" name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} placeholder="Add Item" />
-                </form>
+                {shoppingDisplay}
             </div>
         )
 }
@@ -53,12 +82,14 @@ class CurrentList extends Component {
 
 const mapStateToProps = state => {
     return {
-        nextId: state.shoppingList.nextId
+        nextId: state.shoppingList.nextId,
+        categories: state.shoppingList.currentList.categories
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addItem: (item) => dispatch(actions.addListItem(item))
+        addItem: (item) => dispatch(actions.addListItem(item)),
+        editItem: (itemId, item) => dispatch(actions.editListItem(itemId, item))
     }
 }
 

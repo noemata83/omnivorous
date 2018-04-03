@@ -35,9 +35,9 @@ const fetchSuccess = (lists) => {
     }
 }
 
-export const editList = (id, list) => {
+export const updateList = (id, list) => {
     return {
-        type: actionTypes.EDIT_SHOPPING_LIST,
+        type: actionTypes.UPDATE_SHOPPING_LIST,
         list
     }
 }
@@ -87,5 +87,13 @@ export const addListItem = (item) => {
     return {
         type: actionTypes.ADD_LIST_ITEM,
         item,
+    }
+}
+
+export const editListItem = (itemId, item) => {
+    return {
+        type: actionTypes.EDIT_SHOPPING_LIST_ITEM,
+        itemId,
+        item
     }
 }

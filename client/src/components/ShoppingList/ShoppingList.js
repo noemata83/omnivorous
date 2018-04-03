@@ -18,7 +18,9 @@ const shoppingList = (props) => {
                 </div>
                 <div className={classes.ShoppingList}>
                     <ListControls />
-                    <CurrentList currentList={props.currentList} />
+                    <CurrentList 
+                        setEditMode={props.setEditMode}
+                        currentList={props.currentList} />
                 </div>
             </div>
        </div> 

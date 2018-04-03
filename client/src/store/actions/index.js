@@ -1,3 +1,3 @@
 export { fetchRecipe, fetchRecipes, displayRecipe, addRecipe, newRecipe, updateRecipe, destroyRecipe } from './recipe';
 export { fetchUser } from './auth';
-export { addListItem } from './shoppingList';
+export { addListItem, editListItem } from './shoppingList';
