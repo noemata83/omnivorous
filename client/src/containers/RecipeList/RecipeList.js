@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/';
 
-import RecipeItem from '../../components/RecipeList/RecipeItem/RecipeItem';
-import Button from '../../components/UI/Button/Button';
+import { List, ListItem } from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+
+// import RecipeItem from '../../components/RecipeList/RecipeItem/RecipeItem';
+// import Button from '../../components/UI/Button/Button';
+
+import RaisedButton from 'material-ui/RaisedButton';
 
 import classes from './RecipeList.css';
+import { black, grey200, grey400 } from 'material-ui/styles/colors';
 
 class RecipeList extends Component {
 
@@ -35,14 +42,19 @@ class RecipeList extends Component {
     }
 
     render() {
-        const recipes = this.props.recipes.map(recipe => <RecipeItem edit={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true) }} clicked={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} key={recipe._id} name={recipe.name} />);
+        const recipes = this.props.recipes.map(recipe => <ListItem 
+            primaryText={recipe.name} 
+            rightIconButton={<IconButton onClick={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true)}} iconStyle={{color: grey400}}><ModeEdit /></IconButton>} 
+            onClick={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} 
+            key={recipe._id} 
+            name={recipe.name} />);
         return (
             <div className={classes.RecipeContent}>
                 <div className={classes.ListBox}>
-                    <ul className={classes.RecipeList}>
+                    <List>
                         {recipes}
-                        <Button buttonType="Success" clicked={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}}>Add Recipe</Button>
-                    </ul>
+                        <RaisedButton onClick={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}} label="Add Recipe" primary={true}/>
+                    </List>
                 </div>
                 {/* <RecipeNav shown={this.state.recipeListDisplay} clicked={this.toggleRecipeListHandler} /> */}
             </div>  );    
