@@ -19,9 +19,9 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 const muiTheme = getMuiTheme({
     palette: {
         primary1Color: green600,
-        primary2Color: cyan400,
+        primary2Color: lightGreenA400,
         primary3Color: grey400,
-        accent1Color: lightGreenA400,
+        accent1Color: cyan400,
         accent2Color: grey100,
         accent3Color: grey500,
         textColor: darkBlack,

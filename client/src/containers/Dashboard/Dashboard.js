@@ -9,6 +9,7 @@ import ShoppingListControl from '../ShoppingListControl/ShoppingListControl';
 import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 import {Tab, Tabs} from 'material-ui/Tabs';
+import { cyan400 } from 'material-ui/styles/colors';
 
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
@@ -36,11 +37,11 @@ class Dashboard extends Component {
             <div className={classes.Dashboard}>
                 <div className={classes.SideDrawer}>
                     <Tabs tabItemContainerStyle={{position: "absolute", bottom:"0"}}>
-                        <Tab label="Recipes">
+                        <Tab label="Recipes" style={{backgroundColor:cyan400}}>
                             <RecipeList setEditMode={this.setEditModeHandler}/>
                         </Tab>
-                        <Tab label="Shopping">
-                            <ShoppingListControl />
+                        <Tab label="Shopping" style={{backgroundColor:cyan400}} >
+                            <ShoppingListControl/>
                         </Tab>
                     </Tabs>
                 </div>

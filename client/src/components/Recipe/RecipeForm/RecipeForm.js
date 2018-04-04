@@ -3,26 +3,29 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { recipeHeader, recipeFooter } from './formPrototypes/recipeForm';
 import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
+// import Button from '../../UI/Button/Button';
 import ingredientForm from './IngredientForm/ingredientForm';
 import instructionForm from './InstructionForm/instructionForm';
 import validate from './helpers/validator';
 import classes from './RecipeForm.css';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import { white } from 'material-ui/styles/colors';
+import { red500 } from 'material-ui/styles/colors';
 
 // import * as helpers from './helpers/';
 
 const recipeForm = (props) => {
     const { handleSubmit, onDelete, initialValues } = props;
-    let recipeAction = (<div><Button buttonType="Success">Add Recipe</Button></div>);
+    let recipeAction = (<div><FlatButton primary={true} label="Add Recipe"></FlatButton></div>);
     let importButton = null;
     if (initialValues) {
         recipeAction = (<div>
-                        <FlatButton primary={true} onClick={handleSubmit} style={{fontSize:'2rem', marginRight:'2rem'}}>Edit Recipe</FlatButton>
-                        <FlatButton onClick={() => { onDelete(initialValues._id)}} style={{color: 'red', fontSize:'2rem'}}>Delete Recipe</FlatButton>
+                        <FlatButton primary={true} onClick={handleSubmit} label="Edit Recipe" />
+                        <FlatButton onClick={() => { onDelete(initialValues._id)}} label="Delete Recipe" style={{color:red500}} />
                         </div>);
     } else {
-        importButton = (<Button buttonType="OpenImport" clicked={props.onImportInit}>Import from the Web</Button>)
+        importButton = (<RaisedButton onClick={props.onImportInit} secondary={true} labelColor={white} label="Import from the Web" style={{float: 'right', fontSize: '2rem'}} />)
     }
     return (
         <div className={classes.RecipeForm}>
