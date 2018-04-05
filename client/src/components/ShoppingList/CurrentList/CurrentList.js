@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
 import ListCategory from './ListCategory/ListCategory';
+import List from 'material-ui/List';
 import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
 
@@ -59,13 +60,13 @@ class CurrentList extends Component {
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
         const shoppingDisplay = this.state.editing ? 
-            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} categories={this.props.categories} /> : (
-                <div>
+            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} categories={this.props.categories} /> 
+            : ( <div>
                    <h2 className={classes.ListTitle}>{this.props.currentList.name}</h2>
                     <div className={classes.List}>
-                        <ul className={classes.ShoppingList}>
+                        <List>
                             {categories}
-                        </ul>
+                        </List>
                     </div>
                     <form onSubmit={this.addItemHandler}>
                         <input className={classes.ItemInput} type="text" name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} placeholder="Add Item" />

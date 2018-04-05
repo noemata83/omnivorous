@@ -1,21 +1,35 @@
 import React from 'react';
 
-import ListItem from '../ListItem/ListItem.js';
+import { ListItem } from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
 import classes from './ListCategory.css';
+import { blue100 } from 'material-ui/styles/colors';
 
 const listCategory = (props) => {
-    const items = props.items.map(item => <ListItem key={item.name}             
-        setEditMode={props.setEditMode}
-        name={item.name} 
-        quantity={item.quantity} 
-        unit={item.unit}
-        itemId={item.itemId}/>)
+    const items = props.items.map(item => <ListItem 
+        primaryTogglesNestedList={true}
+        leftCheckbox={
+        <Checkbox onClick={(e) => {
+                e.stopPropagation();
+                console.log("checked");      
+                }}
+                />}
+        key={item.name}             
+        style={{marginLeft:'0px'}}
+        // setEditMode={props.setEditMode}
+        // onClick={() => props.setEditMode(item.id)}
+        primaryText={<span onDoubleClick={() => props.setEditMode(item.itemId)}>{`${item.name} ${item.unit ? "(" + item.quantity + " " + item.unit + ")" : null}`}</span>}
+        />)
     return props.items.length !== 0 ?
-        (<li className={classes.Category}> {props.name}
-            <ul className={classes.CategoryItems}>
-                {items}
-            </ul>
-        </li>) : null;
+        (<ListItem 
+            key={props.name}
+            autoGenerateNestedIndicator={false}
+            primaryText={props.name} 
+            initiallyOpen={true}
+            nestedItems={items}
+            nestedListStyle={{marginLeft:'0px'}}
+            style={{backgroundColor:blue100}}
+            />) : null;
 }
 
 export default listCategory;
