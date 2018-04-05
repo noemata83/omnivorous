@@ -45,7 +45,15 @@ class CurrentList extends Component {
         this.props.editItem(this.state.editId, values);
         this.setState({
             editing: false,
-            editId:null
+            editId: null
+        })
+    }
+
+    handleDelete = () => {
+        this.props.deleteItem(this.state.editId);
+        this.setState({
+            editing: false,
+            editId: null
         })
     }
 
@@ -60,7 +68,7 @@ class CurrentList extends Component {
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
         const shoppingDisplay = this.state.editing ? 
-            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} categories={this.props.categories} /> 
+            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDelete} categories={this.props.categories} /> 
             : ( <div>
                    <h2 className={classes.ListTitle}>{this.props.currentList.name}</h2>
                     <div className={classes.List}>
@@ -90,7 +98,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (item) => dispatch(actions.addListItem(item)),
-        editItem: (itemId, item) => dispatch(actions.editListItem(itemId, item))
+        editItem: (itemId, item) => dispatch(actions.editListItem(itemId, item)),   
+        deleteItem: (itemId) => dispatch(actions.deleteListItem(itemId))
     }
 }
 

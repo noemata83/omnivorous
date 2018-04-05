@@ -87,6 +87,15 @@ const reducer = (state = {...initialState}, action) => {
                 currentList: updatedCurrentList
             }
         }
+        case(actionTypes.DELETE_SHOPPING_LIST_ITEM): {
+            const { itemId } = action;
+            const items = state.currentList.items.filter(item => item.itemId !== itemId);
+            const updatedCurrentList = {...state.currentList, items};
+            return {
+                ...state,
+                currentList: updatedCurrentList
+            }
+        }
         default:
             return state;
     }

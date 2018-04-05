@@ -97,3 +97,10 @@ export const editListItem = (itemId, item) => {
         item
     }
 }
+
+export const deleteListItem = (itemId) => {
+    return {
+        type: actionTypes.DELETE_SHOPPING_LIST_ITEM,
+        itemId
+    }
+}

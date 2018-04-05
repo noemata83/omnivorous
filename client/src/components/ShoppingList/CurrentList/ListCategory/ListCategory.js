@@ -18,7 +18,7 @@ const listCategory = (props) => {
         style={{marginLeft:'0px'}}
         // setEditMode={props.setEditMode}
         // onClick={() => props.setEditMode(item.id)}
-        primaryText={<span onDoubleClick={() => props.setEditMode(item.itemId)}>{`${item.name} ${item.unit ? "(" + item.quantity + " " + item.unit + ")" : null}`}</span>}
+        primaryText={<span onDoubleClick={() => props.setEditMode(item.itemId)}>{`${item.name} ${item.unit ? "(" + item.quantity + " " + item.unit + ")" : ""}`}</span>}
         />)
     return props.items.length !== 0 ?
         (<ListItem 
