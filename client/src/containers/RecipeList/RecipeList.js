@@ -13,7 +13,7 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import classes from './RecipeList.css';
-import { black, grey200, grey400 } from 'material-ui/styles/colors';
+import { grey400 } from 'material-ui/styles/colors';
 
 class RecipeList extends Component {
 
