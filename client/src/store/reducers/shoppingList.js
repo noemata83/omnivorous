@@ -62,6 +62,8 @@ const reducer = (state = {...initialState}, action) => {
             }
         case(actionTypes.ADD_LIST_ITEM): {
             const { item } = action;
+            item.itemId = state.currentList.nextId;
+            console.log(item);
             const items = state.currentList.items.concat(item);
             const nextId = state.currentList.nextId + 1;
             const updatedCurrentList = { ...state.currentList, items, nextId};

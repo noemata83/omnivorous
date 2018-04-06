@@ -6,6 +6,7 @@ import ListCategory from './ListCategory/ListCategory';
 import List from 'material-ui/List';
 import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
+import TextField from 'material-ui/TextField';
 
 class CurrentList extends Component {
 
@@ -76,8 +77,8 @@ class CurrentList extends Component {
                             {categories}
                         </List>
                     </div>
-                    <form onSubmit={this.addItemHandler}>
-                        <input className={classes.ItemInput} type="text" name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} placeholder="Add Item" />
+                    <form onSubmit={this.addItemHandler} style={{padding:'1rem'}}>
+                        <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}}/>
                     </form>
                 </div>
             );

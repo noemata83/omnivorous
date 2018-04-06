@@ -11,7 +11,7 @@
 
 .ListBox {
     background-color: rgba(255,255,255,0.95);
-    overflow-y: auto;
+    overflow-y: hidden;
     box-sizing: content-box;
     transition: all .5s;
 }
@@ -25,9 +25,5 @@
 
 .ListHeaderText {
     font-size: 2rem;
-}
-
-.ShoppingList {
-    padding: 1rem;
 }
 

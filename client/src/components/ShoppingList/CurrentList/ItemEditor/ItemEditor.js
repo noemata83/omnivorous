@@ -1,40 +1,22 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
-import SelectField from 'material-ui/SelectField';
+import { renderSelectField, renderTextField } from '../../../UI/Forms/renderFields';
 import MenuItem from 'material-ui/MenuItem';
 import { red400 } from 'material-ui/styles/colors';
 import { white } from 'material-ui/styles/colors';
 
-const renderSelectField = ({
-    input,
-    label,
-    meta: { touched, error },
-    children,
-    ...custom
-  }) => (
-    <SelectField
-      floatingLabelText={label}
-      errorText={touched && error}
-      fullWidth={true}
-      {...input}
-      onChange={(event, index, value) => input.onChange(value)}
-      children={children}
-      {...custom}
-    />
-  )
- 
 const itemEditor = (props) => {
     const categoryOptions = props.categories.map(category => <MenuItem key={category} value={category} primaryText={category} />);
     return (
         <div>
             <form onSubmit={props.handleSubmit}>
                 <label htmlFor="name">Item:</label>
-                <Field type="text" name="name" component='input' />
+                <Field type="text" fullWidth={true} name="name" component={renderTextField} />
                 <label htmlFor="qty">Qty:</label>
-                <Field type="number" name="quantity" component='input' />
+                <Field type="number" fullWidth={true} name="quantity" component={renderTextField} />
                 <label htmlFor="unit">Unit:</label>
-                <Field type="text" name="unit" component='input' />
+                <Field type="text" fullWidth={true} name="unit" component={renderTextField} />
                 <label htmlFor="category">Category:</label> 
                 <Field
                     name="category"

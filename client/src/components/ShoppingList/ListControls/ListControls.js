@@ -8,7 +8,7 @@ const listControls = (props) => {
     // At present, the SelectField will not be changeable: need to implement some kind of handleChange function, which should call the action to set the currentlist.
     const listOptions = props.lists.map( list  => <MenuItem key={list.id} value={list.name} primaryText={list.name} />);
     return (
-        <div className="input-field">
+        <div className="input-field" style={{padding:'1rem'}}>
             <SelectField fullWidth={true} label="Category" name="category" value={props.currentList.name}>{listOptions}</SelectField>
             <RaisedButton label="New List" primary={true} />
         </div>
