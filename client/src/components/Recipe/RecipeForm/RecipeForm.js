@@ -10,6 +10,7 @@ import validate from './helpers/validator';
 import classes from './RecipeForm.css';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import { renderTextField } from '../../UI/Forms/renderFields';
 import { white } from 'material-ui/styles/colors';
 import { red500 } from 'material-ui/styles/colors';
 
@@ -17,7 +18,7 @@ import { red500 } from 'material-ui/styles/colors';
 
 const recipeForm = (props) => {
     const { handleSubmit, onDelete, initialValues } = props;
-    let recipeAction = (<div><FlatButton primary={true} label="Add Recipe"></FlatButton></div>);
+    let recipeAction = (<div><FlatButton primary={true} onClick={handleSubmit} label="Add Recipe"></FlatButton></div>);
     let importButton = null;
     if (initialValues) {
         recipeAction = (<div>
@@ -32,7 +33,7 @@ const recipeForm = (props) => {
             <h2 className={classes.Header}>Add a Recipe</h2>
             {importButton}
             <form onSubmit={ handleSubmit }>
-            { recipeHeader.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
+            { recipeHeader.map( ({ label, name, style, fullWidth }) => (<Field component={renderTextField} name={name} key={name} label={label} fullWidth style={style} />)) }
             <FieldArray name="recipeIngredient" component={ingredientForm} />
             <FieldArray name="recipeInstructions" component={instructionForm} />
             { recipeFooter.map( ({ label, name, type, style }) => (<Field component={Input} name={name} key={name} type={type} label={label} style={style} />)) }
