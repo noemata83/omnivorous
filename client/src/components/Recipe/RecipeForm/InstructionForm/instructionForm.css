@@ -16,6 +16,6 @@
 }
 
 .InstructionList {
-    -webkit-padding-start: 1rem;;
-    padding-left: 3rem;
+    list-style: none;
+    -webkit-padding-start: 1rem;
 }

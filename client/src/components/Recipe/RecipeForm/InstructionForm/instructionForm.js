@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Input from '../../../UI/Input/Input';
 import Button from '../../../UI/Button/Button';
 import Field from 'redux-form/lib/Field';
 import classes from './instructionForm.css';
+import { renderTextField } from '../../../UI/Forms/renderFields';
 
 const instructionForm = ({fields, meta: { error }}) => {
     if (!fields.length) fields.push();
@@ -21,8 +21,13 @@ const instructionForm = ({fields, meta: { error }}) => {
                             <li key={`Instruction#$${index}`}>
                                 <Field
                                     name={`recipeInstructions[${index}]`}
-                                    component={Input}
-                                    type="textarea"
+                                    component={renderTextField}
+                                    label={`${index+1}.`}
+                                    hintText={null}
+                                    multiLine
+                                    fullWidth
+                                    rows={2}
+                                    rowsMax={4}
                                 />
                             </li>       
                     ))}

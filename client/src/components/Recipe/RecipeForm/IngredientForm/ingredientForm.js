@@ -1,9 +1,21 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import IngredientInput from '../../../UI/Input/IngredientInput/IngredientInput';
 import Button from '../../../UI/Button/Button';
 import classes from './ingredientForm.css';
+import { renderTextField } from '../../../UI/Forms/renderFields';
+
+const qtyStyle = {
+    display: 'inline-block',
+    width: '15%',
+    marginRight: '.5rem',
+}
+
+const detailStyle = {
+    display: 'inline-block',
+    width: '30%',
+    marginRight: ' .5rem'
+}
 
 const ingredientForm = ({fields, meta: { error, submitFailed }}) => {
     if (!fields.length) fields.push();
@@ -17,33 +29,33 @@ const ingredientForm = ({fields, meta: { error, submitFailed }}) => {
                             name={`${recipeIngredient}.amount`}
                             key={`${recipeIngredient}.amount`}
                             label="Amount"
-                            component={IngredientInput}
+                            component={renderTextField}
                             type="text"
-                            sort="Qty"
+                            style={qtyStyle}
                         />
                         <Field
                             name={`${recipeIngredient}.unit`}
                             key={`${recipeIngredient}.unit`}
-                            component={IngredientInput}
+                            component={renderTextField}
                             label="Unit"
                             type="text"
-                            sort="Qty"
+                            style={qtyStyle}
                        />
                         <Field
                             name={`${recipeIngredient}.name`}
                             key={`${recipeIngredient}.name`}
-                            component={IngredientInput}
+                            component={renderTextField}
                             label="Ingredient"
                             type="text"
-                            sort="Detail"
+                            style={detailStyle}
                         />
                         <Field
                             name={`${recipeIngredient}.comment`}
                             key={`${recipeIngredient}.comment`}
-                            component={IngredientInput}
+                            component={renderTextField}
                             label="Comment"
                             type="text"
-                            sort="Detail"
+                            style={detailStyle}
                         />
                 </div>
             ))
