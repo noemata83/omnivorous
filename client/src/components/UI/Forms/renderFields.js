@@ -12,7 +12,7 @@ export const renderTextField = ({
     hintText={label}
     floatingLabelText={label}
     errorText={touched && error}
-    underlineShow={false}
+    // underlineShow={false}
     floatingLabelStyle={{fontSize:'1.2rem'}}
     {...input}
     {...custom}

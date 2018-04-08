@@ -2,7 +2,6 @@ import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 
 import { recipeHeader, recipeFooter } from './formPrototypes/recipeForm';
-// import Button from '../../UI/Button/Button';
 import ingredientForm from './IngredientForm/ingredientForm';
 import instructionForm from './InstructionForm/instructionForm';
 import validate from './helpers/validator';
