@@ -77,8 +77,8 @@ class CurrentList extends Component {
                             {categories}
                         </List>
                     </div>
-                    <form onSubmit={this.addItemHandler} style={{padding:'1rem'}}>
-                        <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}}/>
+                    <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
+                        <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
                     </form>
                 </div>
             );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header/Header';
+import SideHeader from '../../components/SideHeader/SideHeader';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeControl from '../RecipeForm/RecipeControl';
@@ -36,6 +37,7 @@ class Dashboard extends Component {
         return (
             <div className={classes.Dashboard}>
                 <div className={classes.SideDrawer}>
+                    <SideHeader />
                     <Tabs tabItemContainerStyle={{position: "absolute", bottom:"0"}}>
                         <Tab label="Recipes" style={{backgroundColor:cyan400}}>
                             <RecipeList setEditMode={this.setEditModeHandler}/>

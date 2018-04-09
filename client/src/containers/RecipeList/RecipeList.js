@@ -13,7 +13,7 @@ import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import classes from './RecipeList.css';
-import { grey400 } from 'material-ui/styles/colors';
+import { white, green600, grey400 } from 'material-ui/styles/colors';
 
 class RecipeList extends Component {
 
@@ -46,10 +46,13 @@ class RecipeList extends Component {
             primaryText={recipe.name} 
             rightIconButton={<IconButton onClick={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true)}} iconStyle={{color: grey400}}><ModeEdit /></IconButton>} 
             onClick={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} 
-            key={recipe._id} 
+            key={recipe._id}
+            // style={{paddingLeft:0}}
+            innerDivStyle={{paddingLeft: 0}}
             name={recipe.name} />);
         return (
             <div className={classes.RecipeContent}>
+                <h2 style={{ padding: '1rem', marginTop: 0, fontWeight: 'normal', color: white, backgroundColor: green600}}>My Recipes</h2>
                 <div className={classes.ListBox}>
                     <List>
                         {recipes}
