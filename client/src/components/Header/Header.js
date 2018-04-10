@@ -25,6 +25,7 @@ class Header extends Component {
                 title={<Brand />}
                 iconElementRight={<FlatButton><Greeting displayName={this.renderGreeting()}/></FlatButton>}
                 showMenuIconButton={false}
+                style={{zIndex: 1}}
             />
         )
     }

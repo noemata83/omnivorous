@@ -1,6 +1,7 @@
 .RecipeContent {
     transition: all .5s;
     height: 100%;
+    position: relative;
 }
 
 /* .Show {
@@ -16,6 +17,13 @@
     box-sizing: content-box;
     transition: all .5s;
     padding: 1rem;
+}
+
+.FAB {
+    margin: 0px;
+    top: 0;
+    right: 20px;
+    position: 'fixed';
 }
 
 .RecipeList {

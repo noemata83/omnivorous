@@ -6,11 +6,8 @@ import * as actions from '../../store/actions/';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-
-// import RecipeItem from '../../components/RecipeList/RecipeItem/RecipeItem';
-// import Button from '../../components/UI/Button/Button';
-
-import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import classes from './RecipeList.css';
 import { white, green600, grey400 } from 'material-ui/styles/colors';
@@ -47,19 +44,19 @@ class RecipeList extends Component {
             rightIconButton={<IconButton onClick={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true)}} iconStyle={{color: grey400}}><ModeEdit /></IconButton>} 
             onClick={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} 
             key={recipe._id}
-            // style={{paddingLeft:0}}
             innerDivStyle={{paddingLeft: 0}}
             name={recipe.name} />);
         return (
             <div className={classes.RecipeContent}>
                 <h2 style={{ padding: '1rem', marginTop: 0, fontWeight: 'normal', color: white, backgroundColor: green600}}>My Recipes</h2>
+                <FloatingActionButton style={{position:'absolute', top: 20, right: '20px', zIndex: '3'}} mini={true} onClick={() => {this.props.addNewRecipe(); this.props.setEditMode(true)}} secondary={true}>
+                    <ContentAdd />
+                </FloatingActionButton>
                 <div className={classes.ListBox}>
                     <List>
                         {recipes}
-                        <RaisedButton onClick={() => { this.props.addNewRecipe(); this.props.setEditMode(true)}} label="Add Recipe" primary={true}/>
                     </List>
                 </div>
-                {/* <RecipeNav shown={this.state.recipeListDisplay} clicked={this.toggleRecipeListHandler} /> */}
             </div>  );    
 
     }
