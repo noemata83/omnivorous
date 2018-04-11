@@ -4,12 +4,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ShoppingList from '../../components/ShoppingList/ShoppingList';
+import { fetchShoppingLists } from '../../store/actions';
 
 class ShoppingListControl extends Component {
     state = {
         loading: true,
     }
 
+    componentDidMount() {
+        console.log(this.props.userId);
+        console.log(this.props.loading);
+        if (this.props.userId && !this.props.loading) {
+            console.log("Time to fetch!");
+            this.props.fetchShoppingLists(this.props.userId);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.loading) {
+            this.props.fetchShoppingLists(nextProps.userId);
+            this.setState({loading: false});
+        }
+    }
     // toggleListDisplayHandler = () => {
     //     this.setState({
     //         shoppingListDisplay: !this.state.shoppingListDisplay
@@ -30,10 +46,18 @@ class ShoppingListControl extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
     return {
-        currentList: state.shoppingList.currentList
+        fetchShoppingLists: () => dispatch(fetchShoppingLists())
     }
 }
 
-export default connect(mapStateToProps)(ShoppingListControl);
+const mapStateToProps = state => {
+    return {
+        currentList: state.shoppingList.currentList,
+        userId: state.auth.userId || null,
+        loading: state.shoppingList.loading
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingListControl);

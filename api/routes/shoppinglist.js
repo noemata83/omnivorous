@@ -7,4 +7,7 @@ module.exports = (app) => {
         .get(authenticate, shoppingListController.getShoppingLists)
         .post(authenticate, shoppingListController.makeShoppingList);
 
+    app.route('/api/shopping/:id')
+        .get(authenticate, shoppingListController.getShoppingList);
+
 }

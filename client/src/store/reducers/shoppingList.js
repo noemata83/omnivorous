@@ -1,18 +1,24 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    lists: [
-        { name: 'Grocery List', id: "adjiafjaiefaijfoasnda"}
-    ],
+    lists: [],
     currentList: {
-        name: 'Grocery List',
-        categories: ['Dairy', 'Canned Goods', 'Uncategorized'],
-        items: [
-            { itemId: 0, name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
-            { itemId: 1, name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
-        ],
-        nextId: 2
+        name: '',
+        categories: [],
+        items: []
     },
+    // lists: [
+    //     { name: 'Grocery List', id: "adjiafjaiefaijfoasnda"}
+    // ],
+    // currentList: {
+    //     name: 'Grocery List',
+    //     categories: ['Dairy', 'Canned Goods', 'Uncategorized'],
+    //     items: [
+    //         { itemId: 0, name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
+    //         { itemId: 1, name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
+    //     ],
+    //     nextId: 2
+    // },
     loading: false,
     error: null
 }
@@ -38,6 +44,24 @@ const reducer = (state = {...initialState}, action) => {
                 error: null,
                 lists: action.lists
             }
+        case(actionTypes.CREATE_SHOPPING_LIST_SUCCESS):
+            return {
+                ...state,
+                lists: [...state.lists, {name: action.list.name, id: action.list._id}],
+                currentList: action.list
+            }
+        case(actionTypes.CREATE_SHOPPING_LIST_FAIL):
+            return {
+                ...state,
+                error: action.error
+            }
+        case(actionTypes.DISPLAY_SHOPPING_LIST): {
+            const { list } = action;
+            return {
+                ...state,
+                currentList: list,
+            }
+        }
         case(actionTypes.UPDATE_SHOPPING_LIST):
             const lists = [...state.lists];
             const updatedLists = lists.map( (list, index) => {
@@ -63,7 +87,6 @@ const reducer = (state = {...initialState}, action) => {
         case(actionTypes.ADD_LIST_ITEM): {
             const { item } = action;
             item.itemId = state.currentList.nextId;
-            console.log(item);
             const items = state.currentList.items.concat(item);
             const nextId = state.currentList.nextId + 1;
             const updatedCurrentList = { ...state.currentList, items, nextId};

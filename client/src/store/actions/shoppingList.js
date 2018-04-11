@@ -7,6 +7,7 @@ export const fetchShoppingLists = (user) => {
         axios.get(`/api/shopping`)
             .then( res => {
                 dispatch(fetchSuccess(res.data));
+                dispatch(displayShoppingList(res.data[0]));
             })
             .catch(error => {
                 console.log(error);
@@ -42,41 +43,79 @@ export const updateList = (id, list) => {
     }
 }
 
-export const addShoppingList = (user, list) => {
+export const createShoppingList = (list) => {
     return dispatch => {
-        dispatch(addShoppingListStart());
-        axios.post(`/api/shopping`, {...list})
+        axios.post(`api/shopping`, {...list})
             .then(res => {
-                console.log(res);
-                dispatch(addShoppingListSuccess(res.data));
+                dispatch(createShoppingListSuccess(res.data));
             })
-            .catch(error => {
-                dispatch(addShoppingListFail(error));
+            .catch(err => {
+                dispatch(createShoppingListFail(err));
             });
     }
 }
 
-const addShoppingListStart = () => {
+export const createShoppingListSuccess = (list) => {
     return {
-        type: actionTypes.ADD_SHOPPING_LIST_START
-    }
-}
-
-const addShoppingListFail = (error) => {
-    return {
-        type: actionTypes.ADD_SHOPPING_LIST_FAIL,
-        error
-    }
-}
-
-const addShoppingListSuccess = (list) => {
-    return {
-        type: actionTypes.ADD_RECIPE_SUCCESS,
+        type: actionTypes.CREATE_SHOPPING_LIST_SUCCESS,
         list
     }
 }
 
-export const displayShoppingList = (list) => {
+export const createShoppingListFail = (error) => {
+    return {
+        type: actionTypes.CREATE_SHOPPING_LIST_FAIL,
+        error
+    }
+}
+
+// export const saveShoppingList = (user, list) => {
+//     return dispatch => {
+//         dispatch(saveShoppingListStart());
+//         axios.post(`/api/shopping`, {...list})
+//             .then(res => {
+//                 console.log(res);
+//                 dispatch(saveShoppingListSuccess(res.data));
+//             })
+//             .catch(error => {
+//                 dispatch(saveShoppingListFail(error));
+//             });
+//     }
+// }
+
+// const saveShoppingListStart = () => {
+//     return {
+//         type: actionTypes.SAVE_SHOPPING_LIST_START
+//     }
+// }
+
+// const saveShoppingListFail = (error) => {
+//     return {
+//         type: actionTypes.SAVE_SHOPPING_LIST_FAIL,
+//         error
+//     }
+// }
+
+// const saveShoppingListSuccess = (list) => {
+//     return {
+//         type: actionTypes.SAVE_SHOPPING_LIST_SUCCESS,
+//         list
+//     }
+// }
+
+export const getShoppingList = (id) => {
+    return dispatch => {
+        axios.get(`/api/shopping/${id}`)
+            .then(res => {
+                dispatch(displayShoppingList(res.data))
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+}
+
+const displayShoppingList = (list) => {
     return {
         type: actionTypes.DISPLAY_SHOPPING_LIST,
         list

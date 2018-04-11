@@ -12,6 +12,16 @@ const getShoppingLists = (req, res) => {
     });
 }
 
+const getShoppingList = (req, res) => {
+    ShoppingList.findById(req.params.id).then(list => {
+        if (list._ownedby.toHexString() === req.user.id) {
+            res.status(200).send(list);
+        } else {
+            res.status(403).send("User id does not match list owner id");
+        }
+    })
+}
+
 const makeShoppingList = (req, res) => {
     User.findById(req.user._id).then(user => {
         if (!user) {
@@ -60,6 +70,7 @@ const updateShoppingList = (req, res) => {
 
 module.exports = {
     getShoppingLists,
+    getShoppingList,
     makeShoppingList,
     deleteShoppingList
 }
