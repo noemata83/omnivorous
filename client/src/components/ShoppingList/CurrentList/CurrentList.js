@@ -31,11 +31,11 @@ class CurrentList extends Component {
             name: this.state.itemInput,
             unit: '',
             quantity: 1,
-            itemId: this.props.nextId,
+            itemId: this.props.currentList.nextId,
             category: 'Uncategorized',
             purchased: false
         }
-        this.props.addItem(item);
+        this.props.addItem(item, this.props.currentList);
         this.setState({itemInput: ''});
     }
 
@@ -53,7 +53,7 @@ class CurrentList extends Component {
     }
 
     handleSubmit = values => {
-        this.props.editItem(this.state.editId, values);
+        this.props.editItem(this.state.editId, values, this.props.currentList);
         this.setState({
             editItem: false,
             editId: null
@@ -61,7 +61,7 @@ class CurrentList extends Component {
     }
 
     handleDelete = () => {
-        this.props.deleteItem(this.state.editId);
+        this.props.deleteItem(this.state.editId, this.props.currentList);
         this.setState({
             editItem: false,
             editId: null
@@ -132,9 +132,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addItem: (item) => dispatch(actions.addListItem(item)),
-        editItem: (itemId, item) => dispatch(actions.editListItem(itemId, item)),   
-        deleteItem: (itemId) => dispatch(actions.deleteListItem(itemId)),
+        addItem: (item, currentList) => dispatch(actions.addListItem(item, currentList)),
+        editItem: (itemId, item, currentList) => dispatch(actions.editListItem(itemId, item, currentList)),   
+        deleteItem: (itemId, currentList) => dispatch(actions.deleteListItem(itemId, currentList)),
         updateList: (list, user) => dispatch(actions.updateList(list, user))
     }
 }

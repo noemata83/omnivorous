@@ -20,7 +20,6 @@ class RecipeList extends Component {
     }
 
     componentDidMount(){
-        console.log("Recipe list:", this.props.userId);
         if (this.props.userId && !this.props.loading) {
             this.props.fetchRecipes(this.props.userId);
         }

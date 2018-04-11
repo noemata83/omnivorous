@@ -66,43 +66,6 @@ const reducer = (state = {...initialState}, action) => {
                 lists: newLists,
                 currentList: newLists[0] || null
             }
-        case(actionTypes.ADD_LIST_ITEM): {
-            const { item } = action;
-            item.itemId = state.currentList.nextId;
-            const items = state.currentList.items.concat(item);
-            const nextId = state.currentList.nextId + 1;
-            const updatedCurrentList = { ...state.currentList, items, nextId};
-            return {
-                ...state,
-                currentList: updatedCurrentList
-            }
-        }
-        case(actionTypes.EDIT_SHOPPING_LIST_ITEM): {
-            const { itemId, item } = action;
-            const items = state.currentList.items.map(oldItem => {
-                if (oldItem.itemId === itemId) {
-                    return {
-                        ...item,
-                        itemId,
-                    }
-                }
-                return oldItem;
-            });
-            const updatedCurrentList = { ...state.currentList, items };
-            return {
-                ...state,
-                currentList: updatedCurrentList
-            }
-        }
-        case(actionTypes.DELETE_SHOPPING_LIST_ITEM): {
-            const { itemId } = action;
-            const items = state.currentList.items.filter(item => item.itemId !== itemId);
-            const updatedCurrentList = {...state.currentList, items};
-            return {
-                ...state,
-                currentList: updatedCurrentList
-            }
-        }
         default:
             return state;
     }

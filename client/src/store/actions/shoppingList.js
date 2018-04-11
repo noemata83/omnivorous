@@ -135,24 +135,37 @@ const displayShoppingList = (list) => {
     }
 }
 
-export const addListItem = (item) => {
-    return {
-        type: actionTypes.ADD_LIST_ITEM,
-        item,
+export const addListItem = (item, currentList) => {
+    const items = [...currentList.items, item];
+    const nextId = currentList.nextId + 1;
+    const updatedCurrentList = {...currentList, items, nextId};
+    return dispatch => {
+        dispatch(updateList(updatedCurrentList));
+        dispatch(editCurrentList(updatedCurrentList));
+}}
+
+export const editListItem = (itemId, item, currentList) => {
+    const items = currentList.items.map(oldItem => {
+        if (oldItem.itemId === itemId) {
+            return {
+                ...item,
+                itemId,
+            }
+        }
+        return oldItem;
+    });
+    const updatedCurrentList = { ...currentList, items };
+    return dispatch => {
+        dispatch(updateList(updatedCurrentList));
+        dispatch(editCurrentList(updatedCurrentList));
     }
 }
 
-export const editListItem = (itemId, item) => {
-    return {
-        type: actionTypes.EDIT_SHOPPING_LIST_ITEM,
-        itemId,
-        item
-    }
-}
-
-export const deleteListItem = (itemId) => {
-    return {
-        type: actionTypes.DELETE_SHOPPING_LIST_ITEM,
-        itemId
+export const deleteListItem = (itemId, currentList) => {
+    const items = currentList.items.filter(item => item.itemId !== itemId);
+    const updatedCurrentList = {...currentList, items};
+    return dispatch => {
+        dispatch(updateList(updatedCurrentList));
+        dispatch(editCurrentList(updatedCurrentList));
     }
 }
