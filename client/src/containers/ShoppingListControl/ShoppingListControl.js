@@ -12,10 +12,7 @@ class ShoppingListControl extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.userId);
-        console.log(this.props.loading);
         if (this.props.userId && !this.props.loading) {
-            console.log("Time to fetch!");
             this.props.fetchShoppingLists(this.props.userId);
         }
     }

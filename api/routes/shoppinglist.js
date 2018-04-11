@@ -8,6 +8,8 @@ module.exports = (app) => {
         .post(authenticate, shoppingListController.makeShoppingList);
 
     app.route('/api/shopping/:id')
-        .get(authenticate, shoppingListController.getShoppingList);
+        .get(authenticate, shoppingListController.getShoppingList)
+        .put(authenticate, shoppingListController.updateShoppingList)
+        .delete(authenticate, shoppingListController.deleteShoppingList);
 
 }

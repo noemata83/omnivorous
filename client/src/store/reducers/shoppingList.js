@@ -7,18 +7,6 @@ const initialState = {
         categories: [],
         items: []
     },
-    // lists: [
-    //     { name: 'Grocery List', id: "adjiafjaiefaijfoasnda"}
-    // ],
-    // currentList: {
-    //     name: 'Grocery List',
-    //     categories: ['Dairy', 'Canned Goods', 'Uncategorized'],
-    //     items: [
-    //         { itemId: 0, name: 'Milk', quantity: 1, unit: 'quart', purchased: false, category: 'Dairy'},
-    //         { itemId: 1, name: 'Tomatoes, diced', quantity: 2, unit: 'cups', purchased: false, category: 'Canned Goods'},
-    //     ],
-    //     nextId: 2
-    // },
     loading: false,
     error: null
 }
@@ -62,19 +50,13 @@ const reducer = (state = {...initialState}, action) => {
                 currentList: list,
             }
         }
-        case(actionTypes.UPDATE_SHOPPING_LIST):
-            const lists = [...state.lists];
-            const updatedLists = lists.map( (list, index) => {
-                if (list.id === action.id) {
-                    return { ...action.updatedList,
-                             _id: action.id }
-                }
-                return list;
-            });
+        case(actionTypes.UPDATE_SHOPPING_LIST):{
+            const { currentList } = action;
             return {
                 ...state,
-                lists: updatedLists
+                currentList
             }
+        }
         case(actionTypes.DELETE_SHOPPING_LIST):
             const oldLists = [...state.lists];
             const targetIndex = oldLists.map(list => list._id).indexOf(action.id);

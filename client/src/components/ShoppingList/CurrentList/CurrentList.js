@@ -12,8 +12,16 @@ class CurrentList extends Component {
 
     state = {
         itemInput: '',
-        editing: false,
+        editItem: false,
         editId: null,
+        editName: false,
+        nameInput: ''
+    }
+    
+    componentWillReceiveProps(nextprops) {
+        this.setState({
+            nameInput: nextprops.currentList.name
+        });
     }
 
     addItemHandler = (e) => {
@@ -23,7 +31,8 @@ class CurrentList extends Component {
             unit: '',
             quantity: 1,
             itemId: this.props.nextId,
-            category: 'Uncategorized'
+            category: 'Uncategorized',
+            purchased: false
         }
         this.props.addItem(item);
         this.setState({itemInput: ''});
@@ -37,7 +46,7 @@ class CurrentList extends Component {
 
     setEditModeHandler = (editId) => {
         this.setState({
-            editing: true,
+            editItem: true,
             editId
         })
     }
@@ -45,7 +54,7 @@ class CurrentList extends Component {
     handleSubmit = values => {
         this.props.editItem(this.state.editId, values);
         this.setState({
-            editing: false,
+            editItem: false,
             editId: null
         })
     }
@@ -53,8 +62,32 @@ class CurrentList extends Component {
     handleDelete = () => {
         this.props.deleteItem(this.state.editId);
         this.setState({
-            editing: false,
+            editItem: false,
             editId: null
+        })
+    }
+    
+    handleEditName = () => {
+        this.setState({
+            editName: true
+        });
+    }
+
+    handleNameInputChange = (event) => {
+        this.setState({
+            nameInput: event.target.value
+        });
+    }
+
+    handleNameChangeSubmit = (e) => {
+        e.preventDefault();
+        const list = {
+            ...this.props.currentList,
+            name: this.state.nameInput
+        }
+        this.props.updateList(list);
+        this.setState({
+            editName: false
         })
     }
 
@@ -68,10 +101,15 @@ class CurrentList extends Component {
             items={
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
-        const shoppingDisplay = this.state.editing ? 
+        const nameDisplay = this.state.editName ? 
+            <form onSubmit={this.handleNameChangeSubmit} style={{padding:'0 1rem'}}>
+                <TextField name="name" value={this.state.nameInput} onChange={this.handleNameInputChange} fullWidth={true} floatingLabelText="Name" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
+            </form>
+            : <h2 className={classes.ListTitle} onDoubleClick={this.handleEditName}>{this.props.currentList.name}</h2>;
+        const shoppingDisplay = this.state.editItem ? 
             <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDelete} categories={this.props.categories} /> 
             : ( <div>
-                   <h2 className={classes.ListTitle}>{this.props.currentList.name}</h2>
+                    {nameDisplay}
                     <div className={classes.List}>
                         <List>
                             {categories}
@@ -93,14 +131,15 @@ class CurrentList extends Component {
 const mapStateToProps = state => {
     return {
         nextId: state.shoppingList.nextId,
-        categories: state.shoppingList.currentList.categories
+        categories: state.shoppingList.currentList.categories,
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         addItem: (item) => dispatch(actions.addListItem(item)),
         editItem: (itemId, item) => dispatch(actions.editListItem(itemId, item)),   
-        deleteItem: (itemId) => dispatch(actions.deleteListItem(itemId))
+        deleteItem: (itemId) => dispatch(actions.deleteListItem(itemId)),
+        updateList: (list, user) => dispatch(actions.updateList(list, user))
     }
 }
 

@@ -1,13 +1,15 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-export const fetchShoppingLists = (user) => {
+export const fetchShoppingLists = (currentList=null) => {
     return dispatch => {
         dispatch(fetchStart());
         axios.get(`/api/shopping`)
             .then( res => {
                 dispatch(fetchSuccess(res.data));
-                dispatch(displayShoppingList(res.data[0]));
+                if (!currentList) {
+                    dispatch(displayShoppingList(res.data[0]));
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -36,10 +38,21 @@ const fetchSuccess = (lists) => {
     }
 }
 
-export const updateList = (id, list) => {
+export const updateList = (currentList) => {
+    return dispatch => {
+        axios.put(`api/shopping/${currentList._id}`, {...currentList})
+            .then(res => {
+                    dispatch(fetchShoppingLists(currentList));
+                    dispatch(editCurrentList(res.data));
+                })
+            .catch(err => console.log(err));
+    }
+}
+
+const editCurrentList = (currentList) => {
     return {
         type: actionTypes.UPDATE_SHOPPING_LIST,
-        list
+        currentList
     }
 }
 

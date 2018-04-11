@@ -72,5 +72,6 @@ module.exports = {
     getShoppingLists,
     getShoppingList,
     makeShoppingList,
-    deleteShoppingList
+    deleteShoppingList,
+    updateShoppingList
 }

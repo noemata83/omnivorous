@@ -11,6 +11,7 @@ import defaultList from '../Prototype/defaultList';
 
 const listControls = (props) => {
     // At present, the SelectField will not be changeable: need to implement some kind of handleChange function, which should call the action to set the currentlist.
+    console.log(props.lists);
     const listOptions = props.lists.map( list  => <MenuItem key={list._id} value={list._id} label={list.name} primaryText={list.name} />);
     return (
         <div style={{padding:'1rem'}}>
