@@ -169,3 +169,13 @@ export const deleteListItem = (itemId, currentList) => {
         dispatch(editCurrentList(updatedCurrentList));
     }
 }
+
+export const deleteShoppingList = (id) => {
+    return dispatch => {
+        console.log(id);
+        axios.delete(`api/shopping/${id}`)
+            .then(_ => {
+                dispatch(fetchShoppingLists());
+            })
+    }
+}

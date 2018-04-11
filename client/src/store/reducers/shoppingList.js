@@ -57,15 +57,6 @@ const reducer = (state = {...initialState}, action) => {
                 currentList
             }
         }
-        case(actionTypes.DELETE_SHOPPING_LIST):
-            const oldLists = [...state.lists];
-            const targetIndex = oldLists.map(list => list._id).indexOf(action.id);
-            const newLists = oldLists.filter( (list, index) => index !== targetIndex);
-            return {
-                ...state,
-                lists: newLists,
-                currentList: newLists[0] || null
-            }
         default:
             return state;
     }

@@ -60,7 +60,7 @@ class CurrentList extends Component {
         })
     }
 
-    handleDelete = () => {
+    handleDeleteItem = () => {
         this.props.deleteItem(this.state.editId, this.props.currentList);
         this.setState({
             editItem: false,
@@ -78,6 +78,12 @@ class CurrentList extends Component {
         this.setState({
             nameInput: event.target.value
         });
+    }
+
+    handleDeleteList = (list) => {
+        if (window.confirm(`Are you sure you want to delete the list?`)) {
+            this.props.deleteList(list);
+        }
     }
 
     handleNameChangeSubmit = (e) => {
@@ -103,9 +109,9 @@ class CurrentList extends Component {
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
         const shoppingDisplay = this.state.editItem ? 
-            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDelete} categories={this.props.categories} /> 
+            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDeleteItem} categories={this.props.categories} /> 
             : ( <div>
-                    <ListName editName={this.state.editName} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name}/>
+                    <ListName editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
                     <div className={classes.List}>
                         <List>
                             {categories}
@@ -135,7 +141,8 @@ const mapDispatchToProps = dispatch => {
         addItem: (item, currentList) => dispatch(actions.addListItem(item, currentList)),
         editItem: (itemId, item, currentList) => dispatch(actions.editListItem(itemId, item, currentList)),   
         deleteItem: (itemId, currentList) => dispatch(actions.deleteListItem(itemId, currentList)),
-        updateList: (list, user) => dispatch(actions.updateList(list, user))
+        updateList: (list, user) => dispatch(actions.updateList(list, user)),
+        deleteList: (id) => dispatch(actions.deleteShoppingList(id))
     }
 }
 

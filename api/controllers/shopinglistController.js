@@ -43,12 +43,11 @@ const deleteShoppingList = (req,res) => {
         if (!user) {
             res.send("Something went wrong.");
         } else {
-            const targetIndex = user.lists.map(list => list._id.toHexString()).indexOf(req.params.id);
-            user.lists.splice(targetIndex, 1);
+            user.lists = user.lists.filter(list => list.toHexString() !== req.params.id);
             user.save();
             ShoppingList.findByIdAndRemove(req.params.id, err => {
                 if (err) {
-                    res.send(err);
+                    return res.send(err);
                 }
                 res.json({ message: "Shopping List Deleted."});
             });
