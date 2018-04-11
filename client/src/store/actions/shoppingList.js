@@ -7,7 +7,7 @@ export const fetchShoppingLists = (currentList=null) => {
         axios.get(`/api/shopping`)
             .then( res => {
                 dispatch(fetchSuccess(res.data));
-                if (!currentList) {
+                if (!currentList && res.data.length > 0) {
                     dispatch(displayShoppingList(res.data[0]));
                 }
             })
@@ -32,6 +32,15 @@ const fetchFail = (error) => {
 }
 
 const fetchSuccess = (lists) => {
+    if (lists.length === 0) {
+        lists = [{
+            name: 'Default list',
+            items: [],
+            _id: undefined,
+            categories: ['Uncategorized'],
+            nextId: 0
+        }]
+    }
     return {
         type: actionTypes.FETCH_SHOPPING_LISTS_SUCCESS,
         lists
@@ -125,7 +134,7 @@ export const getShoppingList = (id) => {
             .catch(error => {
                 console.log(error);
             });
-        }
+    }
 }
 
 const displayShoppingList = (list) => {
@@ -165,7 +174,9 @@ export const deleteListItem = (itemId, currentList) => {
     const items = currentList.items.filter(item => item.itemId !== itemId);
     const updatedCurrentList = {...currentList, items};
     return dispatch => {
-        dispatch(updateList(updatedCurrentList));
+        if (currentList._id) {
+            dispatch(updateList(updatedCurrentList));
+        }
         dispatch(editCurrentList(updatedCurrentList));
     }
 }

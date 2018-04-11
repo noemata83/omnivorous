@@ -1,7 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    lists: [],
+    lists: [{
+        name: 'Default List',
+        categories: ['Uncategorized'],
+        items: [],
+        _id: 0
+    }],
     currentList: {
         name: '',
         categories: [],
