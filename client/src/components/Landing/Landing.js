@@ -15,7 +15,7 @@ const landing = (props) => {
                     <h1 className={classes.HeaderText}>Welcome to <span className={classes.HeaderText__brand}>Omnivorous</span></h1>
                     <h2 className={classes.Tagline}>The recipe manager that <em>just works</em> (someday)</h2>
                     <a className={classes.Link} href="/auth/google"><img src={signin} alt="Sign in with Google" /></a><br />
-                    <p style={{fontSize:'1.4rem', textAlign:'left'}}><strong>Current Status:</strong> <em>Full CRUD and automated recipe import; some shopping list operations but shopping lists do not persist. <br />Check back often for updates!</em></p>
+                    <p style={{fontSize:'1.4rem', textAlign:'left'}}><strong>Current Status:</strong> <em>Full CRUD and automated recipe import; shopping list CRUD; limited shopping list functionality implemented. <br />Check back often for updates!</em></p>
             </div>
         </Wrapper>
     )
