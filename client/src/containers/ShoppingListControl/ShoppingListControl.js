@@ -13,7 +13,7 @@ class ShoppingListControl extends Component {
 
     componentDidMount() {
         if (this.props.userId && !this.props.loading) {
-            this.props.fetchShoppingLists(this.props.userId);
+            this.props.fetchShoppingLists();
         }
     }
 
@@ -23,16 +23,6 @@ class ShoppingListControl extends Component {
             this.setState({loading: false});
         }
     }
-    // toggleListDisplayHandler = () => {
-    //     this.setState({
-    //         shoppingListDisplay: !this.state.shoppingListDisplay
-    //     })
-    // }
-
-    // getListsHandler() {
-    //     axios.get('/api/shopping').then( whatsit => console.log(whatsit.data));
-    // }
-
     render() {           
         return (
             <ShoppingList 
@@ -52,8 +42,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         currentList: state.shoppingList.currentList,
-        userId: state.auth.userId || null,
-        loading: state.shoppingList.loading
+        loading: state.shoppingList.loading,
+        userId: state.auth.userId || null
     }
 }
 

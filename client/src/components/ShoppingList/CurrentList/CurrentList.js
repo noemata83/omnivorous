@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
 import ListCategory from './ListCategory/ListCategory';
+import ListName from './ListName/listName';
 import List from 'material-ui/List';
 import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
@@ -101,15 +102,10 @@ class CurrentList extends Component {
             items={
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
-        const nameDisplay = this.state.editName ? 
-            <form onSubmit={this.handleNameChangeSubmit} style={{padding:'0 1rem'}}>
-                <TextField name="name" value={this.state.nameInput} onChange={this.handleNameInputChange} fullWidth={true} floatingLabelText="Name" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
-            </form>
-            : <h2 className={classes.ListTitle} onDoubleClick={this.handleEditName}>{this.props.currentList.name}</h2>;
         const shoppingDisplay = this.state.editItem ? 
             <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDelete} categories={this.props.categories} /> 
             : ( <div>
-                    {nameDisplay}
+                    <ListName editName={this.state.editName} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name}/>
                     <div className={classes.List}>
                         <List>
                             {categories}
