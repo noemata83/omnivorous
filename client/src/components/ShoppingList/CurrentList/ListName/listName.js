@@ -19,8 +19,8 @@ const listName = (props) => {
                     anchorOrigin={{horizontal:'right', vertical:'top'}}
                     targetOrigin={{horizontal:'right', vertical:'top'}}
                 >
-                    <MenuItem primaryText="Manage List Categories"/>
-                    <MenuItem primaryText="Manage Lists" />
+                    <MenuItem primaryText="Manage List Categories" disabled />
+                    <MenuItem primaryText="Manage Lists" disabled />
                     <MenuItem primaryText="Delete List" onClick={() => props.handleDeleteList(props.list)} />
                 </IconMenu>
             </div>;

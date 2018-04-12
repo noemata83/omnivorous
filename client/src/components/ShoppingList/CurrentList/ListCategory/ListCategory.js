@@ -17,9 +17,11 @@ const listCategory = (props) => {
                     e.stopPropagation();
                     console.log("checked");      
                     }}
+                    style={{top:'.5rem'}}
                     />}
             key={item.itemId}             
-            style={{marginLeft:'0px'}}
+            style={{marginLeft:'0px', padding: '0px'}}
+            innerDivStyle={{padding: '1rem 1rem 1rem 7.2rem'}}
             // setEditMode={props.setEditMode}
             // onClick={() => props.setEditMode(item.id)}
             primaryText={<span onDoubleClick={() => props.setEditMode(item.itemId)}>{`${item.name} ${qtyString}`}</span>}
@@ -31,8 +33,9 @@ const listCategory = (props) => {
             primaryText={props.name} 
             initiallyOpen={true}
             nestedItems={items}
-            nestedListStyle={{marginLeft:'0px'}}
-            style={{backgroundColor:blue100}}
+            nestedListStyle={{marginLeft:'0px', padding:'0px'}}
+            style={{backgroundColor:blue100, padding: '0px'}}
+            innerDivStyle={{padding:'1rem'}}
             />) : null;
 }
 
