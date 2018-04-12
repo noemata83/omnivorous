@@ -3,6 +3,7 @@
 const mongoose = require('mongoose'),
 User = mongoose.model('users'),
 ShoppingList = mongoose.model('ShoppingList');
+const defaultShoppingList = require('../utility/defaultShoppingList');
 
 const getShoppingLists = (req, res) => {
     User.findById(req.user._id).then( user => {
@@ -44,7 +45,17 @@ const deleteShoppingList = (req,res) => {
             res.send("Something went wrong.");
         } else {
             user.lists = user.lists.filter(list => list.toHexString() !== req.params.id);
-            user.save();
+            if (user.lists.length == 0) {
+                const newShoppingList = {...defaultShoppingList}
+                newShoppingList._ownedby = user._id;
+                ShoppingList.create(newShoppingList).then( list => {
+                    list.save();
+                    user.lists.push(list);
+                    user.save();
+                });
+            } else {
+                user.save();
+            }
             ShoppingList.findByIdAndRemove(req.params.id, err => {
                 if (err) {
                     return res.send(err);

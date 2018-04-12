@@ -1,5 +1,5 @@
 const authenticate = require('../middleware/authenticate');
-const shoppingListController = require('../controllers/shopinglistController');
+const shoppingListController = require('../controllers/shoppinglistController');
 
 module.exports = (app) => {
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import defaultShoppingList from '../../components/ShoppingList/Prototype/defaultList';
 
 export const fetchShoppingLists = (currentList=null) => {
     return dispatch => {
@@ -33,13 +34,7 @@ const fetchFail = (error) => {
 
 const fetchSuccess = (lists) => {
     if (lists.length === 0) {
-        lists = [{
-            name: 'Default list',
-            items: [],
-            _id: undefined,
-            categories: ['Uncategorized'],
-            nextId: 0
-        }]
+        createShoppingList(defaultShoppingList);
     }
     return {
         type: actionTypes.FETCH_SHOPPING_LISTS_SUCCESS,
@@ -91,40 +86,6 @@ export const createShoppingListFail = (error) => {
     }
 }
 
-// export const saveShoppingList = (user, list) => {
-//     return dispatch => {
-//         dispatch(saveShoppingListStart());
-//         axios.post(`/api/shopping`, {...list})
-//             .then(res => {
-//                 console.log(res);
-//                 dispatch(saveShoppingListSuccess(res.data));
-//             })
-//             .catch(error => {
-//                 dispatch(saveShoppingListFail(error));
-//             });
-//     }
-// }
-
-// const saveShoppingListStart = () => {
-//     return {
-//         type: actionTypes.SAVE_SHOPPING_LIST_START
-//     }
-// }
-
-// const saveShoppingListFail = (error) => {
-//     return {
-//         type: actionTypes.SAVE_SHOPPING_LIST_FAIL,
-//         error
-//     }
-// }
-
-// const saveShoppingListSuccess = (list) => {
-//     return {
-//         type: actionTypes.SAVE_SHOPPING_LIST_SUCCESS,
-//         list
-//     }
-// }
-
 export const getShoppingList = (id) => {
     return dispatch => {
         axios.get(`/api/shopping/${id}`)
@@ -148,10 +109,8 @@ export const addListItem = (item, currentList) => {
     const items = [...currentList.items, item];
     const nextId = currentList.nextId + 1;
     const updatedCurrentList = {...currentList, items, nextId};
-    return dispatch => {
-        dispatch(updateList(updatedCurrentList));
-        dispatch(editCurrentList(updatedCurrentList));
-}}
+    return updateCycle(updatedCurrentList);
+}
 
 export const editListItem = (itemId, item, currentList) => {
     const items = currentList.items.map(oldItem => {
@@ -164,26 +123,24 @@ export const editListItem = (itemId, item, currentList) => {
         return oldItem;
     });
     const updatedCurrentList = { ...currentList, items };
+    return updateCycle(updatedCurrentList);
+}
+
+export const deleteListItem = (itemId, currentList) => {
+    const items = currentList.items.filter(item => item.itemId !== itemId);
+    const updatedCurrentList = {...currentList, items};
+    return updateCycle(updatedCurrentList);
+}
+
+const updateCycle = (updatedCurrentList) => {
     return dispatch => {
         dispatch(updateList(updatedCurrentList));
         dispatch(editCurrentList(updatedCurrentList));
     }
 }
 
-export const deleteListItem = (itemId, currentList) => {
-    const items = currentList.items.filter(item => item.itemId !== itemId);
-    const updatedCurrentList = {...currentList, items};
-    return dispatch => {
-        if (currentList._id) {
-            dispatch(updateList(updatedCurrentList));
-        }
-        dispatch(editCurrentList(updatedCurrentList));
-    }
-}
-
 export const deleteShoppingList = (id) => {
     return dispatch => {
-        console.log(id);
         axios.delete(`api/shopping/${id}`)
             .then(_ => {
                 dispatch(fetchShoppingLists());
