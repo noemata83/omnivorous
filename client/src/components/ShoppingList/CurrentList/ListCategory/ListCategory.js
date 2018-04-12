@@ -2,7 +2,8 @@ import React from 'react';
 
 import { ListItem } from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
-import { blue100 } from 'material-ui/styles/colors';
+import blue from 'material-ui/colors/blue';
+const blue100 = blue['100'];
 
 const listCategory = (props) => {
     const items = props.items.map(item => {

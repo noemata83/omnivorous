@@ -6,25 +6,27 @@ import ingredientForm from './IngredientForm/ingredientForm';
 import instructionForm from './InstructionForm/instructionForm';
 import validate from './helpers/validator';
 import classes from './RecipeForm.css';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import { renderTextField } from '../../UI/Forms/renderFields';
-import { white } from 'material-ui/styles/colors';
-import { red500 } from 'material-ui/styles/colors';
+import common from 'material-ui/colors/common';
+import red from 'material-ui/colors/red';
+
+const white = common.white;
+const red500 = red['500'];
 
 // import * as helpers from './helpers/';
 
 const recipeForm = (props) => {
     const { handleSubmit, onDelete, initialValues } = props;
-    let recipeAction = (<div><FlatButton primary={true} onClick={handleSubmit} label="Add Recipe"></FlatButton></div>);
+    let recipeAction = (<div><Button variant='flat' primary={true} onClick={handleSubmit} label="Add Recipe"></Button></div>);
     let importButton = null;
     if (initialValues) {
         recipeAction = (<div>
-                        <FlatButton primary={true} onClick={handleSubmit} label="Edit Recipe" />
-                        <FlatButton onClick={() => { onDelete(initialValues._id)}} label="Delete Recipe" style={{color:red500}} />
+                        <Button variant='flat' primary={true} onClick={handleSubmit} label="Edit Recipe" />
+                        <Button variant='flat' onClick={() => { onDelete(initialValues._id)}} label="Delete Recipe" style={{color:red500}} />
                         </div>);
     } else {
-        importButton = (<RaisedButton onClick={props.onImportInit} secondary={true} labelColor={white} label="Import from the Web" style={{float: 'right', fontSize: '2rem'}} />)
+        importButton = (<Button variant='raised' onClick={props.onImportInit} secondary={true} labelColor={white} label="Import from the Web" style={{float: 'right', fontSize: '2rem'}} />)
     }
     return (
         <div className={classes.RecipeForm}>

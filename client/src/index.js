@@ -11,7 +11,20 @@ import 'font-awesome/css/font-awesome.min.css';
 import thunk from 'redux-thunk';
 
 import reducers from './store/reducers';
-import { lightGreenA400, cyan400, grey400, grey100, grey500, darkBlack, white, grey300, green600 } from 'material-ui/styles/colors';
+import lightGreen from 'material-ui/colors/lightGreen';
+import cyan from 'material-ui/colors/cyan';
+import grey from 'material-ui/colors/grey';
+import common from 'material-ui/colors/common';
+import green from 'material-ui/colors/green';
+const lightGreenA400 = lightGreen.A400;
+const cyan400 = cyan['400'];
+const grey400 = grey['400'];
+const grey100 = grey['100'];
+const grey500 = grey['500'];
+const darkBlack = common.darkBlack;
+const white = common.white;
+const grey300 = grey['300'];
+const green600 = green['600'];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));

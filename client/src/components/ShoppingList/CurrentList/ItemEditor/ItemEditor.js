@@ -1,10 +1,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import { renderSelectField, renderTextField } from '../../../UI/Forms/renderFields';
-import MenuItem from 'material-ui/MenuItem';
-import { red400 } from 'material-ui/styles/colors';
-import { white } from 'material-ui/styles/colors';
+import { MenuItem } from 'material-ui/Menu';
+import red from 'material-ui/colors/red';
+import common from 'material-ui/colors/common';
+const white = common.white;
+const red400 = red['400'];
 
 const itemEditor = (props) => {
     const categoryOptions = props.categories.map(category => <MenuItem key={category} value={category} primaryText={category} />);
@@ -23,8 +25,8 @@ const itemEditor = (props) => {
                     label="Category: "
                     >{categoryOptions}</Field>
                 <Field type="hidden" component='input' name="purchased" />
-                    <RaisedButton primary={true} onClick={props.handleSubmit} label="Submit" style={{marginRight:'2rem'}} />
-                    <RaisedButton onClick={props.onDelete} label="Delete Item" backgroundColor={red400} labelColor={white}/>
+                    <Button variant='raised' primary={true} onClick={props.handleSubmit} label="Submit" style={{marginRight:'2rem'}} />
+                    <Button variant='raised' onClick={props.onDelete} label="Delete Item" backgroundColor={red400} labelColor={white}/>
             </form>
         </div>
     )

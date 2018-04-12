@@ -5,12 +5,17 @@ import * as actions from '../../store/actions/';
 
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
-import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+import ModeEdit from '@material-ui/icons/ModeEdit';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentAdd from '@material-ui/icons/Add';
 
 import classes from './RecipeList.css';
-import { white, green600, grey400 } from 'material-ui/styles/colors';
+import common from 'material-ui/colors/common';
+import green from 'material-ui/colors/green';
+import grey from 'material-ui/colors/grey';
+const white = common.white;
+const green600 = green['600'];
+const grey400 = grey['400'];
 
 class RecipeList extends Component {
 
@@ -61,7 +66,7 @@ class RecipeList extends Component {
 
     }
     
-};
+}
 
 const mapStateToProps = state => {
     return {

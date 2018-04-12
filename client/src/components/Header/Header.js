@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Brand from './Brand/Brand';
 import Greeting from './Greeting/Greeting';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 // import classes from './Header.css';
 
 class Header extends Component {
@@ -23,7 +23,7 @@ class Header extends Component {
         return (
             <AppBar
                 title={<Brand />}
-                iconElementRight={<FlatButton><Greeting displayName={this.renderGreeting()}/></FlatButton>}
+                iconElementRight={<Button variant="flat"><Greeting displayName={this.renderGreeting()}/></Button>}
                 showMenuIconButton={false}
                 style={{zIndex: 1}}
             />
