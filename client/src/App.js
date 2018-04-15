@@ -7,6 +7,13 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './containers/Dashboard/Dashboard';
 import * as actions from './store/actions';
 
+const PrivateRoute = ({ component: Component, currentUser, ...rest }) =>
+  <Route {...rest} render={(props) => (
+    currentUser ?
+      <Component {...props} />
+      : <Redirect to='/' />
+  )} />;
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -16,7 +23,7 @@ class App extends Component {
       <div>
         <Switch>
             <Route path="/" exact render={() => this.props.currentUser ? ( <Redirect to="/recipes" />) : (<Landing /> )} />
-            <Route path="/recipes" component={Dashboard} />
+            <PrivateRoute path="/recipes" currentUser={this.props.currentUser} component={Dashboard} />
         </Switch>
       </div>
     );
