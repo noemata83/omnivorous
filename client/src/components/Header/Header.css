@@ -1,7 +1,7 @@
 .ToolBar {
     display: none;
 }
-@media(max-width:600px) {
+@media(max-width:750px) {
     .ResponsiveAppBar {
         padding-left: 1rem;
         padding-right: 1rem;

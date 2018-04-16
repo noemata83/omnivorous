@@ -1,5 +1,6 @@
 .Main {
-    width: 100%;
+    flex-basis: 75%;
+    flex-grow: 1;
 }
 
 .Dashboard {
@@ -16,14 +17,12 @@
 
 .SideDrawer {
     height: 100vh;
-    width: 25.6rem;
+    flex-basis: 25%;
     position: relative;
 }
 
 @media(max-width: 600px) {
-    .SideDrawer {
-        display: none;
-    }
+    
 }
 
 .RecipeList {
@@ -88,7 +87,20 @@
     display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 950px) {
+    .SideDrawer {
+        flex-basis: 33%;
+    }
+    .Main {
+        flex-basis: 65%;
+    }
+}
+
+@media (max-width: 750px) {
+    .SideDrawer {
+        display: none;
+    }
+
     .MainWindowTabs {
         display: block;
     }

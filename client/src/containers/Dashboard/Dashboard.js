@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapSizesToProps = ({ width }) => ({
-    isMobile: width < 600,
+    isMobile: width < 750,
 });
 
 export default withSizes(mapSizesToProps)(connect(null, mapDispatchToProps)(Dashboard));
