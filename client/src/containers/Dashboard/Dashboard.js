@@ -66,7 +66,7 @@ class Dashboard extends Component {
             <div className={classes.Dashboard}>
                 <div className={classes.SideDrawer}>
                     <SideHeader />
-                    <Tabs tabItemContainerStyle={{position: "absolute", bottom:"0"}}>
+                    <Tabs tabItemContainerStyle={{position: "absolute", bottom:0, zIndex: 1000}}>
                         <Tab label="Recipes" style={{backgroundColor:cyan400}}>
                             <RecipeList setEditMode={this.setEditModeHandler} displayRecipe={this.displayRecipe}/>
                         </Tab>

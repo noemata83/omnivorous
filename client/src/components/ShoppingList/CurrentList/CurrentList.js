@@ -60,6 +60,10 @@ class CurrentList extends Component {
         })
     }
 
+    handleCheck = (item) => {
+        this.props.editItem(item.itemId, {...item, purchased: !item.purchased}, this.props.currentList);
+    }
+
     handleDeleteItem = () => {
         this.props.deleteItem(this.state.editId, this.props.currentList);
         this.setState({
@@ -105,6 +109,7 @@ class CurrentList extends Component {
     render() {
         const categories = this.props.currentList.categories.map(category => <ListCategory 
             setEditMode={this.setEditModeHandler}
+            handleCheck={this.handleCheck}
             items={
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);

@@ -4,6 +4,11 @@ import { ListItem } from 'material-ui/List';
 import Checkbox from 'material-ui/Checkbox';
 import { blue100 } from 'material-ui/styles/colors';
 
+const itemStyle = {
+    marginLeft: '0px',
+    padding: '0px'
+}
+
 const listCategory = (props) => {
     const items = props.items.map(item => {
         let qtyString = '';
@@ -15,12 +20,12 @@ const listCategory = (props) => {
             leftCheckbox={
             <Checkbox onClick={(e) => {
                     e.stopPropagation();
-                    console.log("checked");      
+                    props.handleCheck(item);
                     }}
                     style={{top:'.5rem'}}
                     />}
             key={item.itemId}             
-            style={{marginLeft:'0px', padding: '0px'}}
+            style={item.purchased ? {...itemStyle, fontStyle: 'italic', textDecoration: 'line-through'} : itemStyle }
             innerDivStyle={{padding: '1rem 1rem 1rem 7.2rem'}}
             // setEditMode={props.setEditMode}
             // onClick={() => props.setEditMode(item.id)}
