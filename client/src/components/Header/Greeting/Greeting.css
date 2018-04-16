@@ -1,6 +1,20 @@
 .Greeting {
     font-size: 1.6rem;
     text-transform: uppercase;
+    color: white;
+    padding: 1.5rem;
+}
+
+@media(max-width: 600px) {
+    .Greeting {
+        padding-right: 1rem;
+    }
+    .GreetingResponsive {
+        display: none;
+    }
+    .Logout {
+        font-size: 1rem;
+    }
 }
 
 .Logout {

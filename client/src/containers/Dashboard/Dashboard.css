@@ -1,3 +1,6 @@
+.Main {
+    width: 100%;
+}
 
 .Dashboard {
     height: 100vh;
@@ -7,7 +10,7 @@
 }
 
 .MainContent {
-    overflow: hidden;
+    overflow: auto;
     height: 100vh;
 }
 
@@ -15,6 +18,12 @@
     height: 100vh;
     width: 25.6rem;
     position: relative;
+}
+
+@media(max-width: 600px) {
+    .SideDrawer {
+        display: none;
+    }
 }
 
 .RecipeList {
@@ -33,6 +42,7 @@
     height: 100vh;
     /* max-width: 87.5vw; */
 }
+
 
 .ShoppingList {
     max-width: 25%;
@@ -72,4 +82,18 @@
     flex-basis: 15%;
     padding: 1.5rem;
     box-sizing: border-box;
+}
+
+.MainWindowTabs {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .MainWindowTabs {
+        display: block;
+    }
+    
+    .HeaderBox {
+        padding: 0;
+    }
 }

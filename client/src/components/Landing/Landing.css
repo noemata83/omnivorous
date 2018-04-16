@@ -36,13 +36,28 @@
 }
 
 .Tagline {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
 }
 
-.Link,
+/* .Link,
 .Link:visited {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     text-decoration: none;
     color: black;
+} */
+
+@media(max-width: 600px) {
+
+    .HeaderText {
+        font-size: 1.8rem;
+    }
+    .HeaderText__brand {
+        font-size: 3rem;
+    }
+    
+    .TextBox {
+        width: 60%;
+        padding: 1.5rem;
+    }
 }

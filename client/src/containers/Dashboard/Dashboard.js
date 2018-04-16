@@ -11,14 +11,26 @@ import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 import {Tab, Tabs} from 'material-ui/Tabs';
 import { cyan400 } from 'material-ui/styles/colors';
+import withSizes from 'react-sizes';
 
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
-
 class Dashboard extends Component {
+    static getDerivedStateFromProps (nextProps, prevState) {
+        if (!nextProps.isMobile) {
+            return {
+                ...prevState,
+                tab: 'recipe'
+            }
+        }
+        return {
+            ...prevState
+        }
+    }
     state = {
         editMode: false,
         recipeListDisplay: false,
+        tab: 'recipe',
     }
 
     componentDidMount() {
@@ -27,6 +39,18 @@ class Dashboard extends Component {
 
     setEditModeHandler = (target) => {
         this.setState({ editMode: target});
+    }
+
+    handleTabChange = (value) => {
+        this.setState({
+            tab: value
+        })
+    }
+
+    displayRecipe = () => {
+        this.setState({
+            tab: 'recipe'
+        })
     }
 
     render () {
@@ -40,20 +64,33 @@ class Dashboard extends Component {
                     <SideHeader />
                     <Tabs tabItemContainerStyle={{position: "absolute", bottom:"0"}}>
                         <Tab label="Recipes" style={{backgroundColor:cyan400}}>
-                            <RecipeList setEditMode={this.setEditModeHandler}/>
+                            <RecipeList setEditMode={this.setEditModeHandler} displayRecipe={this.displayRecipe}/>
                         </Tab>
                         <Tab label="Shopping" style={{backgroundColor:cyan400}} >
                             <ShoppingListControl/>
                         </Tab>
                     </Tabs>
                 </div>
-                <div className={classes.MainWindow}>
+                <div className={classes.Main}>
                     <div className={classes.MainContent}>
                         <div className={classes.HeaderBox}>
                             <Header />
                         </div>
                         <div className={classes.MainWindow}>
-                            {mainWindow}
+                            <Tabs value={this.state.tab} onChange={this.handleTabChange} inkBarStyle={this.props.isMobile ? {} : {display: 'none'}} tabItemContainerStyle={this.props.isMobile ? {position: 'absolute', bottom: 0, display: 'block', width: '100%'} : {display: 'none'}}>
+                                <Tab value='recipe' style={{backgroundColor:cyan400}}  label="Recipes">
+                                    {mainWindow}
+                                </Tab>
+                                <Tab value='list' style={{backgroundColor:cyan400}}  label="Cookbook">
+                                    <RecipeList setEditMode={this.setEditModeHandler} displayRecipe={this.displayRecipe}/>
+                                </Tab>
+                                <Tab value='shopping'  style={{backgroundColor:cyan400}} label="Shopping List">
+                                    <ShoppingListControl />
+                                </Tab>
+                                <Tab value='plan'  style={{backgroundColor:cyan400}} label="Meal Plan">
+                                    <div>Hi, I don't exist yet</div>
+                                </Tab>
+                            </Tabs>
                         </div>
                     </div>
                 </div>
@@ -68,4 +105,8 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+const mapSizesToProps = ({ width }) => ({
+    isMobile: width < 600,
+});
+
+export default withSizes(mapSizesToProps)(connect(null, mapDispatchToProps)(Dashboard));

@@ -42,7 +42,7 @@ class RecipeList extends Component {
         const recipes = this.props.recipes.map(recipe => <ListItem 
             primaryText={recipe.name} 
             rightIconButton={<IconButton onClick={()=> { this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(true)}} iconStyle={{color: grey400}}><ModeEdit /></IconButton>} 
-            onClick={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.setEditMode(false);}} 
+            onClick={() => {this.props.onSelectRecipe(this.props.userId, recipe); this.props.displayRecipe(); this.props.setEditMode(false);}} 
             key={recipe._id}
             innerDivStyle={{paddingLeft: 0}}
             name={recipe.name} />);
