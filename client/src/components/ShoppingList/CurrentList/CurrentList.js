@@ -8,24 +8,34 @@ import List from 'material-ui/List';
 import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
 import TextField from 'material-ui/TextField';
+import CategoryEditor from './CategoryEditor/CategoryEditor';
+
+const MODES = {
+    EDIT_ITEM: 'EDIT_ITEM',
+    EDIT_CATEGORIES: 'EDIT_CATEGORIES',
+    DISPLAY_LIST: 'DISPLAY_LIST'    
+}
 
 class CurrentList extends Component {
 
     state = {
         itemInput: '',
         editItem: false,
+        mode: MODES.DISPLAY_LIST,
         editId: null,
         editName: false,
         nameInput: ''
     }
     
     componentWillReceiveProps(nextprops) {
+        // This Lifecycle method updates the component when the list name is changed.
         this.setState({
             nameInput: nextprops.currentList.name
         });
     }
 
     addItemHandler = (e) => {
+        // This method appends a new item to the list with the default category of "Uncategorized"
         e.preventDefault();
         const item = {
             name: this.state.itemInput,
@@ -40,31 +50,48 @@ class CurrentList extends Component {
     }
 
     inputChangedHandler = (e) => {
+        // This method syncs the 'Add Item' input value with the local UI state
         this.setState({
             itemInput: e.target.value
         });
     }
 
-    setEditModeHandler = (editId) => {
+    setItemEditModeHandler = (editId) => {
+        // This method receives the .itemId of a shopping list item, toggles the editItem mode to in turn trigger the ItemEditor component to load in place of the list
         this.setState({
-            editItem: true,
+            mode: MODES.EDIT_ITEM,
             editId
         })
     }
 
+    setCategoryEditModeHandler = () => {
+        this.setState({
+            mode: MODES.EDIT_CATEGORIES
+        })
+    }
+
+    setDisplayModeHandler = () => {
+        this.setState({
+            mode: MODES.DISPLAY_LIST
+        })
+    }
+
     handleSubmit = values => {
+        // This method handles the ItemEditor form submission, passing the needed values to the editItem action, nulling out the id of the item to be edited, and setting item edit mode to false.
         this.props.editItem(this.state.editId, values, this.props.currentList);
         this.setState({
-            editItem: false,
+            mode: MODES.DISPLAY_LIST,
             editId: null
         })
     }
 
     handleCheck = (item) => {
+        // This method calls the editItem action to toggle the purchased status of a shopping list item when the checkbox for that item is checked.
         this.props.editItem(item.itemId, {...item, purchased: !item.purchased}, this.props.currentList);
     }
 
     handleDeleteItem = () => {
+        // This method handles the user option to delete an item from the shopping list.
         this.props.deleteItem(this.state.editId, this.props.currentList);
         this.setState({
             editItem: false,
@@ -73,24 +100,28 @@ class CurrentList extends Component {
     }
     
     handleEditName = () => {
+        // This method updates the editName property to toggle the rendering of an input field to change the name of the current list.
         this.setState({
             editName: true
         });
     }
 
     handleNameInputChange = (event) => {
+        // This method syncs the Name form to local UI state
         this.setState({
             nameInput: event.target.value
         });
     }
 
     handleDeleteList = (list) => {
+        // This method allows the user to delete a list.
         if (window.confirm(`Are you sure you want to delete the list?`)) {
             this.props.deleteList(list);
         }
     }
 
     handleNameChangeSubmit = (e) => {
+        // This method handles the submisssion of the name change form.
         e.preventDefault();
         const list = {
             ...this.props.currentList,
@@ -103,20 +134,38 @@ class CurrentList extends Component {
     }
 
     getItemToEdit = (itemId) => {
+        // This method retrieves the detailed data for a shopping list item.
        return this.props.currentList.items.find(item => item.itemId === itemId);
     }
 
     render() {
         const categories = this.props.currentList.categories.map(category => <ListCategory 
-            setEditMode={this.setEditModeHandler}
+            setEditMode={this.setItemEditModeHandler}
             handleCheck={this.handleCheck}
             items={
                 this.props.currentList.items.filter(item => category === item.category)
             } key={category} name={category}/>);
-        const shoppingDisplay = this.state.editItem ? 
-            <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDeleteItem} categories={this.props.categories} /> 
-            : ( <div>
-                    <ListName editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
+        switch(this.state.mode) {
+            // case(MODES.DISPLAY_LIST):
+            //     return (<div>
+            //         <ListName editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
+            //         <div className={classes.List}>
+            //             <List>
+            //                 {categories}
+            //             </List>
+            //         </div>
+            //         <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
+            //             <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
+            //         </form>
+            //     </div>
+            //     );
+            case(MODES.EDIT_ITEM):
+                return <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDeleteItem} categories={this.props.categories} />;
+            case(MODES.EDIT_CATEGORIES):
+                return <CategoryEditor onDone={this.setDisplayModeHandler} />;
+            default:
+                return (<div>
+                    <ListName manageCategories={this.setCategoryEditModeHandler} editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
                     <div className={classes.List}>
                         <List>
                             {categories}
@@ -125,14 +174,10 @@ class CurrentList extends Component {
                     <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
                         <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
                     </form>
-                </div>
-            );
-        return (
-            <div>
-                {shoppingDisplay}
-            </div>
-        )
-}
+                </div>);
+        }
+    }
+        
 }
 
 const mapStateToProps = state => {

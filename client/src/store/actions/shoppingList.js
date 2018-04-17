@@ -132,6 +132,27 @@ export const deleteListItem = (itemId, currentList) => {
     return updateCycle(updatedCurrentList);
 }
 
+export const addCategory = (category, currentList) => {
+    const categories = [...currentList.categories, category];
+    const updatedCurrentList = {...currentList, categories};
+    return updateCycle(updatedCurrentList);
+}
+
+export const deleteCategory = (category, currentList) => {
+    const items = currentList.items.map(item => {
+        if (item.category === category) {
+            return {
+                    ...item,
+                    category: 'Uncategorized'
+                }
+            }
+        return item;
+    });
+    const categories = currentList.categories.filter(oldCategory => oldCategory !== category);
+    const updatedCurrentList = { ...currentList, items, categories};
+    return updateCycle(updatedCurrentList);
+}
+
 const updateCycle = (updatedCurrentList) => {
     return dispatch => {
         dispatch(updateList(updatedCurrentList));
