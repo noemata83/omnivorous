@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import Landing from './components/Landing/Landing';
 import Dashboard from './containers/Dashboard/Dashboard';
 import * as actions from './store/actions';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 const PrivateRoute = ({ component: Component, currentUser, ...rest }) =>
   <Route {...rest} render={(props) => (
@@ -42,4 +44,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(App)));

@@ -1,36 +1,12 @@
 import React from 'react';
 
 import { ListItem } from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
+// import Checkbox from 'material-ui/Checkbox';
 import { blue100 } from 'material-ui/styles/colors';
-
-const itemStyle = {
-    marginLeft: '0px',
-    padding: '0px'
-}
+import Item from '../ListItem/ListItem';
 
 const listCategory = (props) => {
-    const items = props.items.map(item => {
-        let qtyString = '';
-        if (item.unit || item.quantity > 1) {
-           qtyString = item.unit ? `(${item.quantity} ${item.unit})` : `(${item.quantity})`; 
-        }
-        return <ListItem 
-            primaryTogglesNestedList={true}
-            leftCheckbox={
-            <Checkbox onClick={(e) => {
-                    e.stopPropagation();
-                    props.handleCheck(item);
-                    }}
-                    style={{top:'.5rem'}}
-                    />}
-            key={item.itemId}             
-            style={item.purchased ? {...itemStyle, fontStyle: 'italic', textDecoration: 'line-through'} : itemStyle }
-            innerDivStyle={{padding: '1rem 1rem 1rem 7.2rem'}}
-            // setEditMode={props.setEditMode}
-            // onClick={() => props.setEditMode(item.id)}
-            primaryText={<span onDoubleClick={() => props.setEditMode(item.itemId)}>{`${item.name} ${qtyString}`}</span>}
-        />})
+    const items = props.items.map(item => <Item key={item.itemId} handleCheck={props.handleCheck} item={item} setEditMode={props.setEditMode} />);
     return props.items.length !== 0 ?
         (<ListItem 
             key={props.name}
