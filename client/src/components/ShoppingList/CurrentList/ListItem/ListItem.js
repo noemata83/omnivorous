@@ -2,11 +2,22 @@ import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 import { ListItem, Checkbox } from 'material-ui';
+import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
 
 const itemSource = {
     beginDrag(props) {
         return {
-            itemId: props.item.id
+            itemId: props.item.itemId
+        }
+    },
+    endDrag(props, monitor) {
+        const item = monitor.getItem();
+        const dropResult = monitor.getDropResult();
+
+        if (dropResult) {
+            console.log(
+            `You dropped ${item.itemId} into ${dropResult.name}` 
+            );        
         }
     }
 }
@@ -63,5 +74,5 @@ Item.propTypes = {
     isDragging: PropTypes.bool.isRequired
 }
 
-export default DragSource('listitem', itemSource, collect)(Item);
+export default DragSource(ItemTypes.LIST_ITEM, itemSource, collect)(Item);
 
