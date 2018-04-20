@@ -25,10 +25,7 @@ class ShoppingListControl extends Component {
     }
     render() {           
         return (
-            <ShoppingList 
-            listDisplay={this.state.shoppingListDisplay}
-            currentList={this.props.currentList}
-            />
+            <ShoppingList />
         );
     }
 }

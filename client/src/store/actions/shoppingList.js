@@ -1,6 +1,9 @@
 import axios from 'axios';
+import * as R from 'ramda';
 import * as actionTypes from './actionTypes';
 import defaultShoppingList from '../../components/ShoppingList/Prototype/defaultList';
+
+const sortByCategory = R.sortBy(R.compose(R.toLower, R.prop('category')));
 
 export const fetchShoppingLists = (currentList=null) => {
     return dispatch => {
@@ -106,14 +109,14 @@ const displayShoppingList = (list) => {
 }
 
 export const addListItem = (item, currentList) => {
-    const items = [...currentList.items, item];
+    const items = sortByCategory([...currentList.items, item]);
     const nextId = currentList.nextId + 1;
     const updatedCurrentList = {...currentList, items, nextId};
     return updateCycle(updatedCurrentList);
 }
 
 export const editListItem = (itemId, item, currentList) => {
-    const items = currentList.items.map(oldItem => {
+    const items = sortByCategory(currentList.items.map(oldItem => {
         if (oldItem.itemId === itemId) {
             return {
                 ...item,
@@ -121,7 +124,7 @@ export const editListItem = (itemId, item, currentList) => {
             }
         }
         return oldItem;
-    });
+    }));
     const updatedCurrentList = { ...currentList, items };
     return updateCycle(updatedCurrentList);
 }
@@ -133,7 +136,7 @@ export const deleteListItem = (itemId, currentList) => {
 }
 
 export const addCategory = (category, currentList) => {
-    const categories = [...currentList.categories, category];
+    const categories = [...currentList.categories, category].sort();
     const updatedCurrentList = {...currentList, categories};
     return updateCycle(updatedCurrentList);
 }
@@ -148,7 +151,7 @@ export const deleteCategory = (category, currentList) => {
             }
         return item;
     });
-    const categories = currentList.categories.filter(oldCategory => oldCategory !== category);
+    const categories = currentList.categories.filter(oldCategory => oldCategory !== category).sort();
     const updatedCurrentList = { ...currentList, items, categories};
     return updateCycle(updatedCurrentList);
 }

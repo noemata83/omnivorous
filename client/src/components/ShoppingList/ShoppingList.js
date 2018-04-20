@@ -23,8 +23,7 @@ const shoppingList = (props) => {
                 </FloatingActionButton>
                 <div className={classes.ShoppingList}>
                     <ListControls />
-                    <CurrentList 
-                        currentList={props.currentList} />
+                    <CurrentList />
                 </div>
             </div>
        </div> 

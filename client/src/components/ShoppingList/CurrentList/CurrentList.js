@@ -9,6 +9,7 @@ import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
 import TextField from 'material-ui/TextField';
 import CategoryEditor from './CategoryEditor/CategoryEditor';
+import * as R from 'ramda';
 
 const MODES = {
     EDIT_ITEM: 'EDIT_ITEM',
@@ -24,14 +25,15 @@ class CurrentList extends Component {
         mode: MODES.DISPLAY_LIST,
         editId: null,
         editName: false,
-        nameInput: ''
+        nameInput: '',
     }
-    
-    componentWillReceiveProps(nextprops) {
-        // This Lifecycle method updates the component when the list name is changed.
-        this.setState({
-            nameInput: nextprops.currentList.name
-        });
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const nameInput = nextProps.currentList.name;
+        return {
+            ...prevState,
+            nameInput
+        }
     }
 
     addItemHandler = (e) => {
@@ -74,6 +76,17 @@ class CurrentList extends Component {
         this.setState({
             mode: MODES.DISPLAY_LIST
         })
+    }
+
+    moveItem = (dragIndex, hoverIndex) => {
+        const { items } = this.props.currentList;
+        const dragItem = items[dragIndex];
+        const category = items[hoverIndex].category;
+        const updatedDragItem = {...dragItem,
+                                 category};
+        const updatedItems = R.insert(hoverIndex, updatedDragItem, R.remove(dragIndex, 1, items));
+        const list = {...this.props.currentList, items: updatedItems};
+        this.props.updateList(list);
     }
 
     handleSubmit = values => {
@@ -137,30 +150,23 @@ class CurrentList extends Component {
         // This method retrieves the detailed data for a shopping list item.
        return this.props.currentList.items.find(item => item.itemId === itemId);
     }
+    
+    getAbsoluteIndex = (itemId) => {
+        return R.findIndex(R.propEq('itemId', itemId))(this.props.currentList.items);
+    }
 
     render() {
-        const categories = this.props.currentList.categories.map(category => <ListCategory 
+        const categories = R.map(category => <ListCategory 
             setEditMode={this.setItemEditModeHandler}
+            moveItem={this.moveItem}
             handleCheck={this.handleCheck}
+            getAbsoluteIndex={this.getAbsoluteIndex}
             items={
                 this.props.currentList.items.filter(item => category === item.category)
-            } key={category} name={category}/>);
+            } key={category} name={category}/>, [...this.props.currentList.categories].sort());
         switch(this.state.mode) {
-            // case(MODES.DISPLAY_LIST):
-            //     return (<div>
-            //         <ListName editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
-            //         <div className={classes.List}>
-            //             <List>
-            //                 {categories}
-            //             </List>
-            //         </div>
-            //         <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
-            //             <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
-            //         </form>
-            //     </div>
-            //     );
             case(MODES.EDIT_ITEM):
-                return <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDeleteItem} categories={this.props.categories} />;
+                return <ItemEditor initialValues={this.getItemToEdit(this.state.editId)} onSubmit={this.handleSubmit} id={this.state.editId} onDelete={this.handleDeleteItem} categories={this.props.currentList.categories} />;
             case(MODES.EDIT_CATEGORIES):
                 return <CategoryEditor onDone={this.setDisplayModeHandler} />;
             default:
@@ -183,7 +189,7 @@ class CurrentList extends Component {
 const mapStateToProps = state => {
     return {
         nextId: state.shoppingList.nextId,
-        categories: state.shoppingList.currentList.categories,
+        currentList: state.shoppingList.currentList,
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -191,7 +197,7 @@ const mapDispatchToProps = dispatch => {
         addItem: (item, currentList) => dispatch(actions.addListItem(item, currentList)),
         editItem: (itemId, item, currentList) => dispatch(actions.editListItem(itemId, item, currentList)),   
         deleteItem: (itemId, currentList) => dispatch(actions.deleteListItem(itemId, currentList)),
-        updateList: (list, user) => dispatch(actions.updateList(list, user)),
+        updateList: (list) => dispatch(actions.updateList(list)),
         deleteList: (id) => dispatch(actions.deleteShoppingList(id))
     }
 }
