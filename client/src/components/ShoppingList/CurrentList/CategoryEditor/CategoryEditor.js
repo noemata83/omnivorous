@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import { List, ListItem } from 'material-ui/List';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import {addCategory, deleteCategory} from '../../../../store/actions';
 import Close from 'material-ui/svg-icons/navigation/close';
 
@@ -32,18 +33,18 @@ class CategoryEditor extends Component {
     render() {
         const categories = this.props.currentList.categories.map(category => {
             if (category !== 'Uncategorized') {
-                return <ListItem key={category} primaryText={category} rightIconButton={<Close onClick={() => this.deleteCategoryHandler(category)} />} />
+            return <ListItem key={category} primaryText={category} rightIconButton={<FlatButton style={{marginTop:'.5rem'}} icon={<Close onClick={() => this.deleteCategoryHandler(category)} />} />} />
             }
             return null;
         });
-        return (<div>
-            <div style={{maxHeight: '30vh', overflow:"auto"}}>
+        return (<div style={{padding:'0 1rem'}}>
+            <div style={{maxHeight: '35vh', overflow:"auto"}}>
                 <List>
                     {categories}
                 </List>
             </div>
             <form onSubmit={this.addCategoryHandler} >
-                <TextField name="newcategory" value={this.state.input} onChange={this.inputChangedHandler} />
+                <TextField floatingLabelText="Add Category" name="newcategory"  fullWidth={true} value={this.state.input} onChange={this.inputChangedHandler} floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}} />
             </form>
             <RaisedButton onClick={this.props.onDone} label="Return to List" />
         </div>);
