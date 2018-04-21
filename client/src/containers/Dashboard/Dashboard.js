@@ -6,7 +6,7 @@ import SideHeader from '../../components/SideHeader/SideHeader';
 import RecipeList from '../RecipeList/RecipeList';
 import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
 import RecipeControl from '../RecipeForm/RecipeControl';
-import ShoppingListControl from '../ShoppingListControl/ShoppingListControl';
+import ShoppingListControl from '../../components/ShoppingList/ShoppingList';
 import classes from './Dashboard.css';
 import * as actions from '../../store/actions';
 import {Tab, Tabs} from 'material-ui/Tabs';
