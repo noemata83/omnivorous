@@ -26,13 +26,16 @@ class CurrentList extends Component {
         editId: null,
         editName: false,
         nameInput: '',
+        items: [],
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const nameInput = nextProps.currentList.name;
+        const items = nextProps.currentList.items;
         return {
             ...prevState,
-            nameInput
+            nameInput,
+            items
         }
     }
 
@@ -85,7 +88,13 @@ class CurrentList extends Component {
         const updatedDragItem = {...dragItem,
                                  category};
         const updatedItems = R.insert(hoverIndex, updatedDragItem, R.remove(dragIndex, 1, items));
-        const list = {...this.props.currentList, items: updatedItems};
+        this.setState({
+            items: updatedItems
+        });
+    }
+
+    setItem = () => {
+        const list = {...this.props.currentList, items: this.state.items};
         this.props.updateList(list);
     }
 
@@ -107,7 +116,7 @@ class CurrentList extends Component {
         // This method handles the user option to delete an item from the shopping list.
         this.props.deleteItem(this.state.editId, this.props.currentList);
         this.setState({
-            editItem: false,
+            mode: MODES.DISPLAY_LIST,
             editId: null
         })
     }
@@ -159,10 +168,11 @@ class CurrentList extends Component {
         const categories = R.map(category => <ListCategory 
             setEditMode={this.setItemEditModeHandler}
             moveItem={this.moveItem}
+            setItem = {this.setItem}
             handleCheck={this.handleCheck}
             getAbsoluteIndex={this.getAbsoluteIndex}
             items={
-                this.props.currentList.items.filter(item => category === item.category)
+                this.state.items.filter(item => category === item.category)
             } key={category} name={category}/>, [...this.props.currentList.categories].sort());
         switch(this.state.mode) {
             case(MODES.EDIT_ITEM):

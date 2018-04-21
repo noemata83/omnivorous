@@ -7,7 +7,7 @@ import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
 
 const itemTarget = {
     hover(props, monitor, component) {
-        const dragIndex = monitor.getItem().index;
+        const dragIndex = monitor.getItem().originalIndex;
         const hoverIndex = props.getAbsoluteIndex(props.item.itemId);
 
         if (dragIndex === hoverIndex) {
@@ -42,14 +42,32 @@ const itemTarget = {
 
         monitor.getItem().index = hoverIndex;
     },
+    drop(props) {
+        return {
+            dropIndex: props.getAbsoluteIndex(props.item.itemId),
+        }
+    }
 };
 
 const itemSource = {
     beginDrag(props) {
         return {
-            index: props.getAbsoluteIndex(props.item.itemId)
+            originalIndex: props.getAbsoluteIndex(props.item.itemId)
         }
     },
+
+    endDrag(props,monitor) {
+        const { originalIndex } = monitor.getItem();
+        const didDrop = monitor.didDrop();
+        const dropResult = monitor.getDropResult();
+
+        if (!didDrop) {
+            return props.setItem(originalIndex, originalIndex);
+        }
+        if (dropResult) {
+            return props.setItem(originalIndex, dropResult.dropIndex);
+        }
+    }
 }
 
 function collect(connect, monitor) {
@@ -87,7 +105,7 @@ class Item extends Component {
                     style={{top:'.5rem'}}
                     />}
             key={item.itemId}             
-            style={item.purchased ? {...itemStyle, fontStyle: 'italic', textDecoration: 'line-through'} : itemStyle }
+            style={item.purchased ? {...itemStyle, fontStyle: 'italic', textDecoration: 'line-through'} : itemStyle}
             innerDivStyle={{padding: '1rem 1rem 1rem 7.2rem', backgroundColor: isActive ? 'lightblue' :'white'}}
             primaryText={<span onDoubleClick={() => this.props.setEditMode(item.itemId)}>{`${item.name} ${qtyString}`}</span>}
             />
