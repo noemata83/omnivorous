@@ -2,8 +2,10 @@ import React, { Component }  from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
-import { ListItem, Checkbox } from 'material-ui';
+import { Checkbox } from 'material-ui';
 import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
+import Reorder from 'material-ui/svg-icons/action/reorder';
+import classes from './ListItem.css';
 
 const itemTarget = {
     hover(props, monitor, component) {
@@ -73,42 +75,37 @@ const itemSource = {
 function collect(connect, monitor) {
     return {
         connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
+        isDragging: monitor.isDragging(),
+        connectDragPreview: connect.dragPreview()
     }
-}
-
-
-const itemStyle = {
-    marginLeft: '0px',
-    padding: '0px'
 }
 
 
 class Item extends Component {
     render() {
         const { canDrop, isOver, connectDropTarget } = this.props;
-        const { connectDragSource, isDragging, item } = this.props;
+        const { connectDragSource, isDragging, item, connectDragPreview } = this.props;
         const isActive = canDrop && isOver;
         let qtyString = '';
         if (item.unit || item.quantity > 1) {
            qtyString = item.unit ? `(${item.quantity} ${item.unit})` : `(${item.quantity})`; 
         }
-        return connectDragSource(connectDropTarget( 
-            <div style={{opacity: isDragging ? 0.5 : 1}}>
-            <ListItem 
-            primaryTogglesNestedList={true}
-            leftCheckbox={
-            <Checkbox onClick={(e) => {
-                    e.stopPropagation();
-                    this.props.handleCheck(item);
-                    }}
-                    style={{top:'.5rem'}}
-                    />}
-            key={item.itemId}             
-            style={item.purchased ? {...itemStyle, fontStyle: 'italic', textDecoration: 'line-through'} : itemStyle}
-            innerDivStyle={{padding: '1rem 1rem 1rem 7.2rem', backgroundColor: isActive ? 'lightblue' :'white'}}
-            primaryText={<span onDoubleClick={() => this.props.setEditMode(item.itemId)}>{`${item.name} ${qtyString}`}</span>}
-            />
+        return connectDragPreview(connectDropTarget(
+            <div key={item.itemId}>
+                <span className={classes.listitem}>
+                <div style={{opacity: isDragging ? 0.5 : 1, marginLeft: '0px', padding: '1rem 1rem 1rem 7.2rem', position: 'relative', backgroundColor: isActive ? 'lightblue' : 'white'}}>
+                    {connectDragSource(<i className={classes.reorder} style={{height: '24px', width: '24px', display: 'block', position: 'absolute', top: '0px', margin: '0.6rem 0px', right: '4px'}}><Reorder color='#aaa'/></i>)}
+                    <div style={{cursor: 'pointer', position: 'absolute', overflow: 'visible', display: 'block', height: 'auto', width: '24px', top: '0', left: '16px'}}>
+                        <Checkbox onClick={(e) => {
+                            e.stopPropagation();
+                            this.props.handleCheck(item);
+                            }}
+                            style={{top:'.5rem'}}
+                        />
+                    </div>
+                    <span className={item.purchased ? classes.purchased : null} onDoubleClick={() => this.props.setEditMode(item.itemId)}>{`${item.name} ${qtyString}`}</span>
+                </div>
+                </span>
             </div>
         ));
     }
