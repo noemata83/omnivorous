@@ -81,10 +81,10 @@ class CurrentList extends Component {
         })
     }
 
-    moveItem = (dragIndex, hoverIndex) => {
+    moveItem = (dragIndex, hoverIndex, category=null) => {
         const { items } = this.props.currentList;
         const dragItem = items[dragIndex];
-        const category = items[hoverIndex].category;
+        if (!category) category = items[hoverIndex].category;
         const updatedDragItem = {...dragItem,
                                  category};
         const updatedItems = R.insert(hoverIndex, updatedDragItem, R.remove(dragIndex, 1, items));
