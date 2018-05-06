@@ -188,7 +188,7 @@ class CurrentList extends Component {
                         </List>
                     </div>
                     <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
-                        <TextField name="addItem" value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}}/>
+                        <TextField name="addItem" style={{height:'50px'}} value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem', lineHeight: '22px', top: '18px'}} floatingLabelShrinkStyle={{transform: 'scale(0.75) translate(0px, -16px)'}} inputStyle={{marginTop:'1.5rem', height: '50px'}} underlineStyle={{bottom:'0px'}}/>
                     </form>
                 </div>);
         }

@@ -12,7 +12,7 @@ const listName = (props) => {
             <form onSubmit={props.handleNameChangeSubmit}>
                 <TextField name="name" value={props.nameInput} onChange={props.handleNameInputChange} fullWidth={true} style={{padding:'0 1rem'}}/>
             </form>
-            : <div>
+            : <div style={{margin:'-2rem 0 0 0'}}>
                 <h2 className={classes.ListName} onDoubleClick={props.handleEditName} style={{width:'70%', display:'inline-block'}}>{props.name}</h2>
                 <IconMenu
                     iconButtonElement={<IconButton style={{padding:'0'}}><MoreVertIcon /></IconButton>}
