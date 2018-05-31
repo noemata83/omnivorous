@@ -1,3 +1,7 @@
+.ResponsiveAppBar {
+    display: flex;
+    justify-content: space-between;
+}
 .ToolBar {
     display: none;
 }

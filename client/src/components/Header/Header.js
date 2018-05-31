@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import Brand from './Brand/Brand';
 import Greeting from './Greeting/Greeting';
-import AppBar from 'material-ui/AppBar';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import classes from './Header.css';
 
 class Header extends Component {
@@ -20,13 +21,12 @@ class Header extends Component {
 
     render () {
         return (
-            <AppBar
-                title={<Brand />}
-                iconElementRight={<Greeting displayName={this.renderGreeting()}/>}
-                showMenuIconButton={false}
-                style={{zIndex: 1}}
-                className={classes.ResponsiveAppBar}
-            />
+            <AppBar position="">
+                <Toolbar classes={{root: classes.ResponsiveAppBar}}>
+                    <Brand />
+                    <Greeting displayName={this.renderGreeting()}/>
+                </Toolbar>
+            </AppBar>
         )
     }
 }
