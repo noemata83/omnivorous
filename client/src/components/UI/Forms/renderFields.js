@@ -17,6 +17,8 @@ export const renderTextField = ({
         input: classes.TextField
       }
     }}
+    // eslint complains about the next line because its duplicate props filter is case insensitive
+    // eslint-disable-next-line
     inputProps={{
       className: classes.TextField
     }}

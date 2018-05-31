@@ -52,11 +52,17 @@ class RecipeControl extends Component {
             if (res.data.message) {
                 return console.log(res.data.message);
             } else {
-                let recipe = res.data;
-                Object.keys(recipe).forEach(key => {
-                    this.props.onChangeFieldValue(key, recipe[key]);
+                const recipe = res.data;
+                axios.post(`http://phrase-tagger-service.k2rqsnqehd.us-east-1.elasticbeanstalk.com/parse`, {
+                    "ingredients": [...recipe.recipeIngredient]
+                }).then(res => {
+                    recipe.recipeIngredient = res.data.ingredients.map(ingredient => ({...ingredient, amount: ingredient.qty}));
+                    Object.keys(recipe).forEach(key => {
+                        this.props.onChangeFieldValue(key, recipe[key]);
+                    this.setState({showImportModal: false});
+                });
             });
-                this.setState({showImportModal: false});
+                
             }
         });
 

@@ -23,7 +23,6 @@ const instructionForm = ({fields, meta: { error }}) => {
                                     name={`recipeInstructions[${index}]`}
                                     component={renderTextField}
                                     label={`${index+1}.`}
-                                    hintText={null}
                                     multiline
                                     fullWidth
                                     rows={2}

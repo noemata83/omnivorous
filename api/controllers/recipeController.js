@@ -56,7 +56,7 @@ const convertToMinutes = require('../utility/utility').convertToMinutes;
     const importRecipe = (req, res) => {
         const url = req.body.url;
 
-        kitchenhand(url, {parseIngredients: true}).then(recipe => {
+        kitchenhand(url, {parseIngredients: false}).then(recipe => {
             if (recipe.nutrition) {
                 recipe.nutrition = JSON.stringify(recipe.nutrition);
             }
