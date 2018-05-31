@@ -3,7 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { blue100 } from 'material-ui/styles/colors';
 import {DropTarget} from 'react-dnd';
 import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Item from '../ListItem/ListItem';
 import { ListItemText, List } from '@material-ui/core';
 import classes from './ListCategory.css';

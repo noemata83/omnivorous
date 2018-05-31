@@ -9,7 +9,6 @@ import classes from './RecipeForm.css';
 import Button from '@material-ui/core/Button';
 // import RaisedButton from 'material-ui/RaisedButton';
 import { renderTextField } from '../../UI/Forms/renderFields';
-import { red500 } from 'material-ui/styles/colors';
 
 // import * as helpers from './helpers/';
 

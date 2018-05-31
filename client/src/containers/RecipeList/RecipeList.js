@@ -6,13 +6,11 @@ import * as actions from '../../store/actions/';
 import { List, ListItem, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ModeEdit from '@material-ui/icons/ModeEdit';
-// import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
-// import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import classes from './RecipeList.css';
-import { white, green600, grey400 } from 'material-ui/styles/colors';
+import { white, green600 } from 'material-ui/styles/colors';
 
 class RecipeList extends Component {
 

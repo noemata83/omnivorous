@@ -87,6 +87,10 @@
     display: none;
 }
 
+.BottomNavIcon {
+    opacity: 1 !important;
+}
+
 @media (max-width: 950px) {
     .SideDrawer {
         flex-basis: 33%;

@@ -63,7 +63,7 @@ class Dashboard extends Component {
 
     displayRecipe = () => {
         this.setState({
-            tab: 'recipe'
+            nav: 'recipe'
         })
     }
 
@@ -94,11 +94,11 @@ class Dashboard extends Component {
                             {this.state.nav === 'list' && <RecipeList setEditMode={this.setEditModeHandler} displayRecipe={this.displayRecipe}/>}
                             {this.state.nav === 'shopping' && <ShoppingListControl /> } 
                             {this.state.nav === 'plan' && <div>Some day, I will be a meal plan!</div>}
-                            <BottomNavigation value={this.state.tab} onChange={this.handleNavChange} style={this.props.isMobile ? {position: 'fixed', bottom: 0, display: 'block', width: '100%', zIndex:100} : {display: 'none'}}>
-                                <BottomNavigationAction value='recipe' style={{backgroundColor:cyan400}}  label={<img src={RecipeIcon} alt="Recipe Icon" style={{height: '36px', width: '36px'}}/>}/>
-                                <BottomNavigationAction value ='list' label={<img src={CookBook} alt="CookBook icon" style={{height: '36px', width: '36px'}}/>}/>
-                                <BottomNavigationAction value='shopping'  style={{backgroundColor:cyan400}} label={<img src={ShoppingListIcon} alt="Shopping List Icon" style={{height: '36px', width: '36px'}}/>}/>
-                                <BottomNavigationAction value='plan' style={{backgroundColor:cyan400}} label={<img src={MealPlanIcon} alt="Meal Plan Icon" style={{height: '36px', width: '36px'}}/>} />
+                            <BottomNavigation value={this.state.nav} onChange={this.handleNavChange} style={this.props.isMobile ? {position: 'fixed', bottom: 0, width: '100%', zIndex:100} : {display: 'none'}}>
+                                <BottomNavigationAction value='recipe'  classes={{iconOnly: classes.BottomNavIcon}} style={{backgroundColor:cyan400}}  icon={<img src={RecipeIcon} alt="Recipe Icon" style={{height: '36px', width: '36px'}}/>}/>
+                                <BottomNavigationAction value='list' classes={{iconOnly: classes.BottomNavIcon}} style={{backgroundColor:cyan400}} icon={<img src={CookBook} alt="CookBook icon" style={{height: '36px', width: '36px'}}/>}/>
+                                <BottomNavigationAction value='shopping'  classes={{iconOnly: classes.BottomNavIcon}} style={{backgroundColor:cyan400}} icon={<img src={ShoppingListIcon} alt="Shopping List Icon" style={{height: '36px', width: '36px'}}/>}/>
+                                <BottomNavigationAction value='plan' classes={{iconOnly: classes.BottomNavIcon}} style={{backgroundColor:cyan400}} icon={<img src={MealPlanIcon} alt="Meal Plan Icon" style={{height: '36px', width: '36px'}}/>} />
                             </BottomNavigation>
                         </div>
                     </div>

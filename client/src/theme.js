@@ -12,7 +12,7 @@ const theme = createMuiTheme({
         fontFamily: [
             'Open Sans'
         ].join(','),
-        fontSize:'1.6rem',
+        fontSize: '1.6 rem',
         htmlFontSize: 10
     },
 
