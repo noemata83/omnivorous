@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 
 const ingredientSchema = new Schema({
    amount: String,
-   unit: String,
-   name: String,  // This should be converted, ultimately, to a reference to the ingredient model.
-   comment: String
+   unit: String,    
+   name: String, 
+   comment: String,
+   input: String // used to store the original, unparsed string
 });
 
 let ingredient = mongoose.model('Ingredients', ingredientSchema);
