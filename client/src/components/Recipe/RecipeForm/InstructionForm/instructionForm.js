@@ -24,7 +24,7 @@ const instructionForm = ({fields, meta: { error }}) => {
                                     component={renderTextField}
                                     label={`${index+1}.`}
                                     hintText={null}
-                                    multiLine
+                                    multiline
                                     fullWidth
                                     rows={2}
                                     rowsMax={4}

@@ -1,10 +1,12 @@
 import React, { Component }  from 'react';
-import { ListItem } from 'material-ui/List';
+import ListItem from '@material-ui/core/ListItem';
 import { blue100 } from 'material-ui/styles/colors';
 import {DropTarget} from 'react-dnd';
 import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
 import PropTypes from 'prop-types';
 import Item from '../ListItem/ListItem';
+import { ListItemText, List } from '@material-ui/core';
+import classes from './ListCategory.css';
 
 const categoryTarget = {
     drop(props, monitor, component) {
@@ -33,15 +35,13 @@ class ListCategory extends Component {
         const categoryhovered = this.props.isOverCurrent;
         const items = this.props.items.map( (item, index) => <Item key={item.itemId} moveItem={this.props.moveItem} setItem={this.props.setItem} handleCheck={this.props.handleCheck} item={item} getAbsoluteIndex={this.props.getAbsoluteIndex} setEditMode={this.props.setEditMode} />);
         return this.props.items.length !== 0 ?
-                connectDropTarget(<div key={this.props.name}><ListItem 
-                autoGenerateNestedIndicator={false}
-                primaryText={this.props.name} 
-                initiallyOpen={true}
-                nestedItems={items}
-                nestedListStyle={{marginLeft:'0px', padding:'0px'}}
-                style={{backgroundColor: categoryhovered ? 'green' : blue100, padding: '0px'}}
-                innerDivStyle={{padding:'1rem'}}
-                /></div>) : null;
+                connectDropTarget(<div key={this.props.name}><ListItem style={{backgroundColor: categoryhovered ? 'green' : blue100, padding: '0px'}}>
+                    <ListItemText primary={this.props.name} classes={{root: classes.CategoryName}} />
+                </ListItem>
+                    <List>
+                        {items}
+                    </List>
+                </div>) : null;
     }
 } 
 

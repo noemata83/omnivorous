@@ -6,25 +6,24 @@ import ingredientForm from './IngredientForm/ingredientForm';
 import instructionForm from './InstructionForm/instructionForm';
 import validate from './helpers/validator';
 import classes from './RecipeForm.css';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
+// import RaisedButton from 'material-ui/RaisedButton';
 import { renderTextField } from '../../UI/Forms/renderFields';
-import { white } from 'material-ui/styles/colors';
 import { red500 } from 'material-ui/styles/colors';
 
 // import * as helpers from './helpers/';
 
 const recipeForm = (props) => {
     const { handleSubmit, onDelete, initialValues } = props;
-    let recipeAction = (<div><FlatButton primary={true} onClick={handleSubmit} label="Add Recipe"></FlatButton></div>);
+    let recipeAction = (<div><Button variant="flat" color="primary" onClick={handleSubmit} >Add Recipe</Button></div>);
     let importButton = null;
     if (initialValues) {
         recipeAction = (<div>
-                        <FlatButton primary={true} onClick={handleSubmit} label="Edit Recipe" />
-                        <FlatButton onClick={() => { onDelete(initialValues._id)}} label="Delete Recipe" style={{color:red500}} />
+                        <Button variant="flat" color="primary" onClick={handleSubmit}>Edit Recipe</Button>
+                        <Button variant="flat" onClick={() => { onDelete(initialValues._id)}} style={{color: 'red'}}>Delete Recipe</Button>
                         </div>);
     } else {
-        importButton = (<RaisedButton onClick={props.onImportInit} secondary={true} labelColor={white} label="Import from the Web" style={{float: 'right', fontSize: '2rem'}} />)
+        importButton = (<Button variant="raised" onClick={props.onImportInit} color="secondary" style={{float: 'right', fontSize: '1.5rem', }}>Import Recipe from the Web</Button>)
     }
     return (
         <div className={classes.RecipeForm}>

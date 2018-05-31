@@ -4,10 +4,10 @@ import * as actions from '../../../store/actions';
 
 import ListCategory from './ListCategory/ListCategory';
 import ListName from './ListName/listName';
-import List from 'material-ui/List';
+import List from '@material-ui/core/List';
 import ItemEditor from './ItemEditor/ItemEditor';
 import classes from './CurrentList.css';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import CategoryEditor from './CategoryEditor/CategoryEditor';
 import * as R from 'ramda';
 
@@ -27,6 +27,7 @@ class CurrentList extends Component {
         editName: false,
         nameInput: '',
         items: [],
+        anchorEl: null
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -164,6 +165,14 @@ class CurrentList extends Component {
         return R.findIndex(R.propEq('itemId', itemId))(this.props.currentList.items);
     }
 
+    handleMenuOpen = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    }
+
+    handleMenuClose = () => {
+        this.setState({ anchorEl: null });
+    }
+
     render() {
         const categories = R.map(category => <ListCategory 
             setEditMode={this.setItemEditModeHandler}
@@ -181,14 +190,14 @@ class CurrentList extends Component {
                 return <CategoryEditor onDone={this.setDisplayModeHandler} />;
             default:
                 return (<div>
-                    <ListName manageCategories={this.setCategoryEditModeHandler} editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} name={this.props.currentList.name} list={this.props.currentList._id}/>
+                    <ListName manageCategories={this.setCategoryEditModeHandler} editName={this.state.editName} handleDeleteList={this.handleDeleteList} handleNameChangeSubmit={this.handleNameChangeSubmit} handleNameInputChange={this.handleNameInputChange} nameInput={this.state.nameInput} handleEditName={this.handleEditName} handleOpen={this.handleMenuOpen} handleClose={this.handleMenuClose} anchorEl={this.state.anchorEl} name={this.props.currentList.name} list={this.props.currentList._id}/>
                     <div className={classes.List}>
                         <List>
                             {categories}
                         </List>
                     </div>
                     <form onSubmit={this.addItemHandler} style={{padding:'0 1rem'}}>
-                        <TextField name="addItem" style={{height:'50px'}} value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth={true} floatingLabelText="Add Item" floatingLabelStyle={{fontSize:'1.8rem', lineHeight: '22px', top: '18px'}} floatingLabelShrinkStyle={{transform: 'scale(0.75) translate(0px, -16px)'}} inputStyle={{marginTop:'1.5rem', height: '50px'}} underlineStyle={{bottom:'0px'}}/>
+                        <TextField name="addItem" style={{height:'50px'}} value={this.state.itemInput} onChange={this.inputChangedHandler} fullWidth label="Add Item" InputLabelProps={{style:{fontSize: '1.6rem'}}} InputProps={{style:{fontSize:'1.6rem', margin: '1rem 0'}}}/>
                     </form>
                 </div>);
         }

@@ -31,12 +31,10 @@ const muiTheme = getMuiTheme({
 })
 
 const app = (
-    <MuiThemeProvider muiTheme={muiTheme}>
         <Provider store={store}>
             <BrowserRouter>
                 <App />
             </BrowserRouter>
-        </Provider>
-    </MuiThemeProvider>);
+    </Provider>);
 
 ReactDOM.render(app, document.getElementById('root'));

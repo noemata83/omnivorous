@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 import Landing from './components/Landing/Landing';
 import Dashboard from './containers/Dashboard/Dashboard';
 import * as actions from './store/actions';
@@ -22,12 +23,12 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <MuiThemeProvider theme={theme}>
         <Switch>
             <Route path="/" exact render={() => this.props.currentUser ? ( <Redirect to="/recipes" />) : (<Landing /> )} />
             <PrivateRoute path="/recipes" currentUser={this.props.currentUser} component={Dashboard} />
         </Switch>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -11,3 +11,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.Avatar {
+    width: 60px !important;
+    height: 60px !important;
+}

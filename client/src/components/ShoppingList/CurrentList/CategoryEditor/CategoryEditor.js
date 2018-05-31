@@ -1,11 +1,12 @@
 import React, { Component }  from 'react';
-import TextField from 'material-ui/TextField';
-import { List, ListItem } from 'material-ui/List';
+import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import Button from '@material-ui/core/Button';
 import {addCategory, deleteCategory} from '../../../../store/actions';
-import Close from 'material-ui/svg-icons/navigation/close';
+import Close from '@material-ui/icons/Close';
+import { ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 
 class CategoryEditor extends Component {
     state = {
@@ -33,7 +34,12 @@ class CategoryEditor extends Component {
     render() {
         const categories = this.props.currentList.categories.map(category => {
             if (category !== 'Uncategorized') {
-            return <ListItem key={category} primaryText={category} rightIconButton={<FlatButton style={{marginTop:'.5rem'}} icon={<Close onClick={() => this.deleteCategoryHandler(category)} />} />} />
+            return <ListItem key={category}>
+                <ListItemText primary={category} style={{fontSize:'1.6rem'}}/>
+                <ListItemSecondaryAction>
+                    <Button variant="flat" style={{marginTop:'.5rem'}} onClick={() => this.deleteCategoryHandler(category)}><Close/></Button>
+                </ListItemSecondaryAction>
+            </ListItem>
             }
             return null;
         });
@@ -44,9 +50,9 @@ class CategoryEditor extends Component {
                 </List>
             </div>
             <form onSubmit={this.addCategoryHandler} >
-                <TextField floatingLabelText="Add Category" name="newcategory"  fullWidth={true} value={this.state.input} onChange={this.inputChangedHandler} floatingLabelStyle={{fontSize:'1.8rem'}} inputStyle={{marginTop:'.5rem'}} />
+                <TextField label="Add Category" name="newcategory"  fullWidth value={this.state.input} onChange={this.inputChangedHandler} InputProps={{style:{margin:'1rem 0', fontSize:'1.6rem'}}} InputLabelProps={{style:{fontSize:'1.6rem'}}} />
             </form>
-            <RaisedButton onClick={this.props.onDone} label="Return to List" />
+            <Button variant="raised" onClick={this.props.onDone} color="primary">Return to List</Button>
         </div>);
     }
 }

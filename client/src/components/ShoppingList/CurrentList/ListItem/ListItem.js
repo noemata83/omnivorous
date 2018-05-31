@@ -2,9 +2,9 @@ import React, { Component }  from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
-import { Checkbox } from 'material-ui';
+import Checkbox from '@material-ui/core/Checkbox';
 import ItemTypes from '../../../UI/DragAndDrop/ItemTypes';
-import Reorder from 'material-ui/svg-icons/action/reorder';
+import Reorder from '@material-ui/icons/Reorder';
 import classes from './ListItem.css';
 
 const itemTarget = {
@@ -94,7 +94,7 @@ class Item extends Component {
             <div key={item.itemId}>
                 <span className={classes.listitem}>
                 <div style={{opacity: isDragging ? 0.5 : 1, marginLeft: '0px', padding: '1rem 1rem 1rem 7.2rem', position: 'relative', backgroundColor: isActive ? 'lightblue' : 'white'}}>
-                    {connectDragSource(<i className={classes.reorder} style={{height: '24px', width: '24px', display: 'block', position: 'absolute', top: '0px', margin: '0.6rem 0px', right: '4px'}}><Reorder color='#aaa'/></i>)}
+                    {connectDragSource(<i className={classes.reorder} style={{height: '24px', width: '24px', display: 'block', position: 'absolute', top: '0px', margin: '0.6rem 0px', right: '4px'}}><Reorder/></i>)}
                     <div style={{cursor: 'pointer', position: 'absolute', overflow: 'visible', display: 'block', height: 'auto', width: '24px', top: '0', left: '16px'}}>
                         <Checkbox onClick={(e) => {
                             e.stopPropagation();

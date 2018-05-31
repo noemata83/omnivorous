@@ -21,7 +21,7 @@ class Header extends Component {
 
     render () {
         return (
-            <AppBar position="">
+            <AppBar position="static">
                 <Toolbar classes={{root: classes.ResponsiveAppBar}}>
                     <Brand />
                     <Greeting displayName={this.renderGreeting()}/>

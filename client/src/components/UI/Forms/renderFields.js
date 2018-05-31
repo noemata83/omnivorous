@@ -1,6 +1,7 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
+import classes from './fields.css';
 
 export const renderTextField = ({
   input,
@@ -9,11 +10,23 @@ export const renderTextField = ({
   ...custom
 }) => (
   <TextField
-    hintText={label}
-    floatingLabelText={label}
-    errorText={touched && error}
-    // underlineShow={false}
-    floatingLabelStyle={{fontSize:'1.2rem'}}
+    label={label}
+    InputProps={{
+      classes: {
+        root: classes.TextField,
+        input: classes.TextField
+      }
+    }}
+    inputProps={{
+      className: classes.TextField
+    }}
+    InputLabelProps={{
+      classes: {
+        root: classes.Label
+      }
+    }}
+    margin="normal"
+    // errorText={touched && error}
     {...input}
     {...custom}
   />
@@ -27,7 +40,7 @@ export const renderSelectField = ({
     ...custom
   }) => (
     <SelectField
-      floatingLabelText={label}
+      label={label}
       errorText={touched && error}
       fullWidth={true}
       {...input}

@@ -1,28 +1,34 @@
 import React from 'react';
 
 import classes from './ListName.css';
-import TextField from 'material-ui/TextField';
-import IconMenu from 'material-ui/IconMenu';
-import IconButton from 'material-ui/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/MenuItem';
+import TextField from '@material-ui/core/TextField';
+// import IconMenu from 'material-ui/IconMenu';
+import Menu from '@material-ui/core/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const listName = (props) => {
+    const { anchorEl, handleOpen, handleClose } = props;
     const nameDisplay = props.editName ? 
             <form onSubmit={props.handleNameChangeSubmit}>
-                <TextField name="name" value={props.nameInput} onChange={props.handleNameInputChange} fullWidth={true} style={{padding:'0 1rem'}}/>
+                <TextField name="name" value={props.nameInput} onChange={props.handleNameInputChange} fullWidth style={{padding:'0 1rem'}}/>
             </form>
-            : <div style={{margin:'-2rem 0 0 0'}}>
+            : <div style={{margin:'0'}}>
                 <h2 className={classes.ListName} onDoubleClick={props.handleEditName} style={{width:'70%', display:'inline-block'}}>{props.name}</h2>
-                <IconMenu
-                    iconButtonElement={<IconButton style={{padding:'0'}}><MoreVertIcon /></IconButton>}
-                    anchorOrigin={{horizontal:'right', vertical:'top'}}
-                    targetOrigin={{horizontal:'right', vertical:'top'}}
+                <IconButton aria-label="Edit List" aria-owns={anchorEl ? 'edit-list-menu' : null } aria-haspopup="true" onClick={handleOpen}>
+                    <MoreVertIcon />
+                </IconButton>
+                <Menu
+                    id="edit-list-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
                 >
-                    <MenuItem primaryText="Manage Categories" onClick={() => props.manageCategories()} />
-                    <MenuItem primaryText="Manage Lists" disabled />
-                    <MenuItem primaryText="Delete List" onClick={() => props.handleDeleteList(props.list)} />
-                </IconMenu>
+                    <MenuItem  className={classes.MenuItem} onClick={() => { props.manageCategories(); handleClose();}}>Manage Categories</MenuItem>
+                    <MenuItem  className={classes.MenuItem} disabled>Manage Lists</MenuItem>
+                    <MenuItem className={classes.MenuItem} onClick={() => { props.handleDeleteList(props.list); handleClose();}}>Delete List</MenuItem>
+                </Menu>
             </div>;
 
     return nameDisplay;
