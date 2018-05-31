@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './theme';
 import Landing from './components/Landing/Landing';
-import Dashboard from './containers/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard';
 import * as actions from './store/actions';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';

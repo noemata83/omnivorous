@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { change } from 'redux-form';
 
-import RecipeForm from '../../components/Recipe/RecipeForm/RecipeForm';
-import Modal from '../../components/UI/Modal/Modal';
-import RecipeImport from '../../components/Recipe/RecipeImport/recipeImport';
+import RecipeForm from './RecipeForm/RecipeForm';
+import Modal from '../UI/Modal/Modal';
+import RecipeImport from './RecipeImport/recipeImport';
 import classes from './RecipeControl.css';
 import * as actions from '../../store/actions';
 import Wrapper from '../../hoc/Wrapper/Wrapper';

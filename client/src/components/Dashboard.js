@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../../components/Header/Header';
-import SideHeader from '../../components/SideHeader/SideHeader';
-import RecipeList from '../RecipeList/RecipeList';
-import RecipeDisplay from '../../components/Recipe/RecipeDisplay/RecipeDisplay';
-import RecipeControl from '../RecipeForm/RecipeControl';
-import ShoppingListControl from '../../components/ShoppingList/ShoppingList';
+import Header from './Header/Header';
+import SideHeader from './SideHeader/SideHeader';
+import RecipeList from './RecipeList/RecipeList';
+import RecipeDisplay from './Recipe/RecipeDisplay/RecipeDisplay';
+import RecipeControl from './Recipe/RecipeControl';
+import ShoppingListControl from './ShoppingList/ShoppingList';
 import classes from './Dashboard.css';
-import * as actions from '../../store/actions';
+import * as actions from '../store/actions';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { cyan400 } from 'material-ui/styles/colors';
 import withSizes from 'react-sizes';
-import CookBook from '../../assets/img/noun_51422_cc.svg'; // Cookbook Icon by Marcella Cigarini for the Noun Project
-import RecipeIcon from '../../assets/img/noun_1142064_cc.svg'; // Cooking Icon by Dinosoft Labs for the Noun Project
-import ShoppingListIcon from '../../assets/img/noun_1351304_cc.svg'; // Shopping List Icon by Gregor Cresnar for the Noun Project
-import MealPlanIcon from '../../assets/img/noun_689869_cc.svg'; // Calendar Icon by Smidt Sergey, US for the Noun Project
+import CookBook from '../assets/img/noun_51422_cc.svg'; // Cookbook Icon by Marcella Cigarini for the Noun Project
+import RecipeIcon from '../assets/img/noun_1142064_cc.svg'; // Cooking Icon by Dinosoft Labs for the Noun Project
+import ShoppingListIcon from '../assets/img/noun_1351304_cc.svg'; // Shopping List Icon by Gregor Cresnar for the Noun Project
+import MealPlanIcon from '../assets/img/noun_689869_cc.svg'; // Calendar Icon by Smidt Sergey, US for the Noun Project
 
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
