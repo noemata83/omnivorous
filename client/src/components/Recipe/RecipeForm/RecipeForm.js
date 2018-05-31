@@ -9,6 +9,8 @@ import classes from './RecipeForm.css';
 import Button from '@material-ui/core/Button';
 // import RaisedButton from 'material-ui/RaisedButton';
 import { renderTextField } from '../../UI/Forms/renderFields';
+import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // import * as helpers from './helpers/';
 
@@ -29,12 +31,27 @@ const recipeForm = (props) => {
             <h2 className={classes.Header}>Add a Recipe</h2>
             {importButton}
             <form onSubmit={ handleSubmit }>
-            { recipeHeader.map( ({ label, name, style, ...custom }) => <Field component={renderTextField} name={name} key={name} label={label} style={style} {...custom} />)};
+            <Field component={renderTextField} label='Name' name='name' type="text" fullWidth />
+            <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.PanelTitle}>Basic Recipe Details</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails classes={{root: classes.PanelContent}}>
+                    { recipeHeader.map( ({ label, name, style, ...custom }) => <Field component={renderTextField} name={name} key={name} label={label} style={style} {...custom} />)};
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <FieldArray name="recipeIngredient" component={ingredientForm} />
             <FieldArray name="recipeInstructions" component={instructionForm} />
-            { recipeFooter.map( ({ label, name, type, style, ...custom }) => (<Field component={renderTextField} name={name} key={name} type={type} label={label} style={style} {...custom} />)) }
+            <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.PanelTitle}>Additional recipe details</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails classes={{root: classes.PanelContent}}>
+                { recipeFooter.map( ({ label, name, type, style, ...custom }) => (<Field component={renderTextField} name={name} key={name} type={type} label={label} style={style} {...custom} />)) }
+                </ExpansionPanelDetails>    
+            </ExpansionPanel>
             <div className={classes.FormFooter}>
-                {recipeAction}
+                    {recipeAction}
             </div>
             </form>
         </div>

@@ -19,6 +19,7 @@ import CookBook from '../assets/img/noun_51422_cc.svg'; // Cookbook Icon by Marc
 import RecipeIcon from '../assets/img/noun_1142064_cc.svg'; // Cooking Icon by Dinosoft Labs for the Noun Project
 import ShoppingListIcon from '../assets/img/noun_1351304_cc.svg'; // Shopping List Icon by Gregor Cresnar for the Noun Project
 import MealPlanIcon from '../assets/img/noun_689869_cc.svg'; // Calendar Icon by Smidt Sergey, US for the Noun Project
+import { Drawer } from '@material-ui/core';
 
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
@@ -38,7 +39,8 @@ class Dashboard extends Component {
         editMode: false,
         recipeListDisplay: false,
         tab: 'recipe',
-        nav: 'recipe'
+        nav: 'recipe',
+        drawer: true
     }
 
     componentDidMount() {
@@ -67,6 +69,12 @@ class Dashboard extends Component {
         })
     }
 
+    onToggleDrawer = () => {
+        this.setState({
+            drawer: !this.state.drawer
+        })
+    }
+
     render () {
         let mainWindow = <RecipeDisplay />;
         if (this.state.editMode) {
@@ -74,7 +82,8 @@ class Dashboard extends Component {
         }
         return (
             <div className={classes.Dashboard}>
-                <div className={classes.SideDrawer}>
+                {/* <div className={classes.SideDrawer}> */}
+                <Drawer open={this.state.drawer} onClose={this.onToggleDrawer}>
                     <SideHeader />
                     <Tabs value={this.state.tab} onChange={this.handleTabChange} fullWidth>
                         <Tab value='recipe' label="Recipes" style={{backgroundColor:cyan400}} />
@@ -83,11 +92,12 @@ class Dashboard extends Component {
                     </Tabs>
                     {this.state.tab === 'recipe' && <RecipeList setEditMode={this.setEditModeHandler} displayRecipe={this.displayRecipe}/>}
                     {this.state.tab === 'shopping' && <ShoppingListControl/> }
-                </div>
+                </Drawer>
+                {/* </div> */}
                 <div className={classes.Main}>
                     <div className={classes.MainContent}>
                         <div className={classes.HeaderBox}>
-                            <Header />
+                            <Header drawerToggle={this.onToggleDrawer}/>
                         </div>
                         <div className={classes.MainWindow}>
                             {this.state.nav === 'recipe' && mainWindow}

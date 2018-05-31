@@ -3,7 +3,6 @@ const inlineStyle = {
     marginRight: '3%'
 }
 export const recipeHeader = [
-    { label: 'Name', name: 'name', type: 'text', fullWidth: true },
     { label: 'Author', name: 'author', type: 'text', style: inlineStyle},
     { label: 'Description', name: 'description', fullWidth: true, multiline: true, rows: 2, rowsMax: 4},
     { label: 'Time to Prep', name: 'prepTime', type:'number', style: inlineStyle },

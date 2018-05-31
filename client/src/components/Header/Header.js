@@ -7,6 +7,8 @@ import Greeting from './Greeting/Greeting';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import classes from './Header.css';
+import { IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 class Header extends Component {
 
@@ -23,7 +25,12 @@ class Header extends Component {
         return (
             <AppBar position="static">
                 <Toolbar classes={{root: classes.ResponsiveAppBar}}>
-                    <Brand />
+                    <div>
+                        <IconButton className={classes.menuButton} onClick={this.props.drawerToggle}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Brand />
+                    </div>
                     <Greeting displayName={this.renderGreeting()}/>
                 </Toolbar>
             </AppBar>

@@ -33,3 +33,11 @@
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 }
+
+.PanelTitle {
+	font-size: 2rem;
+}
+
+.PanelContent {
+	display: block !important;
+}

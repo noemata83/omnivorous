@@ -8,7 +8,7 @@ import Modal from '../UI/Modal/Modal';
 import RecipeImport from './RecipeImport/recipeImport';
 import classes from './RecipeControl.css';
 import * as actions from '../../store/actions';
-import Wrapper from '../../hoc/Wrapper/Wrapper';
+import { Paper } from '@material-ui/core';
 
 class RecipeControl extends Component {
     state = {
@@ -70,7 +70,7 @@ class RecipeControl extends Component {
 
     render() {
         return (
-            <Wrapper>
+            <Paper>
                 <Modal 
                     show={this.state.showImportModal} 
                     modalClosed={this.importCancelHandler}
@@ -84,7 +84,7 @@ class RecipeControl extends Component {
                 <div className={classes.FormContainer}>
                     <RecipeForm initialValues={this.props.currentRecipe} onSubmit={this.handleSubmit} onDelete={this.handleDelete} onImportInit={this.initImportHandler} />
                 </div>
-            </Wrapper>
+            </Paper>
         );
     }
 }

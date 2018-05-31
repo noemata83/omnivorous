@@ -5,7 +5,16 @@
 .ToolBar {
     display: none;
 }
+
+.menuButton {
+    margin-left: -12px;
+    margin-right: 20px;
+}
+
 @media(max-width:750px) {
+    .menuButton {
+        display: none !important;
+    }
     .ResponsiveAppBar {
         padding-left: 1rem;
         padding-right: 1rem;
