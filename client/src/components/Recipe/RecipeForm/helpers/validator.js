@@ -1,9 +1,9 @@
 export default (values) => {
-    const errors = {};
+  const errors = {};
 
-    if (!values.name) {
-        errors.name = "You must provide a value.";
-    }
+  if (!values.name) {
+    errors.name = 'You must provide a value.';
+  }
 
-    return errors;
-}
+  return errors;
+};

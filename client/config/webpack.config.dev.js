@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 const autoprefixer = require('autoprefixer');
@@ -115,7 +116,8 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+              emitError: false,
+              emitWarning: true,
             },
             loader: require.resolve('eslint-loader'),
           },

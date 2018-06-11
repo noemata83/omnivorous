@@ -1,3 +1,3 @@
 export default {
-    LIST_ITEM: 'listItem',
-}
+  LIST_ITEM: 'listItem',
+};
