@@ -78,3 +78,18 @@ export const recipeFooter = [
     style: { width: '30%' },
   },
 ];
+
+// export const additionalFooter = [
+//   {
+//     label: 'Time To Bake',
+//     name: 'recipeBakeTime',
+//     type: 'number',
+//     style: { width: '30' },
+//   },
+//   {
+//     label: 'Cuisine',
+//     name: 'recipeCuisine',
+//     type: 'text',
+//     style: { width: '30%' },
+//   },
+// ];
