@@ -13,7 +13,7 @@ const landing = props =>
       <Background />
       <div className={['card', classes.TextBox].join(' ')}>
         <h1 className={classes.HeaderText}>
-          Welcome to{' '}
+          Welcome to
           <span className={classes.HeaderText__brand}>Omnivorous</span>
         </h1>
         <h2 className={classes.Tagline}>
@@ -24,12 +24,17 @@ const landing = props =>
         </a>
         <br />
         <p style={{ fontSize: '1.4rem', textAlign: 'left' }}>
-          <strong>Current Status:</strong>{' '}
+          <strong>Current Status:</strong>
           <em>
-            Full CRUD and automated recipe import; shopping list CRUD; limited
-            shopping list functionality implemented. <br />Check back often for
-            updates!
-          </em>
+            Migrated Presentational Components to Material UI v1.0; shopping list and (mobile) sidebar
+            need fixes. Recipe Import now features CRF microservice-powered intelligent ingredient parsing.
+            <br />Check back often for updates!
+          </em><br />
+          {/* <strong>Current Progress:</strong>{' '}
+          <em>
+            Finished Multicolored meringues recipe!!!
+            <br />Check back often for new recipes!
+          </em> */}
         </p>
       </div>
     </Wrapper>
