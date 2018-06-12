@@ -38,8 +38,6 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.5.0",
-    "ramda": "^0.25.0",
-    "react-dnd": "^2.6.0",
-    "react-dnd-html5-backend": "^2.6.0"
+    "ramda": "^0.25.0"
   }
 }
