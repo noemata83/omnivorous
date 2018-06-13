@@ -29,7 +29,7 @@ class Header extends Component {
         position="static"
       >
         <Toolbar classes={{ root: classes.ResponsiveAppBar }}>
-          <div>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', alignContent: 'center' }}>
             <IconButton
               className={classes.menuButton}
               onClick={this.props.drawerToggle}

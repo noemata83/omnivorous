@@ -17,6 +17,7 @@
 .menuButton {
     margin-left: -12px;
     margin-right: 20px;
+    color: white !important;
 }
 
 @media(max-width:750px) {
