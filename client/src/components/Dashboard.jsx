@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -41,7 +42,7 @@ class Dashboard extends Component {
     // recipeListDisplay: false,
     tab: 'recipe',
     nav: 'recipe',
-    drawer: true,
+    drawer: false,
   };
 
   componentDidMount() {
@@ -82,8 +83,16 @@ class Dashboard extends Component {
     return (
       <div className={classes.Dashboard}>
         {/* <div className={classes.SideDrawer}> */}
-        <Drawer open={this.state.drawer} onClose={this.onToggleDrawer}>
-          <SideHeader />
+        <Drawer 
+          variant="persistent"
+          anchor="left"
+          open={this.state.drawer}
+          onClose={this.onToggleDrawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <SideHeader onClose={this.onToggleDrawer} />
           <Tabs
             value={this.state.tab}
             onChange={this.handleTabChange}
@@ -109,10 +118,12 @@ class Dashboard extends Component {
           {this.state.tab === 'shopping' && <ShoppingListControl />}
         </Drawer>
         {/* </div> */}
-        <div className={classes.Main}>
+        <div className={classnames(classes.MainWindow, {
+          [classes.MainWindowShift]: this.state.drawer,
+        })}>
           <div className={classes.MainContent}>
             <div className={classes.HeaderBox}>
-              <Header drawerToggle={this.onToggleDrawer} />
+              <Header drawerToggle={this.onToggleDrawer} drawerOpen={this.state.drawer} />
             </div>
             <div className={classes.MainWindow}>
               {this.state.nav === 'recipe' && mainWindow}

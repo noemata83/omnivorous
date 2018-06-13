@@ -16,3 +16,16 @@
     width: 60px !important;
     height: 60px !important;
 }
+
+.Toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ToggleIcon {
+    background-color: rgba(0,0,0,0.3) !important;
+}

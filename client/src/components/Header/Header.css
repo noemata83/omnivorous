@@ -1,7 +1,15 @@
+.AppBarShift {
+    width: 66%;
+    transition: .5s all ease-out;
+    margin-left: 34%;
+}
+
 .ResponsiveAppBar {
     display: flex;
     justify-content: space-between;
 }
+
+
 .ToolBar {
     display: none;
 }

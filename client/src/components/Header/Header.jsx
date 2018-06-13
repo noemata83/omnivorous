@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,8 +23,11 @@ class Header extends Component {
   }
 
   render() {
+    const { drawerOpen } = this.props;
     return (
-      <AppBar position="static">
+      <AppBar 
+        position="static"
+      >
         <Toolbar classes={{ root: classes.ResponsiveAppBar }}>
           <div>
             <IconButton

@@ -13,6 +13,7 @@
 .MainContent {
     overflow: auto;
     height: 100vh;
+    width: 100%;
 }
 
 .SideDrawer {
@@ -34,12 +35,17 @@
 }
 
 .MainWindow {
-    z-index: 100;
-    flex-basis: 60%;
-    flex-shrink: 1;
-    flex-grow: 1;
-    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    width: 100%;
     /* max-width: 87.5vw; */
+}
+
+.MainWindowShift {
+    width: 66% !important;
+    transition: .5s all ease-out;
+    margin-left: 34%;
 }
 
 
@@ -53,9 +59,14 @@
 }
 
 /* .SideBar {
-    float: left;
-    z-index: 100;
+    position: relative;
+    width: 25%;
 } */
+
+.drawerPaper {
+    position: relative;
+    width: 34%;
+}
 
 .Background {
     height: 100vh;
@@ -101,7 +112,7 @@
 }
 
 @media (max-width: 750px) {
-    .SideDrawer {
+    .drawerPaper {
         display: none;
     }
 

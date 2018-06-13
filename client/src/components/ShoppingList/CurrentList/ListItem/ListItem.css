@@ -33,3 +33,7 @@
     font-style: italic;
     color: #aaa;
 }
+
+.checkbox {
+    height: 30px !important;
+}

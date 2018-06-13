@@ -141,7 +141,7 @@ class Item extends Component {
                 e.stopPropagation();
                 this.props.handleCheck(item);
               }}
-              style={{ top: '.5rem' }}
+              classes={{ root: classes.checkbox }}
             />
           </div>
           <span
