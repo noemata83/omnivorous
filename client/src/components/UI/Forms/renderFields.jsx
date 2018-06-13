@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SelectField from 'material-ui/SelectField';
+import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import classes from './fields.css';
 
@@ -56,15 +56,17 @@ export const renderSelectField = ({
   children,
   ...custom
 }) => (
-  <SelectField
-    label={label}
-    errorText={touched && error}
-    fullWidth
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}
-    {...custom}
-  />
+    <Select
+      label={label}
+      fullWidth
+      classes={{ 
+        root: classes.TextField,
+      }}
+      {...input}
+      // onChange={(event, index, value) => input.onChange(value)}
+      children={children}
+      {...custom}
+    />
 );
 
 renderSelectField.defaultProps = {

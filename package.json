@@ -2,7 +2,8 @@
   "name": "recipeapi",
   "version": "0.0.1",
   "engines": {
-    "node": "10.4.0"
+    "node": "10.4.0",
+    "npm": "6.1.x"
   },
   "description": "A demo recipe storage api",
   "main": "app.js",

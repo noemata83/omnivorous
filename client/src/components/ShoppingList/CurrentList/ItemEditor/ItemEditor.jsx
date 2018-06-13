@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import { red400, white } from 'material-ui/styles/colors';
 import {
   renderSelectField,
@@ -11,16 +11,16 @@ import {
 
 const itemEditor = (props) => {
   const categoryOptions = props.categories.map(category => (
-    <MenuItem key={category} value={category} primaryText={category} />
+    <MenuItem style={{ fontSize: '1.4rem' }} key={category} value={category}>{category}</MenuItem>
   ));
   return (
     <div style={{ padding: '1rem' }}>
       <form onSubmit={props.handleSubmit}>
-        <label htmlFor="name">Item:</label>
         <Field
           type="text"
           fullWidth
           name="name"
+          label="Item"
           component={renderTextField}
         />
         <label htmlFor="qty">Qty:</label>
@@ -28,31 +28,37 @@ const itemEditor = (props) => {
           type="number"
           fullWidth
           name="quantity"
+          label="Qty"
           component={renderTextField}
         />
-        <label htmlFor="unit">Unit:</label>
         <Field
           type="text"
           fullWidth
           name="unit"
+          label="Unit"
           component={renderTextField}
         />
-        <Field name="category" component={renderSelectField} label="Category: ">
+        <Field name="category" component={renderSelectField} label="Category">
           {categoryOptions}
         </Field>
         <Field type="hidden" component="input" name="purchased" />
-        <RaisedButton
-          primary
-          onClick={props.handleSubmit}
-          label="Submit"
-          style={{ marginRight: '2rem' }}
-        />
-        <RaisedButton
-          onClick={props.onDelete}
-          label="Delete Item"
-          backgroundColor={red400}
-          labelColor={white}
-        />
+        <div style={{ marginTop: '1rem' }}>
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={props.handleSubmit}
+            style={{ marginRight: '2rem' }}
+          >
+            Submit
+          </Button>
+          <Button
+            variant="raised"
+            onClick={props.onDelete}
+            style={{ backgroundColor: red400 }}
+          >
+            Delete Item
+          </Button>
+        </div> 
       </form>
     </div>
   );
