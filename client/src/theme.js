@@ -9,7 +9,7 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: ['Open Sans'].join(','),
-    fontSize: '1.6 rem',
+    fontSize: '14',
     htmlFontSize: 10,
   },
 });

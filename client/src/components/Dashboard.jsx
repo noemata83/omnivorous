@@ -26,6 +26,14 @@ import MealPlanIcon from '../assets/img/noun_689869_cc.svg'; // Calendar Icon by
 // import Wrapper from '../../hoc/Wrapper/Wrapper';
 
 class Dashboard extends Component {
+  state = {
+    editMode: false,
+    // recipeListDisplay: false,
+    tab: 'recipe',
+    nav: 'recipe',
+    drawer: false,
+  };
+  
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.isMobile) {
       return {
@@ -35,16 +43,9 @@ class Dashboard extends Component {
     }
     return {
       ...prevState,
+      drawer: false,
     };
   }
-  state = {
-    editMode: false,
-    // recipeListDisplay: false,
-    tab: 'recipe',
-    nav: 'recipe',
-    drawer: false,
-  };
-
   componentDidMount() {
     this.props.fetchUser();
   }
@@ -54,7 +55,12 @@ class Dashboard extends Component {
       drawer: !this.state.drawer,
     });
 
-  setEditModeHandler = target => this.setState({ editMode: target });
+  setEditModeHandler = target => 
+    this.setState({ 
+      nav: 'recipe', 
+      editMode: target,
+      drawer: false,
+    });
 
   handleNavChange = (event, value) => {
     this.setState({

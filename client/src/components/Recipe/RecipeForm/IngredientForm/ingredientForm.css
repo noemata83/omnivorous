@@ -1,7 +1,14 @@
 .IngredientForm {
-    width: 85%;
+    width: 100%;
     padding: 1rem;
-    display: inline-block;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media(max-width: 800px) {
+    .IngredientForm {
+        flex-wrap: wrap;
+    }
 }
 
 .Header {

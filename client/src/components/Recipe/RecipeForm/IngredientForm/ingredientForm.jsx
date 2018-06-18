@@ -8,14 +8,14 @@ import { renderTextField } from '../../../UI/Forms/renderFields';
 
 const qtyStyle = {
   display: 'inline-block',
-  width: '15%',
-  marginRight: '.5rem',
+  // width: '15%',
+  marginRight: '3rem',
 };
 
 const detailStyle = {
   display: 'inline-block',
-  width: '30%',
-  marginRight: ' .5rem',
+  // width: '30%',
+  marginRight: '3rem',
 };
 
 const ingredientForm = ({ fields, meta: { error, submitFailed } }) => {
