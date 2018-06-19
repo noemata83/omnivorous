@@ -11,6 +11,8 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import { addListItems } from '../../../store/actions';
+
 class RecipeDisplay extends Component {
   state = {
     anchorEl: null,
@@ -19,12 +21,23 @@ class RecipeDisplay extends Component {
   handleOpen = event => this.setState({ anchorEl: event.currentTarget });
   handleClose = () => this.setState({ anchorEl: null });
 
+  AddRecipeToShoppingList = () => {
+    // console.log(this.props.currentList.items);
+    const shoppingListItems = this.props.currentRecipe.recipeIngredient.map(ingredient => ({
+      name: ingredient.name,
+      unit: ingredient.unit,
+      quantity: ingredient.amount,
+      category: 'Uncategorized',
+      purchased: false,
+      }));
+    this.props.addItemsToShoppingList(shoppingListItems, this.props.currentList);
+  }
+
   render() {
     const { currentRecipe } = this.props;
     const { anchorEl } = this.state;
     let recipe = <h1>Please select a Recipe!</h1>;
     if (currentRecipe) {
-      console.log(currentRecipe);
       const ingredients = currentRecipe.recipeIngredient.map(ingredient => (
         <Ingredient key={ingredient.input} ingredient={ingredient} />
       ));
@@ -46,7 +59,7 @@ class RecipeDisplay extends Component {
                 onClose={this.handleClose}
               >
                 <MenuItem onClick={this.handleClose}>Edit Recipe</MenuItem>
-                <MenuItem onClick={this.handleClose}>Add to Shopping List</MenuItem>
+                <MenuItem onClick={this.AddRecipeToShoppingList}>Add to Shopping List</MenuItem>
                 <MenuItem onClick={this.handleClose}>Delete Recipe</MenuItem>
               </Menu>
             </div>
@@ -63,12 +76,17 @@ class RecipeDisplay extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  addItemsToShoppingList: (items, currentList) => dispatch(addListItems(items, currentList)),
+})
+
 const mapStateToProps = state => ({
   currentRecipe: state.recipe.currentRecipe,
+  currentList: state.shoppingList.currentList,
 });
 
 RecipeDisplay.propTypes = {
   currentRecipe: PropTypes.object,
 };
 
-export default connect(mapStateToProps)(RecipeDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeDisplay);

@@ -4,6 +4,7 @@ import * as actionTypes from './actionTypes';
 import defaultShoppingList from '../../components/ShoppingList/Prototype/defaultList';
 
 const sortByCategory = R.sortBy(R.compose(R.toLower, R.prop('category')));
+// const checkIfItemOnList = (item, items) => R.find(R.propEq('name', item.name))(items);
 
 const fetchStart = () => ({
   type: actionTypes.FETCH_SHOPPING_LISTS_START,
@@ -92,13 +93,47 @@ export const getShoppingList = id =>
 const updateCycle = updatedCurrentList =>
   (dispatch) => {
     dispatch(updateList(updatedCurrentList));
-    dispatch(editCurrentList(updatedCurrentList));
+    // dispatch(editCurrentList(updatedCurrentList));
   };
 
 export const addListItem = (item, currentList) => {
-  const items = sortByCategory([...currentList.items, item]);
+  // const duplicate = checkIfItemOnList(item, currentList.items);
+  // console.log(item);
+  // if (duplicate) {
+  //   if (item.unit === duplicate.unit) {
+  //     const updatedItems = currentList.items.map(oldItem => {
+  //       if (oldItem.name === item.name) {
+  //         return { ...oldItem, quantity: +oldItem.quantity + +item.quantity};
+  //       }
+  //       return oldItem;
+  //     });
+  //     return updateCycle({...currentList, items: sortByCategory(updatedItems) });
+  //   }
+  // }
   const nextId = currentList.nextId + 1;
+  const items = sortByCategory([...currentList.items, item]);
   const updatedCurrentList = { ...currentList, items, nextId };
+  return updateCycle(updatedCurrentList);
+};
+
+export const addListItems = (items, currentList) => {
+  // const duplicate = checkIfItemOnList(item, currentList.items);
+  // console.log(item);
+  // if (duplicate) {
+  //   if (item.unit === duplicate.unit) {
+  //     const updatedItems = currentList.items.map(oldItem => {
+  //       if (oldItem.name === item.name) {
+  //         return { ...oldItem, quantity: +oldItem.quantity + +item.quantity};
+  //       }
+  //       return oldItem;
+  //     });
+  //     return updateCycle({...currentList, items: sortByCategory(updatedItems) });
+  //   }
+  // }
+  const updatedItems = ([...currentList.items, ...items.map((item, index) => ({...item, itemId: currentList.nextId+index})).filter(item => item.name !== "")]);
+  const sortedUpdatedItems = sortByCategory(updatedItems);
+  const nextId = currentList.nextId + items.length;
+  const updatedCurrentList = { ...currentList, items: sortedUpdatedItems, nextId };
   return updateCycle(updatedCurrentList);
 };
 

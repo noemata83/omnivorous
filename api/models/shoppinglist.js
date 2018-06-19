@@ -19,8 +19,8 @@ const shoppingListItemSchema = new Schema({
         required: true,
     },
     quantity: {
-        type: Number,
-        default: 0,
+        type: String,
+        default: '0',
     },
     unit: String,
     category: String,
