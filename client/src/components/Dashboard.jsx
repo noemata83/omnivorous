@@ -31,7 +31,7 @@ class Dashboard extends Component {
     // recipeListDisplay: false,
     tab: 'recipe',
     nav: 'recipe',
-    drawer: false,
+    drawer: true,
   };
   
   static getDerivedStateFromProps(nextProps, prevState) {
