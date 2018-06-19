@@ -2,16 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Ingredient.css';
 
-const ingredient = props => <li className={classes.Ingredient}>{[props.amount, props.unit, props.name].join(' ')}</li>;
-
-ingredient.defaultProps = {
-  unit: '',
-};
+const ingredient = ({ingredient}) => <li className={classes.Ingredient}>{ingredient.input}</li>;
 
 ingredient.propTypes = {
-  amount: PropTypes.string.isRequired,
-  unit: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  ingredient: PropTypes.object.isRequired,
 };
 
 export default ingredient;

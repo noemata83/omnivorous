@@ -30,6 +30,12 @@
     font-size: 1.8rem;
 }
 
+.Header {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
 .Description {
     font-size: 1.6rem;
     font-style: italic;

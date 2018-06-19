@@ -98,7 +98,7 @@ class IngredientForm extends Component {
               inputProps={{size: 30}}
             />
             <FormControl style={{marginTop:'2rem'}}>
-              <IconButton onClick={() => fields.remove}>
+              <IconButton onClick={() => fields.remove(index)}>
                 <DeleteIcon />
               </IconButton>
             </FormControl>
