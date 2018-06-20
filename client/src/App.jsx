@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import HTML5TouchBackend from 'react-dnd-html5-touch-backend';
 import theme from './theme';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard';
@@ -59,4 +59,4 @@ App.propTypes = {
 };
 
 export default
-withRouter(connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(App)));
+withRouter(connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5TouchBackend)(App)));
