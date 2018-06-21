@@ -50,10 +50,12 @@ class Dashboard extends Component {
     this.props.fetchUser();
   }
 
-  onToggleDrawer = () =>
+  onToggleDrawer = () => {
     this.setState({
       drawer: !this.state.drawer,
     });
+    return true;
+  }
 
   setEditModeHandler = target => 
     this.setState({ 
@@ -82,7 +84,7 @@ class Dashboard extends Component {
 
 
   render() {
-    let mainWindow = <RecipeDisplay />;
+    let mainWindow = <RecipeDisplay triggerShoppingList={() => (this.props.isMobile ? this.handleNavChange(null, 'shopping') : this.onToggleDrawer() && this.handleTabChange(null, 'shopping'))} />;
     if (this.state.editMode) {
       mainWindow = <RecipeControl setEditMode={this.setEditModeHandler} />;
     }

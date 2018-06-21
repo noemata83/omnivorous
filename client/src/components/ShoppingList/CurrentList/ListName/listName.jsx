@@ -44,6 +44,12 @@ const listName = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem 
+          className={classes.MenuItem}
+          onClick={props.clearShoppingList}
+        >
+          Clear Purchased Items
+        </MenuItem>
         <MenuItem
           className={classes.MenuItem}
           onClick={() => {
@@ -80,6 +86,9 @@ listName.propTypes = {
   anchorEl: PropTypes.object,
   handleOpen: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleNameInputChange: PropTypes.func.isRequired,
+  handleNameChangeSubmit: PropTypes.func.isRequired,
+  clearShoppingList: PropTypes.func.isRequired,
 };
 
 export default listName;

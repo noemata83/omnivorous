@@ -40,7 +40,7 @@ class ShoppingListControl extends Component {
               marginTop: 0,
               fontWeight: 'normal',
               color: white,
-              backgroundColor: green600,
+              backgroundColor: '#4caf50',
             }}
           >
             Shopping List

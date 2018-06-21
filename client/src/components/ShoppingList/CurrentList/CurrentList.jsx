@@ -141,6 +141,13 @@ class CurrentList extends Component {
     });
   };
 
+  handleClearShoppingList = () => {
+    const items = this.props.currentList.items.filter(item => !item.purchased);
+    const list = {...this.props.currentList, items };
+    this.props.updateList(list);
+    this.handleMenuClose();
+  }
+
   handleEditName = () => {
     // This method updates the editName property to toggle the rendering of an
     // input field to change the name of the current list.
@@ -213,6 +220,7 @@ class CurrentList extends Component {
           <div>
             <ListName
               manageCategories={this.setCategoryEditModeHandler}
+              clearShoppingList={this.handleClearShoppingList}
               editName={this.state.editName}
               handleDeleteList={this.handleDeleteList}
               handleNameChangeSubmit={this.handleNameChangeSubmit}

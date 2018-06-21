@@ -31,6 +31,8 @@ class RecipeDisplay extends Component {
       purchased: false,
       }));
     this.props.addItemsToShoppingList(shoppingListItems, this.props.currentList);
+    this.props.triggerShoppingList();
+    this.handleClose();
   }
 
   render() {
