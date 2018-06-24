@@ -1,7 +1,8 @@
 .Background {
     width: 100%;
     min-height: 100vh;
-    background-image: url('../../../assets/img/backdrop.jpg');
+    background-image: radial-gradient(closest-side, transparent, transparent 70%, rgba(255,255,255,0.05) 80%, rgba(255,255,255,0.1) 85%, rgba(255,255,255,0.15) 90%, rgba(255,255,255,0.2) 95%, rgba(255,255,255,0.3) 100%),
+        url('../../../assets/img/backdrop.jpg');
     background-repeat: repeat;
     background-size: cover;
     filter: blur(2px);

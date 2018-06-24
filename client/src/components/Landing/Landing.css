@@ -1,8 +1,48 @@
+.LandingPage {
+    height: 300vh;
+}
+
 .Landing {
     height: 100vh;
     width: 100%;
     background-size: cover;
     position: relative;
+}
+
+.Header {
+    height: 100vh;
+}
+
+.Description {
+    padding: 10rem 5rem;
+    height: 75vh;
+    font-size: 3rem;
+    position: relative;
+    display: flex;
+}
+
+.MarketingCard {
+    display: flex;
+    padding: 3rem;
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Graphic {
+    flex-basis: 50%;
+    /* padding: 2rem 2rem 2rem 2rem; */
+}
+
+.Text {
+    flex-basis: 50%;
+}
+
+.TextHeader {
+    font-size: 4rem;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 .TextBox {
