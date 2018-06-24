@@ -50,6 +50,7 @@ const reducer = (state = { ...initialState }, action) => {
         recipes: state.recipes.concat(action.recipe),
         loading: false,
         error: null,
+        currentRecipe: action.recipe,
       };
     case actionTypes.NEW_RECIPE:
       return {
