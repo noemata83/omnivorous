@@ -41,15 +41,18 @@ class IngredientForm extends Component {
         .then((response) => {
           const recipeIngredient = response.data.ingredients.map(ingredient =>
             ({ ...ingredient, amount: ingredient.qty }));
-            this.props.onChangeFieldValue('recipeIngredient', [...this.props.fields.getAll(), ...recipeIngredient]);
-          });
+          this.props.fields.length ? 
+            this.props.onChangeFieldValue('recipeIngredient', [...this.props.fields.getAll(), ...recipeIngredient])
+            : this.props.onChangeFieldValue('recipeIngredient', [...recipeIngredient]);
+          this.setState({ ingredientInput: '' });
+        });
     }
   }
 
   render() {
     const { fields, meta: { error, submitFailed }} = this.props;
     console.log(this.props.fields);
-    if (!fields.length) fields.push();
+    // if (!fields.length) fields.push();
     const removeButton =
       fields.length > 1 ? (
         <Button type="Button" buttonType="Minus" clicked={() => fields.pop()}>
@@ -110,6 +113,7 @@ class IngredientForm extends Component {
             multiline
             rows={4}
             fullWidth
+            value={this.state.ingredientInput}
             name="ingredientInput"
             onChange={this.onIngredientInput}
             onKeyPress={this.handleIngredientSubmit}
