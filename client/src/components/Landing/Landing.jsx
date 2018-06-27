@@ -46,7 +46,7 @@ const landing = props =>
     <div>
     <div style={{background:"-webkit-linear-gradient(top, #80DEEA, #FFF)"}}>
       <section className={classes.Description} style={{paddingTop: '20rem'}}>
-          {/* <Card className={classes.MarketingCard}> */}
+          <Card className={classes.MarketingCard}>
             <div className={classes.Graphic}>
               <img
                 src={addRecipe}
@@ -54,11 +54,11 @@ const landing = props =>
                 style={{width: '100%'}}
                 />
             </div>
-            <div className={classes.Text} style={{color: 'white', paddingLeft: '6rem'}}>
+            <div className={classes.Text}>
               <h2 className={classes.TextHeader}>Manage Your Recipes</h2>
               <p style={{fontSize:'2.4rem', fontWeight: 'bold'}}>Omnivorous helps you gather recipes and organize them, so your next meal is only a few clicks away.</p>
             </div>
-          {/* </Card> */}
+          </Card>
       </section>
       <section className={classes.Description}>
           <Card className={classes.MarketingCard}>
@@ -78,12 +78,12 @@ const landing = props =>
       </section>
       <section className={classes.Description}>
         <Card className={classes.MarketingCard}>
+          <div className={classes.Graphic}>
+            Coming Soon!
+          </div>
           <div className={classes.Text}>
             <h2 className={classes.TextHeader}>Plan Your Week</h2>
             <p style={{fontSize:'1.8rem'}}>Drag and drop recipes onto your weekly meal plan. Build a shopping list from your meal plan in seconds!</p>
-          </div>
-          <div className={classes.Graphic}>
-            Coming Soon!
           </div>
         </Card>
       </section>

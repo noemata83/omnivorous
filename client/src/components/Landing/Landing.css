@@ -40,6 +40,14 @@
     flex-basis: 50%;
 }
 
+.Text:nth-child(even) {
+    padding-left: 6rem;
+}
+
+.Text:nth-child(odd) {
+    padding-right: 6rem;
+}
+
 .TextHeader {
     font-size: 4rem;
     text-shadow: 0 4px 8px rgba(0,0,0,0.4);

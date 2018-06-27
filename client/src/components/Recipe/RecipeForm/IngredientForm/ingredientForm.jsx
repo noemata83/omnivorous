@@ -51,8 +51,6 @@ class IngredientForm extends Component {
 
   render() {
     const { fields, meta: { error, submitFailed }} = this.props;
-    console.log(this.props.fields);
-    // if (!fields.length) fields.push();
     const removeButton =
       fields.length > 1 ? (
         <Button type="Button" buttonType="Minus" clicked={() => fields.pop()}>
