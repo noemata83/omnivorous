@@ -24,3 +24,13 @@ const createMeal = (req, res) => {
             }
         });
     }
+
+    const getMeals = (req, res) => {
+        User.findById(req.user._id).then( user => {
+            User.populate(user, { path: 'meals', populate: 'meal'}, (err, user) => {
+                res.json(user.meals);        
+            });
+        });
+    }
+
+    
