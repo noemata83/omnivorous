@@ -13,7 +13,11 @@ var UserSchema = new mongoose.Schema({
    lists: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "ShoppingList"
-       }]
+       }],
+    meals: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Meal"
+    }]
 });
 
 mongoose.model('users', UserSchema);
