@@ -33,6 +33,18 @@ const getMeals = (req, res) => {
   });
 };
 
+const updateMeal = (req, res) => {
+  Meal.findByIdAndUpdate(req.params.id, req.body, {new: true}).then( (err, meal) => {
+      if (err) {
+          res.send(err);
+      } 
+      else 
+      {
+          res.json(meal);
+      }
+  });
+}
+
 const deleteMeal = (req, res) => {
   User.findById(req.user._id).then(user => {
     if (!user) {
