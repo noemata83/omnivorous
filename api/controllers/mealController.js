@@ -63,3 +63,10 @@ const deleteMeal = (req, res) => {
     });
   });
 }
+
+module.exports = {
+  createMeal,
+  getMeals,
+  updateMeal,
+  deleteMeal,
+}
