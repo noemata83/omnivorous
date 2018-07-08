@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 
 import classes from './Landing.css';
-import Wrapper from '../../hoc/Wrapper/Wrapper';
 import signin from '../../assets/img/btn_google_signin_dark_normal_web.png';
 import addRecipe from '../../assets/img/add-recipe.gif';
 import addToShoppingList from '../../assets/img/add-to-shopping-list.gif';
@@ -35,11 +33,6 @@ const landing = props =>
             need fixes. Recipe Import now features CRF microservice-powered intelligent ingredient parsing.
             <br />Check back often for updates!
           </em><br />
-          {/* <strong>Current Progress:</strong>{' '}
-          <em>
-            Finished Multicolored meringues recipe!!!
-            <br />Check back often for new recipes!
-          </em> */}
         </p>
       </div>
     </div>
