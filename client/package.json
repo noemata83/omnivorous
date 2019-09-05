@@ -54,7 +54,7 @@
     "url-loader": "^2.1.0",
     "webpack": "^4.39.3",
     "webpack-manifest-plugin": "^2.0.4",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
